@@ -1,0 +1,72 @@
+{
+  "api": {
+    "appName": "skeet-example",
+    "projectId": "skeet-example",
+    "region": "europe-west4",
+    "hasLoadBalancer": false,
+    "cloudRun": {
+      "name": "skeet-skeet-example-api",
+      "url": "",
+      "cpu": 1,
+      "maxConcurrency": 80,
+      "maxInstances": 100,
+      "minInstances": 0,
+      "memory": "4Gi"
+    },
+    "db": {
+      "databaseVersion": "POSTGRES_14",
+      "cpu": 1,
+      "memory": "3840MiB",
+      "storageSize": 10,
+      "whiteList": ""
+    }
+  },
+  "workers": [],
+  "taskQueues": [],
+  "cloudArmor": [
+    {
+      "securityPolicyName": "skeet-skeet-example-armor",
+      "rules": [
+        {
+          "priority": "10",
+          "description": "Allow Your Home IP addresses",
+          "options": {
+            "src-ip-ranges": "77.164.253.253",
+            "action": "allow"
+          }
+        },
+        {
+          "priority": "100",
+          "description": "Defense from SQLi attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('sqli-stable')"
+          }
+        },
+        {
+          "priority": "200",
+          "description": "Defense from XSS attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('xss-stable')"
+          }
+        },
+        {
+          "priority": "300",
+          "description": "Defense from NodeJS attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('nodejs-v33-stable')"
+          }
+        },
+        {
+          "priority": "2147483647",
+          "description": "Deny All IP addresses",
+          "options": {
+            "action": "deny-403"
+          }
+        }
+      ]
+    }
+  ]
+}
