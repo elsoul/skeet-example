@@ -65,10 +65,31 @@ export interface NexusGenObjects {
     hasPreviousPage: boolean; // Boolean!
     startCursor?: string | null; // String
   }
+  Post: { // root type
+    body: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId?: number | null; // Int
+  }
+  PostEdge: { // root type
+    cursor: string; // String!
+    node?: NexusGenRootTypes['Post'] | null; // Post
+  }
   Query: {};
+  QueryPostConnection_Connection: { // root type
+    edges?: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
+    nodes?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
   QueryUserConnection_Connection: { // root type
     edges?: Array<NexusGenRootTypes['UserEdge'] | null> | null; // [UserEdge]
     nodes?: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  QueryUserWalletsConnection_Connection: { // root type
+    edges?: Array<NexusGenRootTypes['UserWalletsEdge'] | null> | null; // [UserWalletsEdge]
+    nodes?: Array<NexusGenRootTypes['UserWallets'] | null> | null; // [UserWallets]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
   }
   User: { // root type
@@ -77,6 +98,24 @@ export interface NexusGenObjects {
   UserEdge: { // root type
     cursor: string; // String!
     node?: NexusGenRootTypes['User'] | null; // User
+  }
+  UserWallets: { // root type
+    chainType: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    epct: number; // Float!
+    imgUrl: string; // String!
+    name: string; // String!
+    priority: number; // Int!
+    privateKey: string; // String!
+    pubkey: string; // String!
+    sol: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    usdc: number; // Float!
+    userId?: number | null; // Int
+  }
+  UserWalletsEdge: { // root type
+    cursor: string; // String!
+    node?: NexusGenRootTypes['UserWallets'] | null; // UserWallets
   }
 }
 
@@ -93,9 +132,15 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    createPost: NexusGenRootTypes['Post'] | null; // Post
     createUser: NexusGenRootTypes['User'] | null; // User
+    createUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    deletePost: NexusGenRootTypes['Post'] | null; // Post
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateUser: NexusGenRootTypes['User'] | null; // User
+    updateUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
   }
   PageInfo: { // field return type
     endCursor: string | null; // String
@@ -103,16 +148,44 @@ export interface NexusGenFieldTypes {
     hasPreviousPage: boolean; // Boolean!
     startCursor: string | null; // String
   }
+  Post: { // field return type
+    body: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string | null; // ID
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: number | null; // Int
+  }
+  PostEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Post'] | null; // Post
+  }
   Query: { // field return type
+    getPost: NexusGenRootTypes['Post'] | null; // Post
     getUser: NexusGenRootTypes['User'] | null; // User
+    getUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     node: NexusGenRootTypes['Node'] | null; // Node
     nodes: Array<NexusGenRootTypes['Node'] | null>; // [Node]!
+    postConnection: NexusGenRootTypes['QueryPostConnection_Connection'] | null; // QueryPostConnection_Connection
     postTweet: boolean | null; // Boolean
     userConnection: NexusGenRootTypes['QueryUserConnection_Connection'] | null; // QueryUserConnection_Connection
+    userWalletsConnection: NexusGenRootTypes['QueryUserWalletsConnection_Connection'] | null; // QueryUserWalletsConnection_Connection
+  }
+  QueryPostConnection_Connection: { // field return type
+    edges: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
+    nodes: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number | null; // Int
   }
   QueryUserConnection_Connection: { // field return type
     edges: Array<NexusGenRootTypes['UserEdge'] | null> | null; // [UserEdge]
     nodes: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number | null; // Int
+  }
+  QueryUserWalletsConnection_Connection: { // field return type
+    edges: Array<NexusGenRootTypes['UserWalletsEdge'] | null> | null; // [UserWalletsEdge]
+    nodes: Array<NexusGenRootTypes['UserWallets'] | null> | null; // [UserWallets]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
     totalCount: number | null; // Int
   }
@@ -124,6 +197,25 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['User'] | null; // User
   }
+  UserWallets: { // field return type
+    chainType: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    epct: number; // Float!
+    id: string | null; // ID
+    imgUrl: string; // String!
+    name: string; // String!
+    priority: number; // Int!
+    privateKey: string; // String!
+    pubkey: string; // String!
+    sol: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    usdc: number; // Float!
+    userId: number | null; // Int
+  }
+  UserWalletsEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+  }
   Node: { // field return type
     id: string | null; // ID
   }
@@ -131,9 +223,15 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    createPost: 'Post'
     createUser: 'User'
+    createUserWallets: 'UserWallets'
+    deletePost: 'Post'
     deleteUser: 'User'
+    deleteUserWallets: 'UserWallets'
+    updatePost: 'Post'
     updateUser: 'User'
+    updateUserWallets: 'UserWallets'
   }
   PageInfo: { // field return type name
     endCursor: 'String'
@@ -141,16 +239,44 @@ export interface NexusGenFieldTypeNames {
     hasPreviousPage: 'Boolean'
     startCursor: 'String'
   }
+  Post: { // field return type name
+    body: 'String'
+    createdAt: 'DateTime'
+    id: 'ID'
+    title: 'String'
+    updatedAt: 'DateTime'
+    userId: 'Int'
+  }
+  PostEdge: { // field return type name
+    cursor: 'String'
+    node: 'Post'
+  }
   Query: { // field return type name
+    getPost: 'Post'
     getUser: 'User'
+    getUserWallets: 'UserWallets'
     node: 'Node'
     nodes: 'Node'
+    postConnection: 'QueryPostConnection_Connection'
     postTweet: 'Boolean'
     userConnection: 'QueryUserConnection_Connection'
+    userWalletsConnection: 'QueryUserWalletsConnection_Connection'
+  }
+  QueryPostConnection_Connection: { // field return type name
+    edges: 'PostEdge'
+    nodes: 'Post'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
   }
   QueryUserConnection_Connection: { // field return type name
     edges: 'UserEdge'
     nodes: 'User'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  QueryUserWalletsConnection_Connection: { // field return type name
+    edges: 'UserWalletsEdge'
+    nodes: 'UserWallets'
     pageInfo: 'PageInfo'
     totalCount: 'Int'
   }
@@ -162,6 +288,25 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'User'
   }
+  UserWallets: { // field return type name
+    chainType: 'String'
+    createdAt: 'DateTime'
+    epct: 'Float'
+    id: 'ID'
+    imgUrl: 'String'
+    name: 'String'
+    priority: 'Int'
+    privateKey: 'String'
+    pubkey: 'String'
+    sol: 'Float'
+    updatedAt: 'DateTime'
+    usdc: 'Float'
+    userId: 'Int'
+  }
+  UserWalletsEdge: { // field return type name
+    cursor: 'String'
+    node: 'UserWallets'
+  }
   Node: { // field return type name
     id: 'ID'
   }
@@ -169,19 +314,65 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createPost: { // args
+      body: string; // String!
+      title: string; // String!
+      userId?: number | null; // Int
+    }
     createUser: { // args
       name?: string | null; // String
     }
+    createUserWallets: { // args
+      chainType: string; // String!
+      epct: number; // Float!
+      imgUrl: string; // String!
+      name: string; // String!
+      priority: number; // Int!
+      privateKey: string; // String!
+      pubkey: string; // String!
+      sol: number; // Float!
+      usdc: number; // Float!
+      userId?: number | null; // Int
+    }
+    deletePost: { // args
+      id: string; // String!
+    }
     deleteUser: { // args
       id: string; // String!
+    }
+    deleteUserWallets: { // args
+      id: string; // String!
+    }
+    updatePost: { // args
+      body?: string | null; // String
+      id: string; // String!
+      userId?: number | null; // Int
     }
     updateUser: { // args
       id: string; // String!
       name?: string | null; // String
     }
+    updateUserWallets: { // args
+      chainType?: string | null; // String
+      epct?: number | null; // Float
+      id: string; // String!
+      imgUrl?: string | null; // String
+      priority?: number | null; // Int
+      privateKey?: string | null; // String
+      pubkey?: string | null; // String
+      sol?: number | null; // Float
+      usdc?: number | null; // Float
+      userId?: number | null; // Int
+    }
   }
   Query: {
+    getPost: { // args
+      id: string; // String!
+    }
     getUser: { // args
+      id: string; // String!
+    }
+    getUserWallets: { // args
       id: string; // String!
     }
     node: { // args
@@ -190,11 +381,23 @@ export interface NexusGenArgTypes {
     nodes: { // args
       ids: string[]; // [ID!]!
     }
+    postConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     postTweet: { // args
       id: string; // String!
       text: string; // String!
     }
     userConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    userWalletsConnection: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
