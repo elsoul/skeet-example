@@ -42,4 +42,5 @@ keyfile.json
 .firebase
 firebase-debug.log
 firestore.json
-  
+
+apps/api/.env*
