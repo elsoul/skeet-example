@@ -31,7 +31,7 @@
           "priority": "10",
           "description": "Allow Your Home IP addresses",
           "options": {
-            "src-ip-ranges": "77.164.253.253",
+            "src-ip-ranges": "77.164.253.253,24.132.70.177",
             "action": "allow"
           }
         },

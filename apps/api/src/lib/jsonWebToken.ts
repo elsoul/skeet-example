@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-
+import { User } from '@prisma/client'
 const SKEET_JWT_SALT = process.env.SKEET_JWT_SALT || 'salt'
 const SKEET_BASE_URL = process.env.SKEET_BASE_URL || 'base_url'
 

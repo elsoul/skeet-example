@@ -58,6 +58,9 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  LoginResponse: { // root type
+    token?: string | null; // String
+  }
   Mutation: {};
   PageInfo: { // root type
     endCursor?: string | null; // String
@@ -131,6 +134,9 @@ export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  LoginResponse: { // field return type
+    token: string | null; // String
+  }
   Mutation: { // field return type
     createPost: NexusGenRootTypes['Post'] | null; // Post
     createUser: NexusGenRootTypes['User'] | null; // User
@@ -138,6 +144,7 @@ export interface NexusGenFieldTypes {
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     deleteUser: NexusGenRootTypes['User'] | null; // User
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateUser: NexusGenRootTypes['User'] | null; // User
     updateUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
@@ -222,6 +229,9 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  LoginResponse: { // field return type name
+    token: 'String'
+  }
   Mutation: { // field return type name
     createPost: 'Post'
     createUser: 'User'
@@ -229,6 +239,7 @@ export interface NexusGenFieldTypeNames {
     deletePost: 'Post'
     deleteUser: 'User'
     deleteUserWallets: 'UserWallets'
+    login: 'LoginResponse'
     updatePost: 'Post'
     updateUser: 'User'
     updateUserWallets: 'UserWallets'
@@ -342,6 +353,9 @@ export interface NexusGenArgTypes {
     }
     deleteUserWallets: { // args
       id: string; // String!
+    }
+    login: { // args
+      token: string; // String!
     }
     updatePost: { // args
       body?: string | null; // String
