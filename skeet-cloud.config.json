@@ -21,7 +21,20 @@
       "whiteList": "24.132.70.177,77.164.253.253"
     }
   },
-  "workers": [],
+  "workers": [
+    {
+      "workerName": "solana-transfer",
+      "cloudRun": {
+        "name": "skeet-skeet-example-worker-solana-transfer",
+        "url": "https://skeet-skeet-example-worker-solana-transfer-m2z5h6qefq-ez.a.run.app",
+        "cpu": 1,
+        "maxConcurrency": 80,
+        "maxInstances": 100,
+        "minInstances": 0,
+        "memory": "1Gi"
+      }
+    }
+  ],
   "taskQueues": [],
   "cloudArmor": [
     {
