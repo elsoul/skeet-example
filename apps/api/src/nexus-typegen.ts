@@ -355,7 +355,7 @@ export interface NexusGenArgTypes {
       id: string; // String!
     }
     login: { // args
-      token: string; // String!
+      token?: string | null; // String
     }
     updatePost: { // args
       body?: string | null; // String
