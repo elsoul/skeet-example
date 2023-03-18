@@ -28,6 +28,7 @@ export default function UserMenu() {
     setUser({
       ...user,
       uid: '',
+      skeetToken: '',
     })
   }, [user, setUser, t])
 
