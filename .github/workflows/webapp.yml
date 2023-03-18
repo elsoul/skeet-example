@@ -1,0 +1,34 @@
+name: WebApp
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/app/**'
+      - '.github/workflows/webapp.yml'
+
+jobs:
+  deploy:
+    defaults:
+      run:
+        working-directory: apps/app
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.14.2'
+      - name: Install yarn and firebase tools
+        run: npm i -g npm yarn firebase-tools
+      - name: GitHub repository setting
+        run: git config --global url."https://github.com".insteadOf ssh://git@github.com
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build App
+        run: yarn build:production:web
+      - name: Deploy to Firebase
+        run: firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
