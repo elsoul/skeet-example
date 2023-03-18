@@ -19,7 +19,11 @@ import { emailSchema, passwordSchema } from '@/utils/form'
 import { firebaseAuth } from '@/lib/firebase'
 import Button from '@/components/common/atoms/Button'
 import { sleep } from '@/utils/time'
-import { graphql } from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
+import {
+  LoginScreenMutation,
+  LoginScreenMutation$data,
+} from '@/__generated__/LoginScreenMutation.graphql'
 
 const mutation = graphql`
   mutation LoginScreenMutation($token: String!) {
@@ -63,6 +67,8 @@ export default function LoginScreen() {
     validatePassword()
   }, [validateEmail, validatePassword])
 
+  const [commit] = useMutation<LoginScreenMutation>(mutation)
+
   const login = useCallback(async () => {
     if (firebaseAuth && emailError === '' && passwordError === '') {
       try {
@@ -78,16 +84,39 @@ export default function LoginScreen() {
         }
 
         const fbToken = await userCredential.user.getIdToken()
-        console.log({ fbToken })
+        console.log(fbToken)
 
-        Toast.show({
-          type: 'success',
-          text1: t('succeedLogin') ?? 'Succeed to sign in🎉',
-          text2: t('howdy') ?? 'Howdy?',
-        })
-        setUser({
-          ...user,
-          uid: userCredential.user.uid,
+        commit({
+          variables: {
+            token:
+              'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOTczZWUwZTE2ZjdlZWY0ZjkyMWQ1MGRjNjFkNzBiMmVmZWZjMTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2tlZXQtZXhhbXBsZSIsImF1ZCI6InNrZWV0LWV4YW1wbGUiLCJhdXRoX3RpbWUiOjE2NzkxNzI2NTUsInVzZXJfaWQiOiJSYUxERDREak9MTXFKRGdOSUNOTEFHOGYzUnUyIiwic3ViIjoiUmFMREQ0RGpPTE1xSkRnTklDTkxBRzhmM1J1MiIsImlhdCI6MTY3OTE3MjY1NSwiZXhwIjoxNjc5MTc2MjU1LCJlbWFpbCI6InMua2lzaGlAZWxzb3VsLm5sIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicy5raXNoaUBlbHNvdWwubmwiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.kxAl4AhAjxeMQV966sc7CTnPu2H1BUCGoxDo6v3yCdSwrrUDg034-UGqfL-RZXQtfXtxr23E_luwzqb6nhENrXj2xvL1Lhc7Cez2HRQtgoeuFR-lBcAsxkYJ9w2vC8KA_MKonpT8QZWu_lDyd1fAoyqaN1e6cBkS4un_jwGZfp5nv14WVuQX9mC0Wi-OBZpgcXB_xnKVQ_Sjz2oBk-UiU7OJHtSNj5iBoPfG4hu60JO58O5Epo01isbn0G7drItv1JwRZBM6M0nIAcH22e32pzejWcsx4dTq9Q41TsIyMIyvN-LkRVk68KFCGwyPkiD1ikG9OwkGxt7AbGBKepIQ3g',
+          },
+          onCompleted: ({ login }: LoginScreenMutation$data) => {
+            Toast.show({
+              type: 'success',
+              text1: t('succeedLogin') ?? 'Succeed to sign in🎉',
+              text2: t('howdy') ?? 'Howdy?',
+            })
+            setUser({
+              ...user,
+              uid: userCredential.user.uid,
+              skeetToken: login?.token ?? '',
+            })
+          },
+          onError: (err) => {
+            console.error(err)
+            Toast.show({
+              type: 'error',
+              text1: t('errorLoginTitle') ?? 'Failed to sign in.',
+              text2:
+                t('errorLoginBody') ??
+                'Something went wrong... Please try it again.',
+            })
+            setUser({
+              ...user,
+              skeetToken: '',
+            })
+          },
         })
       } catch (err) {
         console.error(err)
@@ -112,7 +141,7 @@ export default function LoginScreen() {
         setLoading(false)
       }
     }
-  }, [user, setUser, t, email, password, emailError, passwordError])
+  }, [user, setUser, t, email, password, emailError, passwordError, commit])
 
   return (
     <>
