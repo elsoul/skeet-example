@@ -42,10 +42,11 @@ export const login = extendType({
     t.field('login', {
       type: LoginResponse,
       args: {
-        token: nonNull(stringArg()),
+        token: stringArg(),
       },
       async resolve(_, args, ctx) {
         try {
+          if (!args.token) throw new Error('Invalid Token!')
           const decodedUser: DecodedIdToken = await auth().verifyIdToken(
             args.token
           )

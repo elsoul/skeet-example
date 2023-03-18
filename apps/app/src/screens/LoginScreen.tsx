@@ -26,7 +26,7 @@ import {
 } from '@/__generated__/LoginScreenMutation.graphql'
 
 const mutation = graphql`
-  mutation LoginScreenMutation($token: String!) {
+  mutation LoginScreenMutation($token: String) {
     login(token: $token) {
       token
     }
@@ -88,8 +88,7 @@ export default function LoginScreen() {
 
         commit({
           variables: {
-            token:
-              'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOTczZWUwZTE2ZjdlZWY0ZjkyMWQ1MGRjNjFkNzBiMmVmZWZjMTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2tlZXQtZXhhbXBsZSIsImF1ZCI6InNrZWV0LWV4YW1wbGUiLCJhdXRoX3RpbWUiOjE2NzkxNzI2NTUsInVzZXJfaWQiOiJSYUxERDREak9MTXFKRGdOSUNOTEFHOGYzUnUyIiwic3ViIjoiUmFMREQ0RGpPTE1xSkRnTklDTkxBRzhmM1J1MiIsImlhdCI6MTY3OTE3MjY1NSwiZXhwIjoxNjc5MTc2MjU1LCJlbWFpbCI6InMua2lzaGlAZWxzb3VsLm5sIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicy5raXNoaUBlbHNvdWwubmwiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.kxAl4AhAjxeMQV966sc7CTnPu2H1BUCGoxDo6v3yCdSwrrUDg034-UGqfL-RZXQtfXtxr23E_luwzqb6nhENrXj2xvL1Lhc7Cez2HRQtgoeuFR-lBcAsxkYJ9w2vC8KA_MKonpT8QZWu_lDyd1fAoyqaN1e6cBkS4un_jwGZfp5nv14WVuQX9mC0Wi-OBZpgcXB_xnKVQ_Sjz2oBk-UiU7OJHtSNj5iBoPfG4hu60JO58O5Epo01isbn0G7drItv1JwRZBM6M0nIAcH22e32pzejWcsx4dTq9Q41TsIyMIyvN-LkRVk68KFCGwyPkiD1ikG9OwkGxt7AbGBKepIQ3g',
+            token: fbToken,
           },
           onCompleted: ({ login }: LoginScreenMutation$data) => {
             Toast.show({

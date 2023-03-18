@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c1ba7168abd10da0947b104e13621750>>
+ * @generated SignedSource<<bf6c828634cd3c134c362ceef3d25c1a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,7 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type LoginScreenMutation$variables = {
-  token: string;
+  token?: string | null;
 };
 export type LoginScreenMutation$data = {
   readonly login: {
@@ -74,16 +74,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "5f880f34e9a10ff57aa8703b205ac310",
+    "cacheID": "3b3ef8eae9133630a3ee3f056c49a05e",
     "id": null,
     "metadata": {},
     "name": "LoginScreenMutation",
     "operationKind": "mutation",
-    "text": "mutation LoginScreenMutation(\n  $token: String!\n) {\n  login(token: $token) {\n    token\n  }\n}\n"
+    "text": "mutation LoginScreenMutation(\n  $token: String\n) {\n  login(token: $token) {\n    token\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "3520e9431d64c0d51591a1ea6b01c445";
+(node as any).hash = "8a86c3e0cd841af372090ad3fd16a687";
 
 export default node;
