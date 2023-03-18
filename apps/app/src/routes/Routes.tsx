@@ -24,7 +24,7 @@ export default function Routes() {
   const { t } = useTranslation()
   const user = useRecoilValue(userState)
   const isLoggedIn = useMemo(() => {
-    return user.uid !== ''
+    return user.skeetToken !== '' && user.skeetToken != null
   }, [user])
 
   const linking = useMemo(
