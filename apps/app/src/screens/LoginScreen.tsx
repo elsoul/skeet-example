@@ -19,15 +19,15 @@ import { emailSchema, passwordSchema } from '@/utils/form'
 import { firebaseAuth } from '@/lib/firebase'
 import Button from '@/components/common/atoms/Button'
 import { sleep } from '@/utils/time'
-// import { graphql } from 'react-relay'
-// const mutation = graphql`
-//   mutation LoginScreenMutation($input: LoginUserInput!) {
-//     loginUser(input: $input) {
-//       status
-//       accessToken
-//     }
-//   }
-// `
+import { graphql } from 'react-relay'
+
+const mutation = graphql`
+  mutation LoginScreenMutation($token: String!) {
+    login(token: $token) {
+      token
+    }
+  }
+`
 
 export default function LoginScreen() {
   useColorModeRefresh()
