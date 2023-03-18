@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "skeet-example"
+  },
+  "targets": {
+    "skeet-example": {
+      "hosting": {
+        "skeet-example-app": [
+          "skeet-example-app"
+        ]
+      }
+    }
+  }
+}

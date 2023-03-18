@@ -1,0 +1,215 @@
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type LoginResponse {
+  token: String
+}
+
+type Mutation {
+  createPost(body: String!, title: String!, userId: Int): Post
+  createUser(name: String): User
+  createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
+  deletePost(id: String!): Post
+  deleteUser(id: String!): User
+  deleteUserWallets(id: String!): UserWallets
+  login(token: String!): LoginResponse
+  updatePost(body: String, id: String!, userId: Int): Post
+  updateUser(id: String!, name: String): User
+  updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
+}
+
+"""An object with a global ID"""
+interface Node {
+  """The global ID of the object."""
+  id: ID
+}
+
+"""
+PageInfo cursor, as defined in https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+"""
+type PageInfo {
+  """
+  The cursor corresponding to the last nodes in edges. Null if the connection is empty.
+  """
+  endCursor: String
+
+  """
+  Used to indicate whether more edges exist following the set defined by the clients arguments.
+  """
+  hasNextPage: Boolean!
+
+  """
+  Used to indicate whether more edges exist prior to the set defined by the clients arguments.
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  The cursor corresponding to the first nodes in edges. Null if the connection is empty.
+  """
+  startCursor: String
+}
+
+type Post {
+  body: String!
+  createdAt: DateTime!
+  id: ID
+  rawId: ID
+  title: String!
+  updatedAt: DateTime!
+  userId: Int
+}
+
+type PostEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: Post
+}
+
+type Query {
+  getPost(id: String!): Post
+  getUser(id: String!): User
+  getUserWallets(id: String!): UserWallets
+
+  """Fetches an object given its global ID"""
+  node(
+    """The global ID of an object"""
+    id: ID!
+  ): Node
+
+  """Fetches objects given their global IDs"""
+  nodes(
+    """The global IDs of objects"""
+    ids: [ID!]!
+  ): [Node]!
+  postConnection(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the elements in the list that come before the specified cursor"""
+    before: String
+
+    """Returns the first n elements from the list."""
+    first: Int
+
+    """Returns the last n elements from the list."""
+    last: Int
+  ): QueryPostConnection_Connection
+  postTweet(id: String!, text: String!): Boolean
+  userConnection(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the elements in the list that come before the specified cursor"""
+    before: String
+
+    """Returns the first n elements from the list."""
+    first: Int
+
+    """Returns the last n elements from the list."""
+    last: Int
+  ): QueryUserConnection_Connection
+  userWalletsConnection(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the elements in the list that come before the specified cursor"""
+    before: String
+
+    """Returns the first n elements from the list."""
+    first: Int
+
+    """Returns the last n elements from the list."""
+    last: Int
+  ): QueryUserWalletsConnection_Connection
+}
+
+type QueryPostConnection_Connection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [PostEdge]
+
+  """Flattened list of Post type"""
+  nodes: [Post]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type QueryUserConnection_Connection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [UserEdge]
+
+  """Flattened list of User type"""
+  nodes: [User]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type QueryUserWalletsConnection_Connection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [UserWalletsEdge]
+
+  """Flattened list of UserWallets type"""
+  nodes: [UserWallets]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type User {
+  id: ID
+  name: String!
+  rawId: ID
+}
+
+type UserEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: User
+}
+
+type UserWallets {
+  chainType: String!
+  createdAt: DateTime!
+  epct: Float!
+  id: ID
+  imgUrl: String!
+  name: String!
+  priority: Int!
+  privateKey: String!
+  pubkey: String!
+  rawId: ID
+  sol: Float!
+  updatedAt: DateTime!
+  usdc: Float!
+  userId: Int
+}
+
+type UserWalletsEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: UserWallets
+}
