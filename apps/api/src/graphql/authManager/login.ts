@@ -70,7 +70,7 @@ export const login = extendType({
                 iconUrl: `https://www.gravatar.com/avatar/${crypto
                   .createHash('md5')
                   .update(decodedUser.email ?? '')
-                  .digest('hex')}`,
+                  .digest('hex')}?d=retro`,
               },
             })
             console.log('created new user!')
