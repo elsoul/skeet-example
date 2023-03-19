@@ -19,6 +19,7 @@ import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/dis
 import { sleep } from '@/utils/time'
 import { getLoginUser } from './graphql/authManager/login'
 import { User } from 'nexus-prisma'
+import { Connection } from '@solana/web3.js'
 
 interface Context {
   user?: User
@@ -28,6 +29,10 @@ const prisma = new PrismaClient()
 
 const PORT = process.env.PORT || 4000
 const skeetEnv = process.env.NODE_ENV || 'development'
+export const connection = new Connection(
+  'https://api.devnet.solana.com/',
+  'confirmed'
+)
 
 const queryComplexityRule = queryComplexity({
   maximumComplexity: 1000,

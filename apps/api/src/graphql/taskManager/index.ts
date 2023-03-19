@@ -1,2 +1,5 @@
 export * from './postTweet'
 export * from './createWallet'
+export * from './airdrop'
+export * from './updateBalance'
+export * from './solanaTokenTransfer'

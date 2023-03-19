@@ -14,7 +14,7 @@ export const solanaTokenTransfer = extendType({
       type: 'Boolean',
       args: {
         toAddressPubkey: nonNull(stringArg()),
-        transferAmountLamport: nonNull(stringArg()),
+        transferAmountLamport: nonNull(intArg()),
         tokenMintAddress: nonNull(stringArg()),
         encodedFromSecretKeyString: nonNull(stringArg()),
         iv: nonNull(stringArg()),

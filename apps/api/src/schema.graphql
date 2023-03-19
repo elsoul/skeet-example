@@ -12,6 +12,7 @@ type LoginResponse {
 }
 
 type Mutation {
+  airdrop: UserWallets
   createPost(body: String!, title: String!, userId: Int): Post
   createUser(name: String): User
   createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
@@ -20,6 +21,7 @@ type Mutation {
   deleteUser(id: String!): User
   deleteUserWallets(id: String!): UserWallets
   login(token: String): LoginResponse
+  updateBalance(userWalletId: String!): UserWallets
   updatePost(body: String, id: String!, userId: Int): Post
   updateUser(id: String!, name: String): User
   updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
@@ -103,6 +105,7 @@ type Query {
     last: Int
   ): QueryPostConnection_Connection
   postTweet(id: String!, text: String!): Boolean
+  solanaTokenTransfer(decimal: Int!, encodedFromSecretKeyString: String!, iv: String!, rpcUrl: String!, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!): Boolean
   userConnection(
     """Returns the elements in the list that come after the specified cursor"""
     after: String

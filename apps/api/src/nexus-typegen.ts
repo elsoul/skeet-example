@@ -138,6 +138,7 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
   }
   Mutation: { // field return type
+    airdrop: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     createPost: NexusGenRootTypes['Post'] | null; // Post
     createUser: NexusGenRootTypes['User'] | null; // User
     createUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
@@ -146,6 +147,7 @@ export interface NexusGenFieldTypes {
     deleteUser: NexusGenRootTypes['User'] | null; // User
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
+    updateBalance: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateUser: NexusGenRootTypes['User'] | null; // User
     updateUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
@@ -176,6 +178,7 @@ export interface NexusGenFieldTypes {
     nodes: Array<NexusGenRootTypes['Node'] | null>; // [Node]!
     postConnection: NexusGenRootTypes['QueryPostConnection_Connection'] | null; // QueryPostConnection_Connection
     postTweet: boolean | null; // Boolean
+    solanaTokenTransfer: boolean | null; // Boolean
     userConnection: NexusGenRootTypes['QueryUserConnection_Connection'] | null; // QueryUserConnection_Connection
     userWalletsConnection: NexusGenRootTypes['QueryUserWalletsConnection_Connection'] | null; // QueryUserWalletsConnection_Connection
   }
@@ -234,6 +237,7 @@ export interface NexusGenFieldTypeNames {
     token: 'String'
   }
   Mutation: { // field return type name
+    airdrop: 'UserWallets'
     createPost: 'Post'
     createUser: 'User'
     createUserWallets: 'UserWallets'
@@ -242,6 +246,7 @@ export interface NexusGenFieldTypeNames {
     deleteUser: 'User'
     deleteUserWallets: 'UserWallets'
     login: 'LoginResponse'
+    updateBalance: 'UserWallets'
     updatePost: 'Post'
     updateUser: 'User'
     updateUserWallets: 'UserWallets'
@@ -272,6 +277,7 @@ export interface NexusGenFieldTypeNames {
     nodes: 'Node'
     postConnection: 'QueryPostConnection_Connection'
     postTweet: 'Boolean'
+    solanaTokenTransfer: 'Boolean'
     userConnection: 'QueryUserConnection_Connection'
     userWalletsConnection: 'QueryUserWalletsConnection_Connection'
   }
@@ -363,6 +369,9 @@ export interface NexusGenArgTypes {
     login: { // args
       token?: string | null; // String
     }
+    updateBalance: { // args
+      userWalletId: string; // String!
+    }
     updatePost: { // args
       body?: string | null; // String
       id: string; // String!
@@ -410,6 +419,15 @@ export interface NexusGenArgTypes {
     postTweet: { // args
       id: string; // String!
       text: string; // String!
+    }
+    solanaTokenTransfer: { // args
+      decimal: number; // Int!
+      encodedFromSecretKeyString: string; // String!
+      iv: string; // String!
+      rpcUrl: string; // String!
+      toAddressPubkey: string; // String!
+      tokenMintAddress: string; // String!
+      transferAmountLamport: number; // Int!
     }
     userConnection: { // args
       after?: string | null; // String
