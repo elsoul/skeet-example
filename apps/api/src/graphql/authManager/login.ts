@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { decodedKey, encodeJWT } from '@/lib/jsonWebToken'
-import { objectType, extendType, nonNull, stringArg } from 'nexus'
+import { objectType, extendType, stringArg } from 'nexus'
 import { User } from 'nexus-prisma'
 import { auth } from 'firebase-admin'
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier'
 import admin from 'firebase-admin'
+import crypto from 'crypto'
 
 admin.initializeApp()
 const prisma = new PrismaClient()
@@ -50,6 +51,7 @@ export const login = extendType({
           const decodedUser: DecodedIdToken = await auth().verifyIdToken(
             args.token
           )
+          console.log(decodedUser)
           const user: User = await ctx.prisma.user.findUnique({
             where: {
               uid: decodedUser.uid,
@@ -63,9 +65,12 @@ export const login = extendType({
             const user = await ctx.prisma.user.create({
               data: {
                 uid: decodedUser.uid,
-                name: decodedUser.name,
+                name: decodedUser.email?.split('@')[0],
                 email: decodedUser.email,
-                iconUrl: decodedUser.picture,
+                iconUrl: `https://www.gravatar.com/avatar/${crypto
+                  .createHash('md5')
+                  .update(decodedUser.email ?? '')
+                  .digest('hex')}?d=retro`,
               },
             })
             console.log('created new user!')
