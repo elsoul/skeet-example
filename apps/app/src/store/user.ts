@@ -23,7 +23,7 @@ export const userState = atom<UserState>({
     pubkey: '',
     githubUid: '',
     iconUrl: '',
-    role: 'user',
+    role: 'USER',
     skeetToken: '',
   },
   effects_UNSTABLE: [ReactNativeRecoilPersist.persistAtom],
