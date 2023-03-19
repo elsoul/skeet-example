@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil'
 import { userState } from '@/store/user'
 import { View } from 'react-native'
 import tw from '@/lib/tailwind'
+import CreateUserWallet from './CreateUserWallet'
 
 const fragment = graphql`
   fragment UserDashboardStatus_query on Query {
@@ -49,7 +50,13 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
     [user.wallet]
   )
 
-  console.log(hasWallet)
+  if (!hasWallet) {
+    return (
+      <>
+        <CreateUserWallet />
+      </>
+    )
+  }
 
   return (
     <>
