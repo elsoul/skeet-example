@@ -8,13 +8,16 @@ type LoginResponse {
 }
 
 type Mutation {
+  airdrop: UserWallets
   createPost(body: String!, title: String!, userId: Int): Post
   createUser(name: String): User
   createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
+  createWallet(imgUrl: String, name: String!): UserWallets
   deletePost(id: String!): Post
   deleteUser(id: String!): User
   deleteUserWallets(id: String!): UserWallets
   login(token: String): LoginResponse
+  updateBalance(userWalletId: String!): UserWallets
   updatePost(body: String, id: String!, userId: Int): Post
   updateUser(id: String!, name: String): User
   updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
@@ -73,6 +76,7 @@ type Query {
   getPost(id: String!): Post
   getUser(id: String!): User
   getUserWallets(id: String!): UserWallets
+  me: User
 
   """Fetches an object given its global ID"""
   node(
@@ -99,6 +103,7 @@ type Query {
     last: Int
   ): QueryPostConnection_Connection
   postTweet(id: String!, text: String!): Boolean
+  solanaTokenTransfer(decimal: Int!, encodedFromSecretKeyString: String!, iv: String!, rpcUrl: String!, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!): Boolean
   userConnection(
     """Returns the elements in the list that come after the specified cursor"""
     after: String
@@ -176,9 +181,12 @@ type QueryUserWalletsConnection_Connection {
 }
 
 type User {
+  email: String!
+  iconUrl: String
   id: ID
   name: String!
   rawId: ID
+  uid: String!
 }
 
 type UserEdge {

@@ -1,4 +1,4 @@
-import { extendType, nonNull, stringArg } from 'nexus'
+import { extendType } from 'nexus'
 import { getAirdrop, getKeypairFromArrayString } from '@/lib/solanaUtils'
 import { decrypt } from '@/lib/crypto'
 import { User, UserWallets } from '@prisma/client'

@@ -198,6 +198,7 @@ export interface NexusGenFieldTypes {
     getSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     getUser: NexusGenRootTypes['User'] | null; // User
     getUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    me: NexusGenRootTypes['User'] | null; // User
     node: NexusGenRootTypes['Node'] | null; // Node
     nodes: Array<NexusGenRootTypes['Node'] | null>; // [Node]!
     postConnection: NexusGenRootTypes['QueryPostConnection_Connection'] | null; // QueryPostConnection_Connection
@@ -331,6 +332,7 @@ export interface NexusGenFieldTypeNames {
     getSolanaTransfer: 'SolanaTransfer'
     getUser: 'User'
     getUserWallets: 'UserWallets'
+    me: 'User'
     node: 'Node'
     nodes: 'Node'
     postConnection: 'QueryPostConnection_Connection'

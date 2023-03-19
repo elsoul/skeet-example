@@ -84,6 +84,7 @@ type Query {
   getSolanaTransfer(id: String!): SolanaTransfer
   getUser(id: String!): User
   getUserWallets(id: String!): UserWallets
+  me: User
 
   """Fetches an object given its global ID"""
   node(

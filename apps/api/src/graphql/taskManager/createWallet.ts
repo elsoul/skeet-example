@@ -1,4 +1,4 @@
-import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'
+import { extendType, nonNull, stringArg } from 'nexus'
 import { UserWallets } from 'nexus-prisma'
 import { genKeypair, getKeypairData } from '@/lib/solanaUtils'
 import { encrypt, generateIv } from '@/lib/crypto'

@@ -51,7 +51,6 @@ export const login = extendType({
           const decodedUser: DecodedIdToken = await auth().verifyIdToken(
             args.token
           )
-          console.log(decodedUser)
           const user: User = await ctx.prisma.user.findUnique({
             where: {
               uid: decodedUser.uid,
@@ -90,14 +89,20 @@ export const login = extendType({
 
 export const getLoginUser = async (token: string) => {
   try {
+    if (token == 'undefined' || token == null) throw new Error('undefined')
+
     const bearer = token.split('Bearer ')[1]
     if (!bearer) return unknownUser
     const userId = Number(await decodedKey(bearer))
+
+    if (Number.isNaN(userId)) throw new Error('NaN')
+
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
       },
     })
+    console.log(user)
     if (user) {
       return user
     } else {
