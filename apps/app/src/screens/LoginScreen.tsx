@@ -24,6 +24,7 @@ import {
   LoginScreenMutation,
   LoginScreenMutation$data,
 } from '@/__generated__/LoginScreenMutation.graphql'
+import clsx from 'clsx'
 
 const mutation = graphql`
   mutation LoginScreenMutation($token: String) {
@@ -84,7 +85,6 @@ export default function LoginScreen() {
         }
 
         const fbToken = await userCredential.user.getIdToken()
-        console.log(fbToken)
 
         commit({
           variables: {
@@ -241,7 +241,12 @@ export default function LoginScreen() {
                     login()
                   }}
                   disabled={isLoading}
-                  className="w-full py-2 px-3"
+                  className={clsx(
+                    isLoading
+                      ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400'
+                      : '',
+                    'w-full py-2 px-3'
+                  )}
                 >
                   <Text
                     style={tw`text-center font-loaded-bold text-lg text-white`}

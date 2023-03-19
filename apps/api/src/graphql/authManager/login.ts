@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { decodedKey, encodeJWT } from '@/lib/jsonWebToken'
-import { objectType, extendType, nonNull, stringArg } from 'nexus'
+import { objectType, extendType, stringArg } from 'nexus'
 import { User } from 'nexus-prisma'
 import { auth } from 'firebase-admin'
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier'
