@@ -12,16 +12,18 @@ datasource db {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  uid         String        @unique
-  name        String        @default("Ninja")
-  email       String        @unique
-  iconUrl     String?
-  role        Role          @default(USER)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  userWallets UserWallets[]
-  posts       Post[]
+  id            Int              @id @default(autoincrement())
+  uid           String           @unique
+  name          String           @default("Ninja")
+  email         String           @unique
+  iconUrl       String?
+  role          Role             @default(USER)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  userWallets   UserWallets[]
+  posts         Post[]
+  fromTransfers SolanaTransfer[] @relation("SolanaTransferFromUser")
+  toTransfers   SolanaTransfer[] @relation("SolanaTransferToUser")
 }
 
 enum Role {
@@ -63,4 +65,14 @@ model UserWallets {
 
   @@unique([name, userId])
   @@index([pubkey])
+}
+
+model SolanaTransfer {
+  id            Int    @id @default(autoincrement())
+  amountLamport Float  @default(0)
+  fromUser      User   @relation("SolanaTransferFromUser", fields: [fromUserId], references: [id])
+  fromUserId    Int
+  toUser        User   @relation("SolanaTransferToUser", fields: [toUserId], references: [id])
+  toUserId      Int
+  signature     String @default("")
 }

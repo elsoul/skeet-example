@@ -37,9 +37,9 @@ export const PostMutation = extendType({
         try {
           return await ctx.prisma.post.update({
             where: {
-              id,
+              id
             },
-            data,
+            data
           })
         } catch (error) {
           console.log(error)

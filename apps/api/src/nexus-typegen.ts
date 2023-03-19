@@ -46,6 +46,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Role: "ADMIN" | "MASTER" | "USER"
 }
 
 export interface NexusGenScalars {
@@ -73,7 +74,6 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId?: number | null; // Int
   }
   PostEdge: { // root type
     cursor: string; // String!
@@ -83,6 +83,11 @@ export interface NexusGenObjects {
   QueryPostConnection_Connection: { // root type
     edges?: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
     nodes?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  QuerySolanaTransferConnection_Connection: { // root type
+    edges?: Array<NexusGenRootTypes['SolanaTransferEdge'] | null> | null; // [SolanaTransferEdge]
+    nodes?: Array<NexusGenRootTypes['SolanaTransfer'] | null> | null; // [SolanaTransfer]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
   }
   QueryUserConnection_Connection: { // root type
@@ -95,11 +100,22 @@ export interface NexusGenObjects {
     nodes?: Array<NexusGenRootTypes['UserWallets'] | null> | null; // [UserWallets]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
   }
+  SolanaTransfer: { // root type
+    amountLamport: number; // Float!
+    signature: string; // String!
+  }
+  SolanaTransferEdge: { // root type
+    cursor: string; // String!
+    node?: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
+  }
   User: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     iconUrl?: string | null; // String
     name: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
     uid: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   UserEdge: { // root type
     cursor: string; // String!
@@ -134,7 +150,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   LoginResponse: { // field return type
@@ -143,15 +159,19 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     airdrop: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     createPost: NexusGenRootTypes['Post'] | null; // Post
+    createSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     createUser: NexusGenRootTypes['User'] | null; // User
     createUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     createWallet: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     deletePost: NexusGenRootTypes['Post'] | null; // Post
+    deleteSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     deleteUser: NexusGenRootTypes['User'] | null; // User
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
+    saveSkeetSolanaTransfer: boolean | null; // Boolean
     updateBalance: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     updatePost: NexusGenRootTypes['Post'] | null; // Post
+    updateSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     updateUser: NexusGenRootTypes['User'] | null; // User
     updateUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
   }
@@ -167,7 +187,7 @@ export interface NexusGenFieldTypes {
     id: string | null; // ID
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId: number | null; // Int
+    user: NexusGenRootTypes['User'] | null; // User
   }
   PostEdge: { // field return type
     cursor: string; // String!
@@ -175,6 +195,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getPost: NexusGenRootTypes['Post'] | null; // Post
+    getSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     getUser: NexusGenRootTypes['User'] | null; // User
     getUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     me: NexusGenRootTypes['User'] | null; // User
@@ -183,12 +204,20 @@ export interface NexusGenFieldTypes {
     postConnection: NexusGenRootTypes['QueryPostConnection_Connection'] | null; // QueryPostConnection_Connection
     postTweet: boolean | null; // Boolean
     solanaTokenTransfer: boolean | null; // Boolean
+    solanaTransferConnection: NexusGenRootTypes['QuerySolanaTransferConnection_Connection'] | null; // QuerySolanaTransferConnection_Connection
     userConnection: NexusGenRootTypes['QueryUserConnection_Connection'] | null; // QueryUserConnection_Connection
     userWalletsConnection: NexusGenRootTypes['QueryUserWalletsConnection_Connection'] | null; // QueryUserWalletsConnection_Connection
+    walletSolanaTokenTransfer: boolean | null; // Boolean
   }
   QueryPostConnection_Connection: { // field return type
     edges: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
     nodes: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number | null; // Int
+  }
+  QuerySolanaTransferConnection_Connection: { // field return type
+    edges: Array<NexusGenRootTypes['SolanaTransferEdge'] | null> | null; // [SolanaTransferEdge]
+    nodes: Array<NexusGenRootTypes['SolanaTransfer'] | null> | null; // [SolanaTransfer]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
     totalCount: number | null; // Int
   }
@@ -204,12 +233,30 @@ export interface NexusGenFieldTypes {
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
     totalCount: number | null; // Int
   }
+  SolanaTransfer: { // field return type
+    amountLamport: number; // Float!
+    fromUser: NexusGenRootTypes['User']; // User!
+    id: string | null; // ID
+    signature: string; // String!
+    toUser: NexusGenRootTypes['User']; // User!
+  }
+  SolanaTransferEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
+  }
   User: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
+    fromTransfers: NexusGenRootTypes['SolanaTransfer'][]; // [SolanaTransfer!]!
     iconUrl: string | null; // String
     id: string | null; // ID
     name: string; // String!
+    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    role: NexusGenEnums['Role'] | null; // Role
+    toTransfers: NexusGenRootTypes['SolanaTransfer'][]; // [SolanaTransfer!]!
     uid: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userWallets: NexusGenRootTypes['UserWallets'][]; // [UserWallets!]!
   }
   UserEdge: { // field return type
     cursor: string; // String!
@@ -246,15 +293,19 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     airdrop: 'UserWallets'
     createPost: 'Post'
+    createSolanaTransfer: 'SolanaTransfer'
     createUser: 'User'
     createUserWallets: 'UserWallets'
     createWallet: 'UserWallets'
     deletePost: 'Post'
+    deleteSolanaTransfer: 'SolanaTransfer'
     deleteUser: 'User'
     deleteUserWallets: 'UserWallets'
     login: 'LoginResponse'
+    saveSkeetSolanaTransfer: 'Boolean'
     updateBalance: 'UserWallets'
     updatePost: 'Post'
+    updateSolanaTransfer: 'SolanaTransfer'
     updateUser: 'User'
     updateUserWallets: 'UserWallets'
   }
@@ -270,7 +321,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     title: 'String'
     updatedAt: 'DateTime'
-    userId: 'Int'
+    user: 'User'
   }
   PostEdge: { // field return type name
     cursor: 'String'
@@ -278,6 +329,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getPost: 'Post'
+    getSolanaTransfer: 'SolanaTransfer'
     getUser: 'User'
     getUserWallets: 'UserWallets'
     me: 'User'
@@ -286,12 +338,20 @@ export interface NexusGenFieldTypeNames {
     postConnection: 'QueryPostConnection_Connection'
     postTweet: 'Boolean'
     solanaTokenTransfer: 'Boolean'
+    solanaTransferConnection: 'QuerySolanaTransferConnection_Connection'
     userConnection: 'QueryUserConnection_Connection'
     userWalletsConnection: 'QueryUserWalletsConnection_Connection'
+    walletSolanaTokenTransfer: 'Boolean'
   }
   QueryPostConnection_Connection: { // field return type name
     edges: 'PostEdge'
     nodes: 'Post'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  QuerySolanaTransferConnection_Connection: { // field return type name
+    edges: 'SolanaTransferEdge'
+    nodes: 'SolanaTransfer'
     pageInfo: 'PageInfo'
     totalCount: 'Int'
   }
@@ -307,12 +367,30 @@ export interface NexusGenFieldTypeNames {
     pageInfo: 'PageInfo'
     totalCount: 'Int'
   }
+  SolanaTransfer: { // field return type name
+    amountLamport: 'Float'
+    fromUser: 'User'
+    id: 'ID'
+    signature: 'String'
+    toUser: 'User'
+  }
+  SolanaTransferEdge: { // field return type name
+    cursor: 'String'
+    node: 'SolanaTransfer'
+  }
   User: { // field return type name
+    createdAt: 'DateTime'
     email: 'String'
+    fromTransfers: 'SolanaTransfer'
     iconUrl: 'String'
     id: 'ID'
     name: 'String'
+    posts: 'Post'
+    role: 'Role'
+    toTransfers: 'SolanaTransfer'
     uid: 'String'
+    updatedAt: 'DateTime'
+    userWallets: 'UserWallets'
   }
   UserEdge: { // field return type name
     cursor: 'String'
@@ -349,8 +427,18 @@ export interface NexusGenArgTypes {
       title: string; // String!
       userId?: number | null; // Int
     }
+    createSolanaTransfer: { // args
+      amountLamport: number; // Float!
+      fromUserId: number; // Int!
+      signature: string; // String!
+      toUserId: number; // Int!
+    }
     createUser: { // args
-      name?: string | null; // String
+      email: string; // String!
+      iconUrl?: string | null; // String
+      name: string; // String!
+      role?: string | null; // String
+      uid: string; // String!
     }
     createUserWallets: { // args
       chainType: string; // String!
@@ -371,6 +459,9 @@ export interface NexusGenArgTypes {
     deletePost: { // args
       id: string; // String!
     }
+    deleteSolanaTransfer: { // args
+      id: string; // String!
+    }
     deleteUser: { // args
       id: string; // String!
     }
@@ -380,6 +471,16 @@ export interface NexusGenArgTypes {
     login: { // args
       token?: string | null; // String
     }
+    saveSkeetSolanaTransfer: { // args
+      fromAddressPubkey: string; // String!
+      id?: number | null; // Int
+      signature: string; // String!
+      timestamp?: string | null; // String
+      toAddressPubkey: string; // String!
+      tokenMintAddress: string; // String!
+      transferAmountLamport: number; // Int!
+      usdcPrice: number; // Float!
+    }
     updateBalance: { // args
       userWalletId: string; // String!
     }
@@ -388,9 +489,18 @@ export interface NexusGenArgTypes {
       id: string; // String!
       userId?: number | null; // Int
     }
+    updateSolanaTransfer: { // args
+      fromUserId?: number | null; // Int
+      id: string; // String!
+      signature?: string | null; // String
+      toUserId?: number | null; // Int
+    }
     updateUser: { // args
+      email?: string | null; // String
+      iconUrl?: string | null; // String
       id: string; // String!
       name?: string | null; // String
+      role?: string | null; // String
     }
     updateUserWallets: { // args
       chainType?: string | null; // String
@@ -407,6 +517,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     getPost: { // args
+      id: string; // String!
+    }
+    getSolanaTransfer: { // args
       id: string; // String!
     }
     getUser: { // args
@@ -440,6 +553,12 @@ export interface NexusGenArgTypes {
       tokenMintAddress: string; // String!
       transferAmountLamport: number; // Int!
     }
+    solanaTransferConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     userConnection: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -451,6 +570,10 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+    }
+    walletSolanaTokenTransfer: { // args
+      toUserId: string; // String!
+      transferAmountLamport: number; // Int!
     }
   }
 }
@@ -465,7 +588,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = keyof NexusGenInterfaces;
 

@@ -1708,10 +1708,10 @@
   dependencies:
     "@sinonjs/commons" "^2.0.0"
 
-"@skeet-framework/api-plugin-solana-transfer@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/api-plugin-solana-transfer/-/api-plugin-solana-transfer-0.2.1.tgz#b477ad7ade1cd028def871de23637ffb535ed6f8"
-  integrity sha512-GHUD9G3B4xM9G6Ap17c7ahnoTdJOrTGS01Cv06ZQ2pp6SkCklwxg+QxCpfwpbj24pkTI7tUIUGs51UHR7W5M1Q==
+"@skeet-framework/api-plugin-solana-transfer@0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/api-plugin-solana-transfer/-/api-plugin-solana-transfer-0.2.5.tgz#d78e24bd3eeaa9c61bc2c589e33fdf74454e0ec8"
+  integrity sha512-XwBBEwVNZNfPh/io8SbM/NTT+K85GV93afPfiv9BOfWDJyOd33K3kcAOTPpKUIxryjXe0eC+IVP03dNKgFSisg==
   dependencies:
     "@google-cloud/tasks" "3.1.1"
     dotenv "16.0.3"
@@ -1735,7 +1735,7 @@
   dependencies:
     buffer "~6.0.3"
 
-"@solana/spl-token@^0.3.7":
+"@solana/spl-token@0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@solana/spl-token/-/spl-token-0.3.7.tgz#6f027f9ad8e841f792c32e50920d9d2e714fc8da"
   integrity sha512-bKGxWTtIw6VDdCBngjtsGlKGLSmiu/8ghSt/IOYJV24BsymRbgq7r12GToeetpxmPaZYLddKwAz7+EwprLfkfg==

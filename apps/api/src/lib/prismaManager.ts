@@ -8,11 +8,12 @@ const prisma = new PrismaClient()
 export const getUserWithWallet = async (id: number) => {
   try {
     const user = await prisma.user.findUnique({
-      where: {
-        id,
-      },
+      where: { id },
       include: {
-        userWallets: true,
+        userWallets: {
+          orderBy: { priority: 'asc' },
+          take: 1,
+        },
       },
     })
     if (!user)

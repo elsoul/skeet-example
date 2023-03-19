@@ -47,6 +47,17 @@ CREATE TABLE "UserWallets" (
     CONSTRAINT "UserWallets_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "SolanaTransfer" (
+    "id" SERIAL NOT NULL,
+    "amountLamport" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fromUserId" INTEGER NOT NULL,
+    "toUserId" INTEGER NOT NULL,
+    "signature" TEXT NOT NULL DEFAULT '',
+
+    CONSTRAINT "SolanaTransfer_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_uid_key" ON "User"("uid");
 
@@ -73,3 +84,9 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFE
 
 -- AddForeignKey
 ALTER TABLE "UserWallets" ADD CONSTRAINT "UserWallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolanaTransfer" ADD CONSTRAINT "SolanaTransfer_fromUserId_fkey" FOREIGN KEY ("fromUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolanaTransfer" ADD CONSTRAINT "SolanaTransfer_toUserId_fkey" FOREIGN KEY ("toUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

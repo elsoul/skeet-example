@@ -17,7 +17,7 @@ import queryComplexity, { simpleEstimator } from 'graphql-query-complexity'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import { sleep } from '@/utils/time'
-import { getLoginUser } from './graphql/authManager/login'
+import { getLoginUser } from '@/graphql/authManager/login'
 import { User } from 'nexus-prisma'
 import { Connection } from '@solana/web3.js'
 
@@ -29,10 +29,8 @@ const prisma = new PrismaClient()
 
 const PORT = process.env.PORT || 4000
 const skeetEnv = process.env.NODE_ENV || 'development'
-export const connection = new Connection(
-  'https://api.devnet.solana.com/',
-  'confirmed'
-)
+export const RPC_URL = 'https://api.devnet.solana.com/'
+export const connection = new Connection(RPC_URL, 'confirmed')
 
 const queryComplexityRule = queryComplexity({
   maximumComplexity: 1000,

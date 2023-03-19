@@ -1,27 +1,21 @@
 import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'
 import { fromGlobalId } from 'graphql-relay'
-import { UserWallets } from 'nexus-prisma'
+import { SolanaTransfer } from 'nexus-prisma'
 
-export const UserWalletsMutation = extendType({
+export const SolanaTransferMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.field('createUserWallets', {
-      type: UserWallets.$name,
+    t.field('createSolanaTransfer', {
+      type: SolanaTransfer.$name,
       args: {
-        name: nonNull(stringArg()),
-        chainType: nonNull(stringArg()),
-        imgUrl: nonNull(stringArg()),
-        pubkey: nonNull(stringArg()),
-        privateKey: nonNull(stringArg()),
-        priority: nonNull(intArg()),
-        sol: nonNull(floatArg()),
-        usdc: nonNull(floatArg()),
-        epct: nonNull(floatArg()),
-        userId: intArg(),
+        amountLamport: nonNull(floatArg()),
+        fromUserId: nonNull(intArg()),
+        toUserId: nonNull(intArg()),
+        signature: nonNull(stringArg()),
       },
       async resolve(_, args, ctx) {
         try {
-          return await ctx.prisma.userWallets.create({
+          return await ctx.prisma.solanaTransfer.create({
             data: args,
           })
         } catch (error) {
@@ -30,26 +24,20 @@ export const UserWalletsMutation = extendType({
         }
       },
     })
-    t.field('updateUserWallets', {
-      type: UserWallets.$name,
+    t.field('updateSolanaTransfer', {
+      type: SolanaTransfer.$name,
       args: {
         id: nonNull(stringArg()),
-        chainType: stringArg(),
-        imgUrl: stringArg(),
-        pubkey: stringArg(),
-        privateKey: stringArg(),
-        priority: intArg(),
-        sol: floatArg(),
-        usdc: floatArg(),
-        epct: floatArg(),
-        userId: intArg(),
+        fromUserId: intArg(),
+        toUserId: intArg(),
+        signature: stringArg(),
       },
       async resolve(_, args, ctx) {
         const id = Number(fromGlobalId(args.id).id)
         let data = JSON.parse(JSON.stringify(args))
         delete data.id
         try {
-          return await ctx.prisma.userWallets.update({
+          return await ctx.prisma.solanaTransfer.update({
             where: {
               id
             },
@@ -61,14 +49,14 @@ export const UserWalletsMutation = extendType({
         }
       },
     })
-    t.field('deleteUserWallets', {
-      type: UserWallets.$name,
+    t.field('deleteSolanaTransfer', {
+      type: SolanaTransfer.$name,
       args: {
         id: nonNull(stringArg()),
       },
       async resolve(_, { id }, ctx) {
         try {
-          return await ctx.prisma.userWallets.delete({
+          return await ctx.prisma.solanaTransfer.delete({
             where: {
               id: Number(fromGlobalId(id).id),
             },

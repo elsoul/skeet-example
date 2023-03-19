@@ -1,23 +1,26 @@
 import { extendType } from 'nexus'
 import { getAirdrop, getKeypairFromArrayString } from '@/lib/solanaUtils'
 import { decrypt } from '@/lib/crypto'
-import { User } from '@prisma/client'
+import { User, UserWallets } from '@prisma/client'
+import { UserWallets as UserWalletsType } from 'nexus-prisma'
 import { getUserWallet, updateUserWalletBalance } from '@/lib/prismaManager'
 import { connection } from '@/index'
-import { UserWallets } from 'nexus-prisma'
 import { sleep } from '@/utils/time'
+
+interface UserWithWallets extends User {
+  userWallets: UserWallets[]
+}
 
 export const airdrop = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('airdrop', {
-      type: UserWallets.$name,
+      type: UserWalletsType.$name,
       args: {},
       async resolve(_, _args, ctx) {
         try {
-          const user: User = ctx.user
+          const user: UserWithWallets = ctx.user
           let userWallet = await getUserWallet(user.id)
-
           const keypair = await getKeypairFromArrayString(
             await decrypt(userWallet.privateKey, userWallet.iv)
           )
