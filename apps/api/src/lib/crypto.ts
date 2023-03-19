@@ -22,3 +22,13 @@ export const decrypt = async (data: string, iv: Buffer) => {
   decipheredData += decipher.final(inputEncoding)
   return decipheredData
 }
+
+export const generateIv = async () => {
+  try {
+    const iv = crypto.randomBytes(16)
+    return Buffer.from(iv)
+  } catch (error) {
+    console.log(JSON.stringify(error))
+    throw new Error(`${generateIv.name}: ${error}`)
+  }
+}

@@ -60,7 +60,13 @@ CREATE INDEX "Post_title_idx" ON "Post"("title");
 CREATE INDEX "Post_body_idx" ON "Post"("body");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Post_title_userId_key" ON "Post"("title", "userId");
+
+-- CreateIndex
 CREATE INDEX "UserWallets_pubkey_idx" ON "UserWallets"("pubkey");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserWallets_name_userId_key" ON "UserWallets"("name", "userId");
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -15,6 +15,7 @@ type Mutation {
   createPost(body: String!, title: String!, userId: Int): Post
   createUser(name: String): User
   createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
+  createWallet(imgUrl: String, name: String!): UserWallets
   deletePost(id: String!): Post
   deleteUser(id: String!): User
   deleteUserWallets(id: String!): UserWallets

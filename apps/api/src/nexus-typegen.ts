@@ -141,6 +141,7 @@ export interface NexusGenFieldTypes {
     createPost: NexusGenRootTypes['Post'] | null; // Post
     createUser: NexusGenRootTypes['User'] | null; // User
     createUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    createWallet: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     deleteUser: NexusGenRootTypes['User'] | null; // User
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
@@ -236,6 +237,7 @@ export interface NexusGenFieldTypeNames {
     createPost: 'Post'
     createUser: 'User'
     createUserWallets: 'UserWallets'
+    createWallet: 'UserWallets'
     deletePost: 'Post'
     deleteUser: 'User'
     deleteUserWallets: 'UserWallets'
@@ -344,6 +346,10 @@ export interface NexusGenArgTypes {
       sol: number; // Float!
       usdc: number; // Float!
       userId?: number | null; // Int
+    }
+    createWallet: { // args
+      imgUrl?: string | null; // String
+      name: string; // String!
     }
     deletePost: { // args
       id: string; // String!

@@ -39,6 +39,7 @@ model Post {
   userId    Int?
   user      User?    @relation(fields: [userId], references: [id])
 
+  @@unique([title, userId])
   @@index([title])
   @@index([body])
 }
@@ -60,5 +61,6 @@ model UserWallets {
   userId     Int?
   user       User?    @relation(fields: [userId], references: [id])
 
+  @@unique([name, userId])
   @@index([pubkey])
 }

@@ -33,10 +33,7 @@ export type TokenBalance = {
   amountLamport: number
 }
 
-export const connection = new Connection(
-  'https://neat-hidden-sanctuary.solana-mainnet.discover.quiknode.pro/2af5315d336f9ae920028bbb90a73b724dc1bbed/',
-  'confirmed'
-)
+export const connection = new Connection('https://api.devnet.solana.com')
 
 export const genKeypair = async () => {
   const keypair = Keypair.generate()
