@@ -51,9 +51,9 @@ export const UserWalletsMutation = extendType({
         try {
           return await ctx.prisma.userWallets.update({
             where: {
-              id,
+              id
             },
-            data,
+            data
           })
         } catch (error) {
           console.log(error)

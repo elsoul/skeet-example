@@ -10,6 +10,6 @@ export const PostObject = objectType({
     t.field(Post.body)
     t.field(Post.createdAt)
     t.field(Post.updatedAt)
-    t.field(Post.userId)
+    t.field(Post.user)
   },
 })

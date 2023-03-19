@@ -1,21 +1,23 @@
+import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'
 import { fromGlobalId } from 'graphql-relay'
-import { objectType, stringArg, nonNull } from 'nexus'
 import { User } from 'nexus-prisma'
 
-export const UserMutation = objectType({
-  name: 'Mutation',
+export const UserMutation = extendType({
+  type: 'Mutation',
   definition(t) {
     t.field('createUser', {
       type: User.$name,
       args: {
-        name: stringArg(),
+        uid: nonNull(stringArg()),
+        name: nonNull(stringArg()),
+        email: nonNull(stringArg()),
+        iconUrl: stringArg(),
+        role: stringArg(),
       },
-      async resolve(_, { name }, ctx) {
+      async resolve(_, args, ctx) {
         try {
           return await ctx.prisma.user.create({
-            data: {
-              name,
-            },
+            data: args,
           })
         } catch (error) {
           console.log(error)
@@ -28,16 +30,20 @@ export const UserMutation = objectType({
       args: {
         id: nonNull(stringArg()),
         name: stringArg(),
+        email: stringArg(),
+        iconUrl: stringArg(),
+        role: stringArg(),
       },
-      async resolve(_, { id, name }, ctx) {
+      async resolve(_, args, ctx) {
+        const id = Number(fromGlobalId(args.id).id)
+        let data = JSON.parse(JSON.stringify(args))
+        delete data.id
         try {
           return await ctx.prisma.user.update({
             where: {
-              id: Number(fromGlobalId(id).id),
+              id
             },
-            data: {
-              name,
-            },
+            data
           })
         } catch (error) {
           console.log(error)
