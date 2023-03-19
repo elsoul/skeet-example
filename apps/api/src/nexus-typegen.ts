@@ -181,6 +181,7 @@ export interface NexusGenFieldTypes {
     solanaTokenTransfer: boolean | null; // Boolean
     userConnection: NexusGenRootTypes['QueryUserConnection_Connection'] | null; // QueryUserConnection_Connection
     userWalletsConnection: NexusGenRootTypes['QueryUserWalletsConnection_Connection'] | null; // QueryUserWalletsConnection_Connection
+    walletSolanaTokenTransfer: boolean | null; // Boolean
   }
   QueryPostConnection_Connection: { // field return type
     edges: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
@@ -280,6 +281,7 @@ export interface NexusGenFieldTypeNames {
     solanaTokenTransfer: 'Boolean'
     userConnection: 'QueryUserConnection_Connection'
     userWalletsConnection: 'QueryUserWalletsConnection_Connection'
+    walletSolanaTokenTransfer: 'Boolean'
   }
   QueryPostConnection_Connection: { // field return type name
     edges: 'PostEdge'
@@ -440,6 +442,10 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+    }
+    walletSolanaTokenTransfer: { // args
+      toUserId: string; // String!
+      transferAmountLamport: number; // Int!
     }
   }
 }

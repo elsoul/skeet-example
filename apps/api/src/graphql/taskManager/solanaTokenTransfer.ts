@@ -1,5 +1,4 @@
 import { extendType, intArg, nonNull, stringArg } from 'nexus'
-import { UserWallets } from '@prisma/client'
 import dotenv from 'dotenv'
 import {
   skeetSplTransfer,

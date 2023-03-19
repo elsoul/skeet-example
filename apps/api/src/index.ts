@@ -29,10 +29,8 @@ const prisma = new PrismaClient()
 
 const PORT = process.env.PORT || 4000
 const skeetEnv = process.env.NODE_ENV || 'development'
-export const connection = new Connection(
-  'https://api.devnet.solana.com/',
-  'confirmed'
-)
+export const RPC_URL = 'https://api.devnet.solana.com/'
+export const connection = new Connection(RPC_URL, 'confirmed')
 
 const queryComplexityRule = queryComplexity({
   maximumComplexity: 1000,
