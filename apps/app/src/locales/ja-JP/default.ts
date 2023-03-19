@@ -58,6 +58,12 @@ const defaultJA = {
   alreadyExistTitle: 'すでに登録されています。',
   alreadyExistBody:
     'こちらのメールアドレスはすでに登録されています。ログインをお試しください。',
+  networkErrorTitle: 'ネットワークエラー',
+  networkErrorBody:
+    'データ取得に失敗しました。少し時間をおいてからもう一度お試しください。',
+  refetch: 'リトライ',
+  sessionErrorLogout: 'セッションが切れました',
+  pleaseLoginAgain: 'もう一度ログインしてください。',
 }
 
 export default defaultJA

@@ -79,6 +79,7 @@ type Query {
   getPost(id: String!): Post
   getUser(id: String!): User
   getUserWallets(id: String!): UserWallets
+  me: User
 
   """Fetches an object given its global ID"""
   node(
@@ -183,8 +184,11 @@ type QueryUserWalletsConnection_Connection {
 }
 
 type User {
+  email: String!
+  iconUrl: String
   id: ID
   name: String!
+  uid: String!
 }
 
 type UserEdge {

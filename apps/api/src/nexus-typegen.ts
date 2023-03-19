@@ -96,7 +96,10 @@ export interface NexusGenObjects {
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
   }
   User: { // root type
+    email: string; // String!
+    iconUrl?: string | null; // String
     name: string; // String!
+    uid: string; // String!
   }
   UserEdge: { // root type
     cursor: string; // String!
@@ -174,6 +177,7 @@ export interface NexusGenFieldTypes {
     getPost: NexusGenRootTypes['Post'] | null; // Post
     getUser: NexusGenRootTypes['User'] | null; // User
     getUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    me: NexusGenRootTypes['User'] | null; // User
     node: NexusGenRootTypes['Node'] | null; // Node
     nodes: Array<NexusGenRootTypes['Node'] | null>; // [Node]!
     postConnection: NexusGenRootTypes['QueryPostConnection_Connection'] | null; // QueryPostConnection_Connection
@@ -201,8 +205,11 @@ export interface NexusGenFieldTypes {
     totalCount: number | null; // Int
   }
   User: { // field return type
+    email: string; // String!
+    iconUrl: string | null; // String
     id: string | null; // ID
     name: string; // String!
+    uid: string; // String!
   }
   UserEdge: { // field return type
     cursor: string; // String!
@@ -273,6 +280,7 @@ export interface NexusGenFieldTypeNames {
     getPost: 'Post'
     getUser: 'User'
     getUserWallets: 'UserWallets'
+    me: 'User'
     node: 'Node'
     nodes: 'Node'
     postConnection: 'QueryPostConnection_Connection'
@@ -300,8 +308,11 @@ export interface NexusGenFieldTypeNames {
     totalCount: 'Int'
   }
   User: { // field return type name
+    email: 'String'
+    iconUrl: 'String'
     id: 'ID'
     name: 'String'
+    uid: 'String'
   }
   UserEdge: { // field return type name
     cursor: 'String'

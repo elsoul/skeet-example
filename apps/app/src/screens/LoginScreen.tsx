@@ -98,7 +98,6 @@ export default function LoginScreen() {
             })
             setUser({
               ...user,
-              uid: userCredential.user.uid,
               skeetToken: login?.token ?? '',
             })
           },

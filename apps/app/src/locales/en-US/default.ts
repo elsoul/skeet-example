@@ -57,6 +57,11 @@ const defaultEN = {
   alreadyExistTitle: 'Already exist',
   alreadyExistBody:
     'This email address is already exist. Please try to sign in.',
+  networkErrorTitle: 'Network Error',
+  networkErrorBody: 'Failed to get data. Please retry it again later.',
+  refetch: 'Retry',
+  sessionErrorLogout: 'Session expired',
+  pleaseLoginAgain: 'Please sign in again.',
 }
 
 export default defaultEN

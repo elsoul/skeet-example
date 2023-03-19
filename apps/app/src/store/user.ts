@@ -2,28 +2,30 @@ import { atom } from 'recoil'
 import ReactNativeRecoilPersist from 'react-native-recoil-persist'
 
 export type UserState = {
-  userId: string
   uid: string
   email: string
-  username: string
-  pubkey: string
-  githubUid: string
+  name: string
   iconUrl: string
   role: string
+  wallet: {
+    pubkey: string
+    sol: number
+  }
   skeetToken: string
 }
 
 export const userState = atom<UserState>({
   key: 'userState',
   default: {
-    userId: '',
     uid: '',
     email: '',
-    username: '',
-    pubkey: '',
-    githubUid: '',
+    name: '',
     iconUrl: '',
     role: 'USER',
+    wallet: {
+      pubkey: '',
+      sol: 0,
+    },
     skeetToken: '',
   },
   effects_UNSTABLE: [ReactNativeRecoilPersist.persistAtom],
