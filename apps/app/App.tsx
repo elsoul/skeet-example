@@ -1,9 +1,9 @@
-import './global'
-import 'react-native-get-random-values'
 import 'react-native-url-polyfill/auto'
-import 'text-encoding-polyfill'
-
+import 'react-native-get-random-values'
 import 'react-native-gesture-handler'
+import 'text-encoding-polyfill'
+import './global'
+
 import '@/lib/i18n'
 import { useDeviceContext } from 'twrnc'
 import tw from '@/lib/tailwind'
