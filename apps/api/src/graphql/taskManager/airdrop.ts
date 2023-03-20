@@ -20,6 +20,7 @@ export const airdrop = extendType({
         try {
           const user: UserWithWallets = ctx.user
           let userWallet = await getUserWallet(user.userWallets[0].id)
+          console.log(userWallet)
           const keypair = await getKeypairFromArrayString(
             await decrypt(userWallet.privateKey, userWallet.iv)
           )
