@@ -1,3 +1,8 @@
+import './global'
+import 'react-native-get-random-values'
+import 'react-native-url-polyfill/auto'
+import 'text-encoding-polyfill'
+
 import 'react-native-gesture-handler'
 import '@/lib/i18n'
 import { useDeviceContext } from 'twrnc'

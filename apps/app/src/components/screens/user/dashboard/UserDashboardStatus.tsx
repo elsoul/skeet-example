@@ -15,7 +15,7 @@ import {
 } from '@/__generated__/UserDashboardStatusMutation.graphql'
 import Toast from 'react-native-toast-message'
 import { useTranslation } from 'react-i18next'
-// import { LAMPORTS_PER_SOL } from '@solana/web3.js'
+import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import { ArrowPathIcon } from 'react-native-heroicons/outline'
 import { Platform } from 'react-native'
 
@@ -172,7 +172,8 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
             <Text
               style={tw`font-loaded-bold pt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
             >
-              {(user.wallet.sol / 10 ** 9).toLocaleString()}
+              {(user.wallet.sol / LAMPORTS_PER_SOL).toLocaleString()}
+              {/* {(user.wallet.sol / 10 ** 9).toLocaleString()} */}
               <Text
                 style={tw`font-loaded-bold ml-1 mt-2 text-center text-2xl tracking-tight text-gray-700 dark:text-gray-200`}
               >
