@@ -8,6 +8,8 @@ defaultConfig.resolver.assetExts = defaultConfig.resolver.assetExts.filter(
   (ext) => ext !== 'svg'
 )
 defaultConfig.resolver.sourceExts.push('svg')
+// defaultConfig.resolver.sourceExts.push('cjs')
+// defaultConfig.resolver.extraNodeModules = require('expo-crypto-polyfills')
 defaultConfig.transformer.babelTransformerPath = require.resolve(
   'react-native-svg-transformer'
 )

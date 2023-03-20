@@ -69,7 +69,12 @@ export default function CreateUserWallet({ refetch }: Props) {
           >
             <View style={tw``}>
               <Image
-                source={{ uri: user.iconUrl }}
+                source={{
+                  uri:
+                    user.iconUrl == ''
+                      ? 'https://dummyimage.com/300x300/000/fff&text=USER'
+                      : user.iconUrl,
+                }}
                 alt={user.name}
                 style={tw`w-12 h-12 rounded-full`}
               />
