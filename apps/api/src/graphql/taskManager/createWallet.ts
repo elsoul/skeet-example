@@ -26,13 +26,17 @@ export const createWallet = extendType({
           const priority = userData.userWallets.length === 0 ? 1 : 5
           const data = {
             name: args.name,
-            imgUrl: args.imgUrl,
+            imgUrl: args.imgUrl || '',
             userId: user.id,
             pubkey: walletData.pubkey,
             privateKey: encodedPrivateKeyString,
             iv,
             priority,
+            sol: 0,
+            usdc: 0,
+            epct: 0,
           }
+          console.log(data)
           const userWallet = await ctx.prisma.userWallets.create({
             data,
           })
