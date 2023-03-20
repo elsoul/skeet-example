@@ -18,6 +18,13 @@ export const airdrop = extendType({
           const user: User = ctx.user
           console.log(user)
           const userWallet = await getUserWithWallet(user.id)
+          if (
+            !userWallet ||
+            !userWallet.userWallets ||
+            userWallet.userWallets.length === 0
+          ) {
+            throw new Error('User wallet not found')
+          }
           console.log(userWallet)
           const keypair = await getKeypairFromArrayString(
             await decrypt(
