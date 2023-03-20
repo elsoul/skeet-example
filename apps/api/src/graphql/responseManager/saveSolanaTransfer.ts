@@ -1,4 +1,8 @@
 import { extendType, floatArg, intArg, nonNull, stringArg } from 'nexus'
+import { PrismaClient } from '@prisma/client'
+import { getUserWalletByPubkey } from '@/lib/prismaManager'
+
+const prisma = new PrismaClient()
 
 export const saveSkeetSolanaTransfer = extendType({
   type: 'Mutation',
@@ -15,11 +19,16 @@ export const saveSkeetSolanaTransfer = extendType({
         usdcPrice: nonNull(floatArg()),
         timestamp: stringArg(),
       },
-      async resolve(_, args, ctx) {
+      async resolve(_, args, _ctx) {
         try {
           console.log(
             `saveSkeetSolanaTransfer: ${JSON.stringify(args, null, 2)}`
           )
+          const solanaTransfer = await updateSolanaTransfer(
+            args.id || 0,
+            args.signature
+          )
+          console.log(solanaTransfer)
           return true
         } catch (error) {
           console.log(error)
@@ -29,3 +38,13 @@ export const saveSkeetSolanaTransfer = extendType({
     })
   },
 })
+
+export const updateSolanaTransfer = async (id: number, signature: string) => {
+  const solanaTransfer = await prisma.solanaTransfer.update({
+    where: { id },
+    data: {
+      signature,
+    },
+  })
+  return solanaTransfer
+}
