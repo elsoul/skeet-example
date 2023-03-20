@@ -1,5 +1,4 @@
 import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token'
-import * as solanaWeb3 from '@solana/web3.js'
 import {
   Keypair,
   Connection,
@@ -47,7 +46,6 @@ export const getTokenType = async (tokenAddress: string) => {
   return token[0].symbol
 }
 
-export const getTokenTypeEnum = async (tokenSymbol: string) => {}
 export const usdcOrEpct = async (tokenAddress: string) => {
   const symbol = await getTokenType(tokenAddress)
   if (symbol === 'EPCT') {
@@ -72,14 +70,14 @@ export const getKeypairData = async (keypair: Keypair) => {
 
 export const getKeypairFromArrayString = async (keyString: string) => {
   const secretKeyArray = keyString.split(',').map((i) => Number(i))
-  let secretKey = Uint8Array.from(secretKeyArray)
-  let keypair = Keypair.fromSecretKey(secretKey)
+  const secretKey = Uint8Array.from(secretKeyArray)
+  const keypair = Keypair.fromSecretKey(secretKey)
   return keypair
 }
 
 export const getAirdrop = async (connection: Connection, keypair: Keypair) => {
   try {
-    let airdropSignature = await connection.requestAirdrop(
+    const airdropSignature = await connection.requestAirdrop(
       keypair.publicKey,
       LAMPORTS_PER_SOL
     )
@@ -173,7 +171,7 @@ export const getTokenBalances = async (
     const keypairInfo = await getKeypairData(keypair)
     console.log(keypairInfo.pubkey)
     const splBalance = await getSplTokenBalance(connection, keypairInfo.pubkey)
-    let tokenBalance: { [key: string]: number } = {}
+    const tokenBalance: { [key: string]: number } = {}
     const solBalance = await getBalance(connection, keypair)
     if (splBalance)
       for await (const tokenInfo of splBalance) {

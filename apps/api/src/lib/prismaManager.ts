@@ -86,6 +86,6 @@ export const updateUserWalletBalance = async (userWalletsId: number) => {
 }
 
 // const run = async () => {
-//   console.log(await getUserWithWallet(3))
+//   console.log(await getUserWithWallet(1))
 // }
 // run()
