@@ -16,11 +16,9 @@ export const getUserWithWallet = async (id: number) => {
         },
       },
     })
-    if (!user)
-      throw new Error(`getUserWithWallet: No User Data!Check your Database!`)
     return user
   } catch (error) {
-    throw new Error(`getUserWithWallet: ${error}`)
+    return {}
   }
 }
 
