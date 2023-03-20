@@ -17,6 +17,7 @@ import Toast from 'react-native-toast-message'
 import { useTranslation } from 'react-i18next'
 // import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import { ArrowPathIcon } from 'react-native-heroicons/outline'
+import { Platform } from 'react-native'
 
 const fragment = graphql`
   fragment UserDashboardStatus_query on Query {
@@ -127,7 +128,7 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
         <View style={tw`sm:mx-auto sm:w-full sm:max-w-md`}>
           <LogoHorizontal />
           <View
-            style={tw`mt-6 flex flex-row items-center justify-center gap-6`}
+            style={tw`pt-6 flex flex-row items-center justify-center gap-6`}
           >
             <View style={tw``}>
               <Image
@@ -165,17 +166,20 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
               </Pressable>
             </View>
           </View>
-          <Text
-            style={tw`font-loaded-bold mt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
+          <View
+            style={tw`${clsx(Platform.OS === 'android' ? 'pt-6' : '', '')}`}
           >
-            {(user.wallet.sol / 10 ** 9).toLocaleString()}
             <Text
-              style={tw`font-loaded-bold ml-1 mt-2 text-center text-2xl tracking-tight text-gray-700 dark:text-gray-200`}
+              style={tw`font-loaded-bold pt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
             >
-              SOL
+              {(user.wallet.sol / 10 ** 9).toLocaleString()}
+              <Text
+                style={tw`font-loaded-bold ml-1 mt-2 text-center text-2xl tracking-tight text-gray-700 dark:text-gray-200`}
+              >
+                SOL
+              </Text>
             </Text>
-          </Text>
-
+          </View>
           <View style={tw`mt-8 flex items-center justify-center gap-x-6`}>
             <Button
               onPress={() => {

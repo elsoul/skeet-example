@@ -90,7 +90,6 @@ You need to run this command to setup EAS Build project.
 yarn build:configure
 ```
 
-
 ## GitHub Actions (CI/CD)
 
 Needs to set Secrets on GitHub to work with GitHub Actions.
@@ -98,3 +97,7 @@ Needs to set Secrets on GitHub to work with GitHub Actions.
 ```
 FIREBASE_DEPLOY_TOKEN
 ```
+
+## For Android Development
+
+Please set your local IP for app config to connect with Skeet API in local development.
