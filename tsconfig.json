@@ -12,28 +12,21 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "resolveJsonModule": true,
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "sourceMap": true,
+    "inlineSources": true,
+    "inlineSourceMap": false,
+    "mapRoot": ".",
+    "declaration": false,
+    "noEmitOnError": true,
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "files": [
-    "package.json",
-    "skeet-cloud.config.js"
-  ],
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  "files": ["package.json", "skeet-cloud.config.js"],
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compileOnSave": false
 }

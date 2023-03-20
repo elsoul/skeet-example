@@ -46,14 +46,14 @@ export const UserWalletsMutation = extendType({
       },
       async resolve(_, args, ctx) {
         const id = Number(fromGlobalId(args.id).id)
-        let data = JSON.parse(JSON.stringify(args))
+        const data = JSON.parse(JSON.stringify(args))
         delete data.id
         try {
           return await ctx.prisma.userWallets.update({
             where: {
-              id
+              id,
             },
-            data
+            data,
           })
         } catch (error) {
           console.log(error)
