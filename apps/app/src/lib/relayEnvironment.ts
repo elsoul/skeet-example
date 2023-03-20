@@ -13,9 +13,11 @@ const source = new RecordSource()
 const store = new Store(source)
 
 let storeEnvironment: Environment | null = null
+let beforeToken: string | null = null
 
 export const createEnvironment = (token: string) => {
-  if (storeEnvironment) return storeEnvironment
+  if (storeEnvironment && beforeToken && beforeToken === token)
+    return storeEnvironment
   storeEnvironment = new Environment({
     store,
     network: new RelayNetworkLayer([
@@ -38,5 +40,6 @@ export const createEnvironment = (token: string) => {
       }),
     ]),
   })
+  beforeToken = token
   return storeEnvironment
 }

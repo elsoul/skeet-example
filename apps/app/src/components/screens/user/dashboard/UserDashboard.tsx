@@ -37,8 +37,11 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
       user.skeetToken != '' &&
       data.me &&
       data.me.uid &&
-      user.uid == '' &&
-      user.uid !== data.me.uid
+      data.me.uid != '' &&
+      (user.uid !== data.me.uid ||
+        user.email !== data.me.email ||
+        user.name !== data.me.name ||
+        user.iconUrl !== data.me.iconUrl)
     ) {
       setUser({
         ...user,
