@@ -102,7 +102,6 @@ export const getLoginUser = async (token: string) => {
         id: userId,
       },
     })
-    console.log(user)
     if (user) {
       return user
     } else {

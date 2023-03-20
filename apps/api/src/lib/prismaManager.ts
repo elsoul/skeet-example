@@ -1,11 +1,17 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User, UserWallets } from '@prisma/client'
 import { connection } from '..'
 import { decrypt } from './crypto'
 import { getBalance, getKeypairFromArrayString } from './solanaUtils'
 
 const prisma = new PrismaClient()
 
-export const getUserWithWallet = async (id: number) => {
+export interface UserWithWallets extends User {
+  userWallets: UserWallets[]
+}
+
+export const getUserWithWallet: (
+  id: number
+) => Promise<UserWithWallets> = async (id: number) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id },
@@ -16,9 +22,22 @@ export const getUserWithWallet = async (id: number) => {
         },
       },
     })
-    return user
+    if (!user) throw new Error('user not found')
+    const result: UserWithWallets = user
+    return result
   } catch (error) {
-    return {}
+    const result: UserWithWallets = {
+      id: 0,
+      uid: '',
+      name: '',
+      email: '',
+      iconUrl: '',
+      role: 'USER',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      userWallets: [],
+    }
+    return result
   }
 }
 
@@ -65,3 +84,8 @@ export const updateUserWalletBalance = async (userWalletsId: number) => {
   })
   return userWallet
 }
+
+// const run = async () => {
+//   console.log(await getUserWithWallet(3))
+// }
+// run()
