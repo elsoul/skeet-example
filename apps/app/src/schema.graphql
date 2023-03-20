@@ -10,16 +10,20 @@ type LoginResponse {
 type Mutation {
   airdrop: UserWallets
   createPost(body: String!, title: String!, userId: Int): Post
-  createUser(name: String): User
+  createSolanaTransfer(amountLamport: Float!, fromUserId: Int!, signature: String!, toUserId: Int!): SolanaTransfer
+  createUser(email: String!, iconUrl: String, name: String!, role: String, uid: String!): User
   createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
   createWallet(imgUrl: String, name: String!): UserWallets
   deletePost(id: String!): Post
+  deleteSolanaTransfer(id: String!): SolanaTransfer
   deleteUser(id: String!): User
   deleteUserWallets(id: String!): UserWallets
   login(token: String): LoginResponse
+  saveSkeetSolanaTransfer(fromAddressPubkey: String!, id: Int, signature: String!, timestamp: String, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!, usdcPrice: Float!): Boolean
   updateBalance(userWalletId: String!): UserWallets
   updatePost(body: String, id: String!, userId: Int): Post
-  updateUser(id: String!, name: String): User
+  updateSolanaTransfer(fromUserId: Int, id: String!, signature: String, toUserId: Int): SolanaTransfer
+  updateUser(email: String, iconUrl: String, id: String!, name: String, role: String): User
   updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
 }
 
@@ -61,7 +65,7 @@ type Post {
   rawId: ID
   title: String!
   updatedAt: DateTime!
-  userId: Int
+  user: User
 }
 
 type PostEdge {
@@ -74,6 +78,7 @@ type PostEdge {
 
 type Query {
   getPost(id: String!): Post
+  getSolanaTransfer(id: String!): SolanaTransfer
   getUser(id: String!): User
   getUserWallets(id: String!): UserWallets
   me: User
@@ -104,6 +109,19 @@ type Query {
   ): QueryPostConnection_Connection
   postTweet(id: String!, text: String!): Boolean
   solanaTokenTransfer(decimal: Int!, encodedFromSecretKeyString: String!, iv: String!, rpcUrl: String!, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!): Boolean
+  solanaTransferConnection(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the elements in the list that come before the specified cursor"""
+    before: String
+
+    """Returns the first n elements from the list."""
+    first: Int
+
+    """Returns the last n elements from the list."""
+    last: Int
+  ): QuerySolanaTransferConnection_Connection
   userConnection(
     """Returns the elements in the list that come after the specified cursor"""
     after: String
@@ -130,6 +148,7 @@ type Query {
     """Returns the last n elements from the list."""
     last: Int
   ): QueryUserWalletsConnection_Connection
+  walletSolanaTokenTransfer(toUserId: String!, transferAmountLamport: Int!): Boolean
 }
 
 type QueryPostConnection_Connection {
@@ -140,6 +159,22 @@ type QueryPostConnection_Connection {
 
   """Flattened list of Post type"""
   nodes: [Post]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type QuerySolanaTransferConnection_Connection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [SolanaTransferEdge]
+
+  """Flattened list of SolanaTransfer type"""
+  nodes: [SolanaTransfer]
 
   """
   https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
@@ -180,13 +215,43 @@ type QueryUserWalletsConnection_Connection {
   totalCount: Int
 }
 
+enum Role {
+  ADMIN
+  MASTER
+  USER
+}
+
+type SolanaTransfer {
+  amountLamport: Float!
+  fromUser: User!
+  id: ID
+  rawId: ID
+  signature: String!
+  toUser: User!
+}
+
+type SolanaTransferEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: SolanaTransfer
+}
+
 type User {
+  createdAt: DateTime!
   email: String!
+  fromTransfers: [SolanaTransfer!]!
   iconUrl: String
   id: ID
   name: String!
+  posts: [Post!]!
   rawId: ID
+  role: Role
+  toTransfers: [SolanaTransfer!]!
   uid: String!
+  updatedAt: DateTime!
+  userWallets: [UserWallets!]!
 }
 
 type UserEdge {
