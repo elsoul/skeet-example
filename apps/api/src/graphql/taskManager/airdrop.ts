@@ -2,12 +2,7 @@ import { extendType } from 'nexus'
 import { getAirdrop, getKeypairFromArrayString } from '@/lib/solanaUtils'
 import { decrypt } from '@/lib/crypto'
 import { UserWallets as UserWalletsType } from 'nexus-prisma'
-import {
-  getUserWallet,
-  getUserWithWallet,
-  updateUserWalletBalance,
-  UserWithWallets,
-} from '@/lib/prismaManager'
+import { getUserWithWallet, updateUserWalletBalance } from '@/lib/prismaManager'
 import { connection } from '@/index'
 import { sleep } from '@/utils/time'
 import { User } from '@prisma/client'
@@ -21,7 +16,9 @@ export const airdrop = extendType({
       async resolve(_, _args, ctx) {
         try {
           const user: User = ctx.user
+          console.log(user)
           const userWallet = await getUserWithWallet(user.id)
+          console.log(userWallet)
           const keypair = await getKeypairFromArrayString(
             await decrypt(
               userWallet.userWallets[0].privateKey,
@@ -36,7 +33,7 @@ export const airdrop = extendType({
           return result
         } catch (error) {
           console.log(error)
-          throw new Error(`createWallet: ${error}`)
+          throw new Error(`airdrop: ${error}`)
         }
       },
     })
