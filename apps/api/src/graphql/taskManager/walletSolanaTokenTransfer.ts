@@ -4,13 +4,9 @@ import {
   skeetSolTransfer,
   SkeetSolTransferParam,
 } from '@skeet-framework/api-plugin-solana-transfer'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 import { fromGlobalId } from 'graphql-relay'
-import {
-  getUserWallet,
-  getUserWithWallet,
-  UserWithWallets,
-} from '@/lib/prismaManager'
+import { getUserWithWallet, UserWithWallets } from '@/lib/prismaManager'
 import { RPC_URL } from '@/index'
 dotenv.config()
 
@@ -27,17 +23,19 @@ export const walletSolanaTokenTransfer = extendType({
       },
       async resolve(_, args, ctx) {
         try {
-          const user: UserWithWallets = ctx.user
-          const fromUserWallet = await getUserWallet(user.userWallets[0].id)
+          const user: User = ctx.user
+          const fromUserWallet = await getUserWithWallet(user.id)
           const toUserIdInt = Number(fromGlobalId(args.toUserId).id)
           const toUserWallet: UserWithWallets = await getUserWithWallet(
             toUserIdInt
           )
+          console.log(fromUserWallet)
           const skeetSolTransferParam: SkeetSolTransferParam = {
             toAddressPubkey: toUserWallet.userWallets[0].pubkey,
             transferAmountLamport: args.transferAmountLamport,
-            encodedFromSecretKeyString: fromUserWallet.privateKey,
-            iv: fromUserWallet.iv.toString('base64'),
+            encodedFromSecretKeyString:
+              fromUserWallet.userWallets[0].privateKey,
+            iv: fromUserWallet.userWallets[0].iv.toString('base64'),
             rpcUrl: RPC_URL,
           }
           await skeetSolTransfer(skeetSolTransferParam)

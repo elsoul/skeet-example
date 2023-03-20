@@ -4,11 +4,13 @@ import { decrypt } from '@/lib/crypto'
 import { UserWallets as UserWalletsType } from 'nexus-prisma'
 import {
   getUserWallet,
+  getUserWithWallet,
   updateUserWalletBalance,
   UserWithWallets,
 } from '@/lib/prismaManager'
 import { connection } from '@/index'
 import { sleep } from '@/utils/time'
+import { User } from '@prisma/client'
 
 export const airdrop = extendType({
   type: 'Mutation',
@@ -18,17 +20,20 @@ export const airdrop = extendType({
       args: {},
       async resolve(_, _args, ctx) {
         try {
-          const user: UserWithWallets = ctx.user
-          console.log(user)
-          let userWallet = await getUserWallet(user.userWallets[0].id)
-          console.log(userWallet)
+          const user: User = ctx.user
+          const userWallet = await getUserWithWallet(user.id)
           const keypair = await getKeypairFromArrayString(
-            await decrypt(userWallet.privateKey, userWallet.iv)
+            await decrypt(
+              userWallet.userWallets[0].privateKey,
+              userWallet.userWallets[0].iv
+            )
           )
           await getAirdrop(connection, keypair)
           await sleep(1000)
-          userWallet = await updateUserWalletBalance(userWallet.id)
-          return userWallet
+          const result = await updateUserWalletBalance(
+            userWallet.userWallets[0].id
+          )
+          return result
         } catch (error) {
           console.log(error)
           throw new Error(`createWallet: ${error}`)

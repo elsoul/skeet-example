@@ -17,7 +17,7 @@ export const saveSkeetSolanaTransfer = extendType({
         usdcPrice: nonNull(floatArg()),
         timestamp: stringArg(),
       },
-      async resolve(_, args, _ctx) {
+      async resolve(_, args, ctx) {
         try {
           console.log(
             `saveSkeetSolanaTransfer: ${JSON.stringify(args, null, 2)}`
