@@ -10,7 +10,8 @@ module.exports = {
     '**/posts/**',
     '**/test/**',
     '**/public/**',
-    '**/.next/**',
     '**/out/**',
+    '**/web-build/**',
+    '**/.expo/**',
   ],
 }
