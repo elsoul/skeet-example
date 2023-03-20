@@ -1,7 +1,5 @@
 import { extendType, floatArg, intArg, nonNull, stringArg } from 'nexus'
 import { PrismaClient } from '@prisma/client'
-import { getUserWalletByPubkey } from '@/lib/prismaManager'
-
 const prisma = new PrismaClient()
 
 export const saveSkeetSolanaTransfer = extendType({

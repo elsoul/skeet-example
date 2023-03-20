@@ -24,14 +24,15 @@ export const createWallet = extendType({
           const encodedPrivateKeyString = await encrypt(privateKeyString, iv)
           const userData = await getUserWithWallet(user.id)
           const priority = userData.userWallets.length === 0 ? 1 : 5
-          const newArgs = {
+          const data = {
+            name: args.name,
+            imgUrl: args.imgUrl,
             userId: user.id,
             pubkey: walletData.pubkey,
             privateKey: encodedPrivateKeyString,
             iv,
             priority,
           }
-          const data = Object.assign({}, args, newArgs)
           const userWallet = await ctx.prisma.userWallets.create({
             data,
           })

@@ -17,9 +17,10 @@ import queryComplexity, { simpleEstimator } from 'graphql-query-complexity'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import { sleep } from '@/utils/time'
-import { getLoginUser } from '@/graphql/authManager/login'
+import { getLoginUser, LOGIN_EXPIRATION } from '@/graphql/authManager/login'
 import { User } from 'nexus-prisma'
 import { Connection } from '@solana/web3.js'
+import { encodeJWT } from './lib/jsonWebToken'
 
 interface Context {
   user?: User
@@ -90,6 +91,7 @@ export const expressServer = httpServer.listen(PORT, async () => {
     await sleep(1000)
     process.exit()
   }
+  console.log(await encodeJWT(String(1), LOGIN_EXPIRATION))
   console.log(
     `🚀 [${skeetEnv}]Server ready at http://localhost:${PORT}/graphql`
   )
