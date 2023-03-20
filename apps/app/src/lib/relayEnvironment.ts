@@ -8,6 +8,7 @@ import {
   retryMiddleware,
 } from 'react-relay-network-modern'
 import appConfig from '@/config/app'
+import { Platform } from 'react-native'
 
 const source = new RecordSource()
 const store = new Store(source)
@@ -35,7 +36,9 @@ export const createEnvironment = (token: string) => {
       urlMiddleware({
         url: () =>
           process.env.NODE_ENV !== 'production'
-            ? 'http://localhost:4000/graphql'
+            ? Platform.OS === 'android'
+              ? `http://${appConfig.localIp}:4000/graphql`
+              : 'http://localhost:4000/graphql'
             : `https://${appConfig.skeetApiDomain}/graphql`,
       }),
     ]),
