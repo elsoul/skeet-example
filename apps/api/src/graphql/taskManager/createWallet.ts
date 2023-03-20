@@ -23,7 +23,7 @@ export const createWallet = extendType({
           const iv = await generateIv()
           const encodedPrivateKeyString = await encrypt(privateKeyString, iv)
           const userData = await getUserWithWallet(user.id)
-          const priority = userData ? 5 : 1
+          const priority = userData.userWallets ? 5 : 1
           const data = {
             name: args.name,
             imgUrl: args.imgUrl || '',
