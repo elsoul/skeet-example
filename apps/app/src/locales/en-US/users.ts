@@ -7,6 +7,7 @@ const userEN = {
   airdrop: 'GET Airdrop',
   airdropSuccessTitle: 'Airdrop Succeed',
   airdropSuccessBody: 'Airdrop Succeeded🎉 You got 1 SOL🙌',
+  sayHi: '👋 挨拶ガチャ',
 }
 
 export default userEN

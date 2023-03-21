@@ -64,6 +64,7 @@ const defaultJA = {
   refetch: 'リトライ',
   sessionErrorLogout: 'セッションが切れました',
   pleaseLoginAgain: 'もう一度ログインしてください。',
+  copyToClipboardSuccess: 'クリップボードにコピーしました📜',
 }
 
 export default defaultJA

@@ -57,7 +57,7 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
     <>
       <Container>
         <View
-          style={tw`flex flex-col md:flex-row items-center justify-center gap-24`}
+          style={tw`flex flex-col md:flex-row items-center md:items-start justify-center gap-24`}
         >
           <View style={tw``}>
             <UserDashboardStatus refetch={refetch} query={data} />

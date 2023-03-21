@@ -62,6 +62,7 @@ const defaultEN = {
   refetch: 'Retry',
   sessionErrorLogout: 'Session expired',
   pleaseLoginAgain: 'Please sign in again.',
+  copyToClipboardSuccess: 'Copied to Clipboard📜',
 }
 
 export default defaultEN
