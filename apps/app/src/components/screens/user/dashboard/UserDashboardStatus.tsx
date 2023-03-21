@@ -16,8 +16,9 @@ import {
 import Toast from 'react-native-toast-message'
 import { useTranslation } from 'react-i18next'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
-import { ArrowPathIcon } from 'react-native-heroicons/outline'
+import { ArrowPathIcon, ClipboardIcon } from 'react-native-heroicons/outline'
 import { Platform } from 'react-native'
+import { copyToClipboard } from '@/utils/userAction'
 
 const fragment = graphql`
   fragment UserDashboardStatus_query on Query {
@@ -74,6 +75,17 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
     () => user.wallet.pubkey != null && user.wallet.pubkey != '',
     [user.wallet]
   )
+
+  const walletCompact = useMemo(() => {
+    const walletName = user.wallet.pubkey
+    if (walletName.length <= 8) {
+      return walletName
+    } else {
+      const firstFour = walletName.substring(0, 4)
+      const lastFour = walletName.substring(walletName.length - 4)
+      return firstFour + '...' + lastFour
+    }
+  }, [user.wallet.pubkey])
 
   const [commit, isInFlight] =
     useMutation<UserDashboardStatusMutation>(mutation)
@@ -166,6 +178,37 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
               </Pressable>
             </View>
           </View>
+          <View style={tw`mt-2 flex items-center justify-center gap-x-6`}>
+            <View style={tw`px-3 py-1 bg-gray-50 dark:bg-gray-700`}>
+              <Text
+                style={tw`text-center font-loaded-normal text-sm dark:text-white text-gray-900`}
+              >
+                Devnet
+              </Text>
+            </View>
+          </View>
+          <View
+            style={tw`mt-2 flex flex-row items-center justify-center gap-x-3`}
+          >
+            <View style={tw``}>
+              <Text
+                style={tw`text-center font-loaded-normal text-xs dark:text-white text-gray-900`}
+              >
+                {walletCompact}
+              </Text>
+            </View>
+            <View style={tw``}>
+              <Pressable
+                onPress={() => {
+                  copyToClipboard(user.wallet.pubkey)
+                }}
+              >
+                <ClipboardIcon
+                  style={tw`w-4 h-4 mx-auto text-gray-900 dark:text-gray-50`}
+                />
+              </Pressable>
+            </View>
+          </View>
           <View
             style={tw`${clsx(Platform.OS === 'android' ? 'pt-6' : '', '')}`}
           >
@@ -173,7 +216,6 @@ export default function UserDashboardStatus({ refetch, query }: Props) {
               style={tw`font-loaded-bold pt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
             >
               {(user.wallet.sol / LAMPORTS_PER_SOL).toLocaleString()}
-              {/* {(user.wallet.sol / 10 ** 9).toLocaleString()} */}
               <Text
                 style={tw`font-loaded-bold ml-1 mt-2 text-center text-2xl tracking-tight text-gray-700 dark:text-gray-200`}
               >
