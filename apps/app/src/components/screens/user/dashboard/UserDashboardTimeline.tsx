@@ -3,7 +3,7 @@ import tw from '@/lib/tailwind'
 import { userState } from '@/store/user'
 import { useRecoilValue } from 'recoil'
 import { View, Text, Image, Pressable } from 'react-native'
-import SayHi from './SayHi'
+import GreetingGacha from './GreetingGacha'
 
 const priceList = [
   {
@@ -58,7 +58,7 @@ export default function UserDashboardTimeline({ refetch }: Props) {
         </View>
         {hasWallet && (
           <View style={tw`w-full`}>
-            <SayHi refetch={refetch} />
+            <GreetingGacha refetch={refetch} />
           </View>
         )}
 

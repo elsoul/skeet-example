@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import { View, Text } from 'react-native'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
+import { copyToClipboard } from '@/utils/userAction'
 
 const greetings = {
   'en-US': [
@@ -27,6 +28,16 @@ const greetings = {
     'What have you been up to?',
     'How have you been?',
     'Nice to meet you!',
+    'Howdy, partner!',
+    'Good afternoon!',
+    "How's everything?",
+    "What's going on?",
+    "What's the latest?",
+    "How's your family?",
+    "What's your plan for today?",
+    "How's your weekend been?",
+    "What's on your mind?",
+    "How's your job going?",
   ],
   'ja-JP': [
     'こんにちは！',
@@ -49,6 +60,16 @@ const greetings = {
     'お元気そうで何よりです！',
     'ご無沙汰しています！',
     '初めまして！',
+    'おつかれさまです！',
+    'こんばんは！',
+    'おやすみなさい！',
+    '元気にしていますか？',
+    'お体に気をつけて！',
+    'お祝い事、ありますか？',
+    'お帰りなさい！',
+    'ご飯はもう食べましたか？',
+    '今日の予定は何ですか？',
+    '今週はどうでしたか？',
   ],
 }
 
@@ -56,14 +77,19 @@ type Props = {
   refetch: () => void
 }
 
-export default function SayHi({ refetch }: Props) {
+export default function GreetingGacha({ refetch }: Props) {
   const { t, i18n } = useTranslation()
-  console.log(i18n.language)
 
   const getRandomGreeting = useCallback(() => {
     const languageArray = greetings[i18n.language as 'en-US' | 'ja-JP']
+    const randomIndex = Math.floor(Math.random() * languageArray.length)
+    return languageArray[randomIndex]
   }, [i18n.language])
-  const onSubmit = useCallback(() => {}, [])
+
+  const onSubmit = useCallback(() => {
+    copyToClipboard(getRandomGreeting())
+  }, [getRandomGreeting])
+
   return (
     <>
       <View style={tw`w-full h-40 flex flex-row items-center justify-center`}>
@@ -80,7 +106,7 @@ export default function SayHi({ refetch }: Props) {
           <Text
             style={tw`text-center font-loaded-bold text-lg text-white dark:text-gray-900`}
           >
-            {t('users.sayHi')}
+            {t('users.greetingGacha')}
           </Text>
         </Button>
       </View>
