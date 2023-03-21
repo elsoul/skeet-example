@@ -7,6 +7,7 @@ export const copyToClipboard = async (text: string) => {
   Toast.show({
     type: 'success',
     text1: i18n.t('copyToClipboardSuccess') ?? 'Copied📜',
+    text2: text,
   })
 }
 
