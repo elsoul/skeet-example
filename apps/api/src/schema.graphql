@@ -22,6 +22,7 @@ type Mutation {
   deleteSolanaTransfer(id: String!): SolanaTransfer
   deleteUser(id: String!): User
   deleteUserWallets(id: String!): UserWallets
+  greetingGacha(content: String, transferAmountLamport: Int): Boolean
   login(token: String): LoginResponse
   saveSkeetSolanaTransfer(fromAddressPubkey: String!, id: Int, signature: String!, timestamp: String, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!, usdcPrice: Float!): Boolean
   updateBalance(userWalletId: String!): UserWallets
@@ -29,6 +30,7 @@ type Mutation {
   updateSolanaTransfer(fromUserId: Int, id: String!, signature: String, toUserId: Int): SolanaTransfer
   updateUser(email: String, iconUrl: String, id: String!, name: String, role: String): User
   updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
+  walletSolanaTokenTransfer(toUserId: String!, transferAmountLamport: Int!): Boolean
 }
 
 """An object with a global ID"""
@@ -151,7 +153,6 @@ type Query {
     """Returns the last n elements from the list."""
     last: Int
   ): QueryUserWalletsConnection_Connection
-  walletSolanaTokenTransfer(toUserId: String!, transferAmountLamport: Int!): Boolean
 }
 
 type QueryPostConnection_Connection {

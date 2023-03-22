@@ -4,7 +4,11 @@ import { useCallback } from 'react'
 import { View, Text } from 'react-native'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
-import { copyToClipboard } from '@/utils/userAction'
+
+import { useMutation, graphql } from 'react-relay'
+import { GreetingGachaMutation } from '@/__generated__/GreetingGachaMutation.graphql'
+import { LAMPORTS_PER_SOL } from '@solana/web3.js'
+import Toast from 'react-native-toast-message'
 
 const greetings = {
   'en-US': [
@@ -73,6 +77,18 @@ const greetings = {
   ],
 }
 
+const mutation = graphql`
+  mutation GreetingGachaMutation(
+    $content: String
+    $transferAmountLamport: Int
+  ) {
+    greetingGacha(
+      content: $content
+      transferAmountLamport: $transferAmountLamport
+    )
+  }
+`
+
 type Props = {
   refetch: () => void
 }
@@ -86,9 +102,34 @@ export default function GreetingGacha({ refetch }: Props) {
     return languageArray[randomIndex]
   }, [i18n.language])
 
+  const [commit] = useMutation<GreetingGachaMutation>(mutation)
+
   const onSubmit = useCallback(() => {
-    copyToClipboard(getRandomGreeting())
-  }, [getRandomGreeting])
+    const content = getRandomGreeting()
+    commit({
+      variables: {
+        content,
+        transferAmountLamport: 1 * LAMPORTS_PER_SOL,
+      },
+      onCompleted: () => {
+        Toast.show({
+          type: 'success',
+          text1: t('gachaComplete') ?? `What's up?👋`,
+          text2: content,
+        })
+      },
+      onError: (err) => {
+        console.error(err)
+        Toast.show({
+          type: 'error',
+          text1: t('networkErrorTitle') ?? 'Network Error',
+          text2:
+            t('networkErrorBody') ??
+            'Network connection failed. Please retry it again later.',
+        })
+      },
+    })
+  }, [getRandomGreeting, commit, t])
 
   return (
     <>

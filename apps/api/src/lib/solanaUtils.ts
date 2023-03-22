@@ -6,8 +6,10 @@ import {
   PublicKey,
 } from '@solana/web3.js'
 import bs58 from 'bs58'
-import { UserWallets } from '@prisma/client'
+import { PrismaClient, UserWallets } from '@prisma/client'
 import { decrypt } from './crypto'
+
+const prisma = new PrismaClient()
 
 export const LAMPORTS_PER_EPCT = 1_000_000
 
@@ -184,4 +186,25 @@ export const getTokenBalances = async (
   } catch (error) {
     throw new Error(`getTokenBalances: ${error}`)
   }
+}
+
+export const createSolanaTransfer = async (
+  amountLamport: number,
+  fromUserId: number,
+  toUserId: number,
+  signature?: string
+) => {
+  const solanaTransfer = await prisma.solanaTransfer.create({
+    data: {
+      amountLamport,
+      fromUser: {
+        connect: { id: fromUserId },
+      },
+      toUser: {
+        connect: { id: toUserId },
+      },
+      signature,
+    },
+  })
+  return solanaTransfer
 }

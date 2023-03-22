@@ -167,6 +167,7 @@ export interface NexusGenFieldTypes {
     deleteSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     deleteUser: NexusGenRootTypes['User'] | null; // User
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    greetingGacha: boolean | null; // Boolean
     login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
     saveSkeetSolanaTransfer: boolean | null; // Boolean
     updateBalance: NexusGenRootTypes['UserWallets'] | null; // UserWallets
@@ -174,6 +175,7 @@ export interface NexusGenFieldTypes {
     updateSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
     updateUser: NexusGenRootTypes['User'] | null; // User
     updateUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
+    walletSolanaTokenTransfer: boolean | null; // Boolean
   }
   PageInfo: { // field return type
     endCursor: string | null; // String
@@ -207,7 +209,6 @@ export interface NexusGenFieldTypes {
     solanaTransferConnection: NexusGenRootTypes['QuerySolanaTransferConnection_Connection'] | null; // QuerySolanaTransferConnection_Connection
     userConnection: NexusGenRootTypes['QueryUserConnection_Connection'] | null; // QueryUserConnection_Connection
     userWalletsConnection: NexusGenRootTypes['QueryUserWalletsConnection_Connection'] | null; // QueryUserWalletsConnection_Connection
-    walletSolanaTokenTransfer: boolean | null; // Boolean
   }
   QueryPostConnection_Connection: { // field return type
     edges: Array<NexusGenRootTypes['PostEdge'] | null> | null; // [PostEdge]
@@ -301,6 +302,7 @@ export interface NexusGenFieldTypeNames {
     deleteSolanaTransfer: 'SolanaTransfer'
     deleteUser: 'User'
     deleteUserWallets: 'UserWallets'
+    greetingGacha: 'Boolean'
     login: 'LoginResponse'
     saveSkeetSolanaTransfer: 'Boolean'
     updateBalance: 'UserWallets'
@@ -308,6 +310,7 @@ export interface NexusGenFieldTypeNames {
     updateSolanaTransfer: 'SolanaTransfer'
     updateUser: 'User'
     updateUserWallets: 'UserWallets'
+    walletSolanaTokenTransfer: 'Boolean'
   }
   PageInfo: { // field return type name
     endCursor: 'String'
@@ -341,7 +344,6 @@ export interface NexusGenFieldTypeNames {
     solanaTransferConnection: 'QuerySolanaTransferConnection_Connection'
     userConnection: 'QueryUserConnection_Connection'
     userWalletsConnection: 'QueryUserWalletsConnection_Connection'
-    walletSolanaTokenTransfer: 'Boolean'
   }
   QueryPostConnection_Connection: { // field return type name
     edges: 'PostEdge'
@@ -468,6 +470,10 @@ export interface NexusGenArgTypes {
     deleteUserWallets: { // args
       id: string; // String!
     }
+    greetingGacha: { // args
+      content?: string | null; // String
+      transferAmountLamport?: number | null; // Int
+    }
     login: { // args
       token?: string | null; // String
     }
@@ -513,6 +519,10 @@ export interface NexusGenArgTypes {
       sol?: number | null; // Float
       usdc?: number | null; // Float
       userId?: number | null; // Int
+    }
+    walletSolanaTokenTransfer: { // args
+      toUserId: string; // String!
+      transferAmountLamport: number; // Int!
     }
   }
   Query: {
@@ -570,10 +580,6 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-    }
-    walletSolanaTokenTransfer: { // args
-      toUserId: string; // String!
-      transferAmountLamport: number; // Int!
     }
   }
 }
