@@ -5,7 +5,7 @@ console.log(__dirname)
 async function main() {
   const labo = await prisma.user.create({
     data: {
-      uid: 'uid',
+      uid: 'BVSSne3ffPZ02h5hRqAK9UJBjss2',
       email: 'labo@elsoul.nl',
       name: 'ELSOUL LABO',
       role: 'MASTER',
