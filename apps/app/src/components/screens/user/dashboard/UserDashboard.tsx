@@ -34,7 +34,6 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
   const [user, setUser] = useRecoilState(userState)
 
   const data = usePreloadedQuery(userDashboardQuery, queryReference)
-  console.log(data)
 
   useEffect(() => {
     if (
@@ -84,7 +83,7 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
           style={tw`flex flex-col md:flex-row items-center md:items-start justify-center gap-24`}
         >
           <View style={tw``}>
-            <UserDashboardStatus refetch={refetch} query={data} />
+            <UserDashboardStatus refetch={refetch} />
           </View>
           <View style={tw`grow`}>
             <UserDashboardTimeline refetch={refetch} />
