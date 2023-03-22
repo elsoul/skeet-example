@@ -102,7 +102,7 @@ export default function GreetingGacha({ refetch }: Props) {
     return languageArray[randomIndex]
   }, [i18n.language])
 
-  const [commit] = useMutation<GreetingGachaMutation>(mutation)
+  const [commit, isInFlight] = useMutation<GreetingGachaMutation>(mutation)
 
   const onSubmit = useCallback(() => {
     const content = getRandomGreeting()
@@ -138,9 +138,9 @@ export default function GreetingGacha({ refetch }: Props) {
           onPress={() => {
             onSubmit()
           }}
-          // disabled={isInFlight}
+          disabled={isInFlight}
           className={clsx(
-            // isInFlight ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400' : '',
+            isInFlight ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400' : '',
             'w-full py-2 px-3'
           )}
         >
