@@ -10,15 +10,16 @@ import {
 import appConfig from '@/config/app'
 import { Platform } from 'react-native'
 
-const source = new RecordSource()
-const store = new Store(source)
-
 let storeEnvironment: Environment | null = null
 let beforeToken: string | null = null
 
 export const createEnvironment = (token: string) => {
+  console.log({ token })
+  console.log({ beforeToken })
   if (storeEnvironment && beforeToken && beforeToken === token)
     return storeEnvironment
+  const source = new RecordSource()
+  const store = new Store(source)
   storeEnvironment = new Environment({
     store,
     network: new RelayNetworkLayer([

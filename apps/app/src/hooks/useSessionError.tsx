@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function useSessionError() {
   const { t } = useTranslation()
+
   const logout = useRecoilCallback(({ reset }) => () => {
     reset(userState)
     Toast.show({
