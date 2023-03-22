@@ -63,6 +63,7 @@ const defaultEN = {
   sessionErrorLogout: 'Session expired',
   pleaseLoginAgain: 'Please sign in again.',
   copyToClipboardSuccess: 'Copied to Clipboard📜',
+  gachaComplete: "What's up?👋",
 }
 
 export default defaultEN

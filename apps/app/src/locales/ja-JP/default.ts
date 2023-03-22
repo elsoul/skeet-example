@@ -65,6 +65,7 @@ const defaultJA = {
   sessionErrorLogout: 'セッションが切れました',
   pleaseLoginAgain: 'もう一度ログインしてください。',
   copyToClipboardSuccess: 'クリップボードにコピーしました📜',
+  gachaComplete: 'お疲れ様です👋',
 }
 
 export default defaultJA
