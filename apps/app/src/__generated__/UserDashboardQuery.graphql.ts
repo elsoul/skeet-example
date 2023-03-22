@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fdd74dcbba2f344e52a28d34f1340006>>
+ * @generated SignedSource<<cc7ef0eb1145d77e1d088ba248bd208d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,7 +9,6 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-import { FragmentRefs } from "relay-runtime";
 export type UserDashboardQuery$variables = {};
 export type UserDashboardQuery$data = {
   readonly me: {
@@ -17,8 +16,11 @@ export type UserDashboardQuery$data = {
     readonly iconUrl: string | null;
     readonly name: string;
     readonly uid: string;
+    readonly userWallets: ReadonlyArray<{
+      readonly pubkey: string;
+      readonly sol: number;
+    }>;
   } | null;
-  readonly " $fragmentSpreads": FragmentRefs<"UserDashboardStatus_query">;
 };
 export type UserDashboardQuery = {
   response: UserDashboardQuery$data;
@@ -58,6 +60,20 @@ v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
+  "name": "pubkey",
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "sol",
+  "storageKey": null
+},
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 };
@@ -79,14 +95,22 @@ return {
           (v0/*: any*/),
           (v1/*: any*/),
           (v2/*: any*/),
-          (v3/*: any*/)
+          (v3/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "UserWallets",
+            "kind": "LinkedField",
+            "name": "userWallets",
+            "plural": true,
+            "selections": [
+              (v4/*: any*/),
+              (v5/*: any*/)
+            ],
+            "storageKey": null
+          }
         ],
         "storageKey": null
-      },
-      {
-        "args": null,
-        "kind": "FragmentSpread",
-        "name": "UserDashboardStatus_query"
       }
     ],
     "type": "Query",
@@ -110,77 +134,37 @@ return {
           (v1/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
-          (v4/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": [
-          {
-            "kind": "Literal",
-            "name": "first",
-            "value": 1
-          }
-        ],
-        "concreteType": "QueryUserWalletsConnection_Connection",
-        "kind": "LinkedField",
-        "name": "userWalletsConnection",
-        "plural": false,
-        "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "UserWalletsEdge",
+            "concreteType": "UserWallets",
             "kind": "LinkedField",
-            "name": "edges",
+            "name": "userWallets",
             "plural": true,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "UserWallets",
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "pubkey",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "sol",
-                    "storageKey": null
-                  },
-                  (v4/*: any*/)
-                ],
-                "storageKey": null
-              }
+              (v4/*: any*/),
+              (v5/*: any*/),
+              (v6/*: any*/)
             ],
             "storageKey": null
-          }
+          },
+          (v6/*: any*/)
         ],
-        "storageKey": "userWalletsConnection(first:1)"
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "ecd4eeeb3397a9876ba5334123ff2e57",
+    "cacheID": "4e19a0fd525417ce23c5b8e7652c0fff",
     "id": null,
     "metadata": {},
     "name": "UserDashboardQuery",
     "operationKind": "query",
-    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    id\n  }\n  ...UserDashboardStatus_query\n}\n\nfragment UserDashboardStatus_query on Query {\n  userWalletsConnection(first: 1) {\n    edges {\n      node {\n        pubkey\n        sol\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "4af28a5f6bd8a5124499feae11ec6ff5";
+(node as any).hash = "2971d9417fb99e8f4309337a7ad0b980";
 
 export default node;

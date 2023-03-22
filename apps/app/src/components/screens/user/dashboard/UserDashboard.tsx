@@ -17,8 +17,11 @@ export const userDashboardQuery = graphql`
       name
       email
       iconUrl
+      userWallets {
+        pubkey
+        sol
+      }
     }
-    ...UserDashboardStatus_query
   }
 `
 
@@ -31,6 +34,7 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
   const [user, setUser] = useRecoilState(userState)
 
   const data = usePreloadedQuery(userDashboardQuery, queryReference)
+  console.log(data)
 
   useEffect(() => {
     if (
@@ -52,6 +56,26 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
       })
     }
   }, [data.me, setUser, user])
+
+  useEffect(() => {
+    if (
+      user.skeetToken != '' &&
+      data.me &&
+      data.me.uid &&
+      data.me.uid != '' &&
+      data.me.userWallets.length > 0 &&
+      (user.wallet.pubkey !== data.me.userWallets[0]?.pubkey ||
+        user.wallet.sol !== data.me.userWallets[0]?.sol)
+    ) {
+      setUser({
+        ...user,
+        wallet: {
+          pubkey: data.me.userWallets[0]?.pubkey ?? '',
+          sol: data.me.userWallets[0]?.sol ?? '',
+        },
+      })
+    }
+  }, [data.me, user, setUser])
 
   return (
     <>
