@@ -14,8 +14,6 @@ let storeEnvironment: Environment | null = null
 let beforeToken: string | null = null
 
 export const createEnvironment = (token: string) => {
-  console.log({ token })
-  console.log({ beforeToken })
   if (storeEnvironment && beforeToken && beforeToken === token)
     return storeEnvironment
   const source = new RecordSource()
