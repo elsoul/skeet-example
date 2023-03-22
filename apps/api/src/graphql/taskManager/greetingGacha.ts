@@ -31,6 +31,7 @@ export const greetingGacha = extendType({
           const toUserWallet: UserWithWallets = await getUserWithWallet(
             toUserIdInt
           )
+          console.log(toUserWallet)
           console.log(fromUserWallet)
           const skeetSolTransferParam: SkeetSolTransferParam = {
             toAddressPubkey: toUserWallet.userWallets[0].pubkey,
