@@ -70,7 +70,11 @@ export const server = new ApolloServer<Context>({
   validationRules: [depthLimit(7), queryComplexityRule],
   introspection: true,
 })
-const allowedOrigins = ['https://example.skeet.dev']
+
+const allowedOrigins = ['http://localhost:4000', 'https://example.skeet.dev']
+new Array(10).fill(0).forEach((_, i) => {
+  allowedOrigins.push(`http://localhost:1900${i}`)
+})
 
 const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
