@@ -5,11 +5,7 @@ import {
   SkeetSolTransferParam,
 } from '@skeet-framework/api-plugin-solana-transfer'
 import { User } from '@prisma/client'
-import {
-  getUserWithWallet,
-  updateUserWalletBalance,
-  UserWithWallets,
-} from '@/lib/prismaManager'
+import { getUserWithWallet, UserWithWallets } from '@/lib/prismaManager'
 import { RPC_URL } from '@/index'
 import { createSolanaTransfer } from '@/lib/solanaUtils'
 

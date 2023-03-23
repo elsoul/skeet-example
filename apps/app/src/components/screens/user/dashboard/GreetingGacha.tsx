@@ -122,7 +122,7 @@ export default function GreetingGacha({ refetch }: Props) {
       onError: (err) => {
         console.error(err)
         Toast.show({
-          type: 'error',
+          type: 'warning',
           text1: t('networkErrorTitle') ?? 'Network Error',
           text2:
             t('networkErrorBody') ??
