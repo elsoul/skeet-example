@@ -68,11 +68,13 @@ model UserWallets {
 }
 
 model SolanaTransfer {
-  id            Int    @id @default(autoincrement())
-  amountLamport Float  @default(0)
-  fromUser      User   @relation("SolanaTransferFromUser", fields: [fromUserId], references: [id])
+  id            Int      @id @default(autoincrement())
+  amountLamport Float    @default(0)
+  fromUser      User     @relation("SolanaTransferFromUser", fields: [fromUserId], references: [id])
   fromUserId    Int
-  toUser        User   @relation("SolanaTransferToUser", fields: [toUserId], references: [id])
+  toUser        User     @relation("SolanaTransferToUser", fields: [toUserId], references: [id])
   toUserId      Int
-  signature     String @default("")
+  signature     String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
