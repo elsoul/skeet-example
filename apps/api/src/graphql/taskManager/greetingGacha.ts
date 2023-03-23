@@ -64,7 +64,6 @@ export const greetingGacha = extendType({
               userId: user.id,
             },
           })
-          await updateUserWalletBalance(fromUserWallet.id)
           return true
         } catch (error) {
           console.log(`greetingGacha: ${error}`)

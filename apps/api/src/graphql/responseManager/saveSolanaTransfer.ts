@@ -1,5 +1,9 @@
 import { extendType, floatArg, intArg, stringArg } from 'nexus'
 import { PrismaClient } from '@prisma/client'
+import {
+  getUserWalletByPubkey,
+  updateUserWalletBalance,
+} from '@/lib/prismaManager'
 const prisma = new PrismaClient()
 
 export const saveSkeetSolanaTransfer = extendType({
@@ -27,6 +31,14 @@ export const saveSkeetSolanaTransfer = extendType({
             args.signature || ''
           )
           console.log(solanaTransfer)
+          if (!args.fromAddressPubkey) throw new Error('no from pubkey!')
+          const fromUserWallet = await getUserWalletByPubkey(
+            args.fromAddressPubkey
+          )
+          await updateUserWalletBalance(fromUserWallet.id)
+          if (!args.toAddressPubkey) throw new Error('no to pubkey!')
+          const toUserWallet = await getUserWalletByPubkey(args.toAddressPubkey)
+          await updateUserWalletBalance(toUserWallet.id)
           return true
         } catch (error) {
           console.log(`saveSkeetSolanaTransfer: ${error}`)
