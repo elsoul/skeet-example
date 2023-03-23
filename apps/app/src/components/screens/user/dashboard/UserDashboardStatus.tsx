@@ -61,7 +61,7 @@ export default function UserDashboardStatus({ refetch }: Props) {
       onCompleted: ({ airdrop }: UserDashboardStatusMutation$data) => {
         if (airdrop?.sol === user.wallet.sol) {
           Toast.show({
-            type: 'error',
+            type: 'warning',
             text1: t('networkErrorTitle') ?? 'Network Error',
             text2:
               t('networkErrorBody') ??
@@ -81,7 +81,7 @@ export default function UserDashboardStatus({ refetch }: Props) {
       onError: (err) => {
         console.error(err)
         Toast.show({
-          type: 'error',
+          type: 'warning',
           text1: t('networkErrorTitle') ?? 'Network Error',
           text2:
             t('networkErrorBody') ??
