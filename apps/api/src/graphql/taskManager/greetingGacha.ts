@@ -44,12 +44,13 @@ export const greetingGacha = extendType({
             rpcUrl: RPC_URL,
           }
 
-          console.log(`here; ${skeetSolTransferParam}`)
+          console.log(`here; ${JSON.stringify(skeetSolTransferParam)}`)
           const solanaTransfer = await createSolanaTransfer(
             args.transferAmountLamport,
             user.id,
             toUserIdInt
           )
+          console.log(solanaTransfer)
           skeetSolTransferParam.id = solanaTransfer.id
           await skeetSolTransfer(skeetSolTransferParam)
           await ctx.prisma.post.create({
