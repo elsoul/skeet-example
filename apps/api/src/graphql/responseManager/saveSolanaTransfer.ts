@@ -9,9 +9,6 @@ export const saveSkeetSolanaTransfer = extendType({
       type: 'Boolean',
       args: {
         id: intArg(),
-        workerUrl: stringArg(),
-        projectId: stringArg(),
-        taskLocation: stringArg(),
         toAddressPubkey: stringArg(),
         fromAddressPubkey: stringArg(),
         transferAmountLamport: intArg(),
