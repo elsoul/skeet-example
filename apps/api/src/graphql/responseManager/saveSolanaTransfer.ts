@@ -32,8 +32,8 @@ export const saveSkeetSolanaTransfer = extendType({
           console.log(solanaTransfer)
           return true
         } catch (error) {
-          console.log(error)
-          throw new Error(`error: ${error}`)
+          console.log(`saveSkeetSolanaTransfer: ${error}`)
+          throw new Error(`saveSkeetSolanaTransfer: ${error}`)
         }
       },
     })

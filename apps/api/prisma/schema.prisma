@@ -33,13 +33,16 @@ enum Role {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String   @default("title")
-  body      String   @default("body")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int?
-  user      User?    @relation(fields: [userId], references: [id])
+  id         Int      @id @default(autoincrement())
+  title      String   @default("title")
+  body       String   @default("body")
+  goodNum    Int      @default(0)
+  greatNum   Int      @default(0)
+  awesomeNum Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     Int?
+  user       User?    @relation(fields: [userId], references: [id])
 
   @@unique([title, userId])
   @@index([title])

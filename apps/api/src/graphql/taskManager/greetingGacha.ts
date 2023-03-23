@@ -26,7 +26,6 @@ export const greetingGacha = extendType({
             throw new Error('Invalid Args')
 
           const user: User = ctx.user
-          console.log(user)
           const fromUserWallet = await getUserWithWallet(user.id)
           const toUserIdInt = 1
           const toUserWallet: UserWithWallets = await getUserWithWallet(
@@ -43,7 +42,6 @@ export const greetingGacha = extendType({
             iv: fromUserWallet.userWallets[0].iv.toString('base64'),
             rpcUrl: RPC_URL,
           }
-          await skeetSolTransfer(skeetSolTransferParam)
           const solanaTransfer = await createSolanaTransfer(
             args.transferAmountLamport,
             user.id,
@@ -55,7 +53,7 @@ export const greetingGacha = extendType({
             data: {
               title: args.content,
               body: args.content,
-              userId: toUserIdInt,
+              userId: user.id,
             },
           })
 

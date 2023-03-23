@@ -1707,10 +1707,10 @@
   dependencies:
     "@sinonjs/commons" "^2.0.0"
 
-"@skeet-framework/api-plugin-solana-transfer@0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/api-plugin-solana-transfer/-/api-plugin-solana-transfer-0.2.6.tgz#b2f60fed5d2f49237a2b1b3f8c6a53f896f7bb56"
-  integrity sha512-gnOtu8okrmGMDmvXGqVKzwC5hn49TYdGwJ+CR5aLQbhUdgwlycjrcGQLAiYVV9FyEHuw7vrCIt0ECVIvD83zNg==
+"@skeet-framework/api-plugin-solana-transfer@0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/api-plugin-solana-transfer/-/api-plugin-solana-transfer-0.2.7.tgz#1a578dd84cc18994800f003d39c984b612de139d"
+  integrity sha512-ZQK91RexirUlh1wRfCx0LJhyRnZU3MOtG7k+Y/KlbBoiweuwaCF/6jDF0wz8pOafWgBLVHz0Hmoh+3Od06EMyQ==
   dependencies:
     "@google-cloud/tasks" "3.1.1"
     dotenv "16.0.3"
