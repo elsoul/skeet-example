@@ -68,6 +68,14 @@
           }
         },
         {
+          "priority": "11",
+          "description": "Allow host",
+          "options": {
+            "action": "allow",
+            "expression": "request.headers['host'].lower().contains('https://example.skeet.dev')"
+          }
+        },
+        {
           "priority": "100",
           "description": "Defense from SQLi attack",
           "options": {
