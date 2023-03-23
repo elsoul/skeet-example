@@ -5,7 +5,11 @@ import {
   SkeetSolTransferParam,
 } from '@skeet-framework/api-plugin-solana-transfer'
 import { User } from '@prisma/client'
-import { getUserWithWallet, UserWithWallets } from '@/lib/prismaManager'
+import {
+  getUserWithWallet,
+  updateUserWalletBalance,
+  UserWithWallets,
+} from '@/lib/prismaManager'
 import { RPC_URL } from '@/index'
 import { createSolanaTransfer } from '@/lib/solanaUtils'
 
@@ -60,7 +64,7 @@ export const greetingGacha = extendType({
               userId: user.id,
             },
           })
-
+          await updateUserWalletBalance(fromUserWallet.id)
           return true
         } catch (error) {
           console.log(`greetingGacha: ${error}`)
