@@ -201,9 +201,7 @@ export default function UserDashboardStatus({ refetch }: Props) {
                 'w-full py-2 px-3'
               )}
             >
-              <Text
-                style={tw`text-center font-loaded-bold text-lg text-white dark:text-gray-900`}
-              >
+              <Text style={tw`text-center font-loaded-bold text-lg text-white`}>
                 {t('users.airdrop')}
               </Text>
             </Button>

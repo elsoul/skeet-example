@@ -169,6 +169,7 @@ export interface NexusGenFieldTypes {
     deleteUserWallets: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     greetingGacha: boolean | null; // Boolean
     login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
+    loginTest: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
     saveSkeetSolanaTransfer: boolean | null; // Boolean
     updateBalance: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     updatePost: NexusGenRootTypes['Post'] | null; // Post
@@ -304,6 +305,7 @@ export interface NexusGenFieldTypeNames {
     deleteUserWallets: 'UserWallets'
     greetingGacha: 'Boolean'
     login: 'LoginResponse'
+    loginTest: 'LoginResponse'
     saveSkeetSolanaTransfer: 'Boolean'
     updateBalance: 'UserWallets'
     updatePost: 'Post'
@@ -477,15 +479,21 @@ export interface NexusGenArgTypes {
     login: { // args
       token?: string | null; // String
     }
-    saveSkeetSolanaTransfer: { // args
-      fromAddressPubkey: string; // String!
+    loginTest: { // args
       id?: number | null; // Int
-      signature: string; // String!
+    }
+    saveSkeetSolanaTransfer: { // args
+      fromAddressPubkey?: string | null; // String
+      id?: number | null; // Int
+      projectId?: string | null; // String
+      signature?: string | null; // String
+      taskLocation?: string | null; // String
       timestamp?: string | null; // String
-      toAddressPubkey: string; // String!
-      tokenMintAddress: string; // String!
-      transferAmountLamport: number; // Int!
-      usdcPrice: number; // Float!
+      toAddressPubkey?: string | null; // String
+      tokenMintAddress?: string | null; // String
+      transferAmountLamport?: number | null; // Int
+      usdcPrice?: number | null; // Float
+      workerUrl?: string | null; // String
     }
     updateBalance: { // args
       userWalletId: string; // String!

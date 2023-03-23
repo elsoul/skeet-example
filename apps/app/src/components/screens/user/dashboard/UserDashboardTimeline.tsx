@@ -40,7 +40,7 @@ export default function UserDashboardTimeline({ refetch }: Props) {
     <>
       <View style={tw`max-w-md`}>
         <View
-          style={tw`w-full px-6 py-3 bg-gray-50 flex flex-row items-center justify-center flex-wrap sm:flex-nowrap gap-6`}
+          style={tw`w-full px-6 py-3 bg-gray-50 dark:bg-gray-700 flex flex-row items-center justify-center flex-wrap sm:flex-nowrap gap-6`}
         >
           {priceList.map((item) => (
             <View

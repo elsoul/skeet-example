@@ -24,7 +24,8 @@ type Mutation {
   deleteUserWallets(id: String!): UserWallets
   greetingGacha(content: String, transferAmountLamport: Int): Boolean
   login(token: String): LoginResponse
-  saveSkeetSolanaTransfer(fromAddressPubkey: String!, id: Int, signature: String!, timestamp: String, toAddressPubkey: String!, tokenMintAddress: String!, transferAmountLamport: Int!, usdcPrice: Float!): Boolean
+  loginTest(id: Int): LoginResponse
+  saveSkeetSolanaTransfer(fromAddressPubkey: String, id: Int, projectId: String, signature: String, taskLocation: String, timestamp: String, toAddressPubkey: String, tokenMintAddress: String, transferAmountLamport: Int, usdcPrice: Float, workerUrl: String): Boolean
   updateBalance(userWalletId: String!): UserWallets
   updatePost(body: String, id: String!, userId: Int): Post
   updateSolanaTransfer(fromUserId: Int, id: String!, signature: String, toUserId: Int): SolanaTransfer
