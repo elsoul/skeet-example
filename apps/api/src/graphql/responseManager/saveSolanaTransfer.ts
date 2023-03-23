@@ -27,7 +27,7 @@ export const saveSkeetSolanaTransfer = extendType({
           )
           const solanaTransfer = await updateSolanaTransfer(
             Number(args.id) || 0,
-            args.signature
+            args.signature || ''
           )
           console.log(solanaTransfer)
           return true

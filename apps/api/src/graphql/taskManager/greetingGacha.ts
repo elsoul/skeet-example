@@ -26,13 +26,12 @@ export const greetingGacha = extendType({
             throw new Error('Invalid Args')
 
           const user: User = ctx.user
+          console.log(user)
           const fromUserWallet = await getUserWithWallet(user.id)
           const toUserIdInt = 1
           const toUserWallet: UserWithWallets = await getUserWithWallet(
             toUserIdInt
           )
-          console.log(toUserWallet)
-          console.log(fromUserWallet)
           const skeetSolTransferParam: SkeetSolTransferParam = {
             workerUrl: process.env.SOLANA_TRANSFER || '',
             projectId: process.env.SKEET_GCP_PROJECT || '',
