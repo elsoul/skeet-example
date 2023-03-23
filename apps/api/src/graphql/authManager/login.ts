@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { decodedKey, encodeJWT } from '@/lib/jsonWebToken'
-import { objectType, extendType, stringArg } from 'nexus'
+import { objectType, extendType, stringArg, intArg } from 'nexus'
 import { User } from 'nexus-prisma'
 import { auth } from 'firebase-admin'
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier'
@@ -111,3 +111,29 @@ export const getLoginUser = async (token: string) => {
     return unknownUser
   }
 }
+
+export const loginTest = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.field('loginTest', {
+      type: LoginResponse,
+      args: {
+        id: intArg(),
+      },
+      async resolve(_, { id }, ctx) {
+        try {
+          const user: User = await ctx.prisma.user.findUnique({
+            where: {
+              id,
+            },
+          })
+          const token = await encodeJWT(String(user.id), LOGIN_EXPIRATION)
+          return { token }
+        } catch (error) {
+          console.log(`login: ${error}`)
+          return { token: 'Invalid Token!' }
+        }
+      },
+    })
+  },
+})
