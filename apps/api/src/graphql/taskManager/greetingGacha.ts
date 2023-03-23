@@ -43,6 +43,8 @@ export const greetingGacha = extendType({
             iv: fromUserWallet.userWallets[0].iv.toString('base64'),
             rpcUrl: RPC_URL,
           }
+
+          console.log(`here; ${skeetSolTransferParam}`)
           const solanaTransfer = await createSolanaTransfer(
             args.transferAmountLamport,
             user.id,
