@@ -26,6 +26,7 @@ export const greetingGacha = extendType({
             throw new Error('Invalid Args')
 
           const user: User = ctx.user
+          console.log(user)
           const fromUserWallet = await getUserWithWallet(user.id)
           const toUserIdInt = 1
           const toUserWallet: UserWithWallets = await getUserWithWallet(
@@ -59,6 +60,7 @@ export const greetingGacha = extendType({
 
           return true
         } catch (error) {
+          console.log(`greetingGacha: ${error}`)
           throw new Error(`greetingGacha: ${error}`)
         }
       },
