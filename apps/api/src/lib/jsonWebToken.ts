@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken'
-import { User } from '@prisma/client'
 const SKEET_JWT_SALT = process.env.SKEET_JWT_SALT || 'salt'
 const SKEET_BASE_URL = process.env.SKEET_BASE_URL || 'base_url'
 
-export const encodeJWT = async (key: string, expiresIn: string = '10000d') => {
+export const encodeJWT = async (key: string, expiresIn = '10000d') => {
   const token = jwt.sign({ key }, SKEET_JWT_SALT, {
     algorithm: 'HS256',
     issuer: SKEET_BASE_URL,
@@ -12,7 +11,7 @@ export const encodeJWT = async (key: string, expiresIn: string = '10000d') => {
   return token
 }
 
-export const decodeJWT = async (token: string, maxAge: string = '10000d') => {
+export const decodeJWT = async (token: string, maxAge = '10000d') => {
   try {
     const decoded = jwt.verify(token, SKEET_JWT_SALT, {
       algorithms: ['HS256'],
