@@ -498,15 +498,12 @@ export interface NexusGenArgTypes {
     saveSkeetSolanaTransfer: { // args
       fromAddressPubkey?: string | null; // String
       id?: number | null; // Int
-      projectId?: string | null; // String
       signature?: string | null; // String
-      taskLocation?: string | null; // String
       timestamp?: string | null; // String
       toAddressPubkey?: string | null; // String
       tokenMintAddress?: string | null; // String
       transferAmountLamport?: number | null; // Int
       usdcPrice?: number | null; // Float
-      workerUrl?: string | null; // String
     }
     updateBalance: { // args
       userWalletId: string; // String!
