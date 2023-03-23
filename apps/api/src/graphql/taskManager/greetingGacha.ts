@@ -34,7 +34,7 @@ export const greetingGacha = extendType({
           )
           const skeetSolTransferParam: SkeetSolTransferParam = {
             workerUrl: process.env.SOLANA_TRANSFER || '',
-            projectId: process.env.SKEET_GCP_PROJECT || '',
+            projectId: process.env.SKEET_GCP_PROJECT_ID || '',
             taskLocation: process.env.SKEET_GCP_TASK_REGION || '',
             toAddressPubkey: toUserWallet.userWallets[0].pubkey,
             transferAmountLamport: args.transferAmountLamport,
