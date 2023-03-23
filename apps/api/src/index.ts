@@ -70,11 +70,27 @@ export const server = new ApolloServer<Context>({
   validationRules: [depthLimit(7), queryComplexityRule],
   introspection: true,
 })
+const allowedOrigins = [
+  'http://localhost:4000',
+  'http://localhost:4200',
+  'https://example.skeet.dev',
+]
+
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+}
+app.use(cors(corsOptions))
 export const startApolloServer = async () => {
   await server.start()
   app.use(
     '/graphql',
-    cors<cors.CorsRequest>(),
+    cors<cors.CorsRequest>(corsOptions),
     json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({

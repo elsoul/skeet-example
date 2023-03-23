@@ -1,4 +1,4 @@
-import { extendType, floatArg, intArg, nonNull, stringArg } from 'nexus'
+import { extendType, floatArg, intArg, stringArg } from 'nexus'
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 

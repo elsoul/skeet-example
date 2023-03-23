@@ -13,7 +13,7 @@ type LoginResponse {
 
 type Mutation {
   airdrop: UserWallets
-  createPost(body: String!, title: String!, userId: Int): Post
+  createPost(awesomeNum: Int!, body: String!, goodNum: Int!, greatNum: Int!, title: String!, userId: Int): Post
   createSolanaTransfer(amountLamport: Float!, fromUserId: Int!, signature: String!, toUserId: Int!): SolanaTransfer
   createUser(email: String!, iconUrl: String, name: String!, role: String, uid: String!): User
   createUserWallets(chainType: String!, epct: Float!, imgUrl: String!, name: String!, priority: Int!, privateKey: String!, pubkey: String!, sol: Float!, usdc: Float!, userId: Int): UserWallets
@@ -27,7 +27,7 @@ type Mutation {
   loginTest(id: Int): LoginResponse
   saveSkeetSolanaTransfer(fromAddressPubkey: String, id: Int, projectId: String, signature: String, taskLocation: String, timestamp: String, toAddressPubkey: String, tokenMintAddress: String, transferAmountLamport: Int, usdcPrice: Float, workerUrl: String): Boolean
   updateBalance(userWalletId: String!): UserWallets
-  updatePost(body: String, id: String!, userId: Int): Post
+  updatePost(awesomeNum: Int, body: String, goodNum: Int, greatNum: Int, id: String!, userId: Int): Post
   updateSolanaTransfer(fromUserId: Int, id: String!, signature: String, toUserId: Int): SolanaTransfer
   updateUser(email: String, iconUrl: String, id: String!, name: String, role: String): User
   updateUserWallets(chainType: String, epct: Float, id: String!, imgUrl: String, priority: Int, privateKey: String, pubkey: String, sol: Float, usdc: Float, userId: Int): UserWallets
@@ -66,12 +66,15 @@ type PageInfo {
 }
 
 type Post {
+  awesomeNum: Int!
   body: String!
   createdAt: DateTime!
+  goodNum: Int!
+  greatNum: Int!
   id: ID
   title: String!
   updatedAt: DateTime!
-  user: User
+  userId: Int
 }
 
 type PostEdge {

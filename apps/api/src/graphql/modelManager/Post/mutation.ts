@@ -10,6 +10,9 @@ export const PostMutation = extendType({
       args: {
         title: nonNull(stringArg()),
         body: nonNull(stringArg()),
+        goodNum: nonNull(intArg()),
+        greatNum: nonNull(intArg()),
+        awesomeNum: nonNull(intArg()),
         userId: intArg(),
       },
       async resolve(_, args, ctx) {
@@ -28,6 +31,9 @@ export const PostMutation = extendType({
       args: {
         id: nonNull(stringArg()),
         body: stringArg(),
+        goodNum: intArg(),
+        greatNum: intArg(),
+        awesomeNum: intArg(),
         userId: intArg(),
       },
       async resolve(_, args, ctx) {
@@ -37,9 +43,9 @@ export const PostMutation = extendType({
         try {
           return await ctx.prisma.post.update({
             where: {
-              id
+              id,
             },
-            data
+            data,
           })
         } catch (error) {
           console.log(error)

@@ -8,8 +8,11 @@ export const PostObject = objectType({
     t.relayGlobalId('id', {})
     t.field(Post.title)
     t.field(Post.body)
+    t.field(Post.goodNum)
+    t.field(Post.greatNum)
+    t.field(Post.awesomeNum)
     t.field(Post.createdAt)
     t.field(Post.updatedAt)
-    t.field(Post.user)
+    t.field(Post.userId)
   },
 })

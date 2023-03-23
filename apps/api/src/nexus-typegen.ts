@@ -70,10 +70,14 @@ export interface NexusGenObjects {
     startCursor?: string | null; // String
   }
   Post: { // root type
+    awesomeNum: number; // Int!
     body: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    goodNum: number; // Int!
+    greatNum: number; // Int!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId?: number | null; // Int
   }
   PostEdge: { // root type
     cursor: string; // String!
@@ -185,12 +189,15 @@ export interface NexusGenFieldTypes {
     startCursor: string | null; // String
   }
   Post: { // field return type
+    awesomeNum: number; // Int!
     body: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    goodNum: number; // Int!
+    greatNum: number; // Int!
     id: string | null; // ID
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    user: NexusGenRootTypes['User'] | null; // User
+    userId: number | null; // Int
   }
   PostEdge: { // field return type
     cursor: string; // String!
@@ -321,12 +328,15 @@ export interface NexusGenFieldTypeNames {
     startCursor: 'String'
   }
   Post: { // field return type name
+    awesomeNum: 'Int'
     body: 'String'
     createdAt: 'DateTime'
+    goodNum: 'Int'
+    greatNum: 'Int'
     id: 'ID'
     title: 'String'
     updatedAt: 'DateTime'
-    user: 'User'
+    userId: 'Int'
   }
   PostEdge: { // field return type name
     cursor: 'String'
@@ -427,7 +437,10 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     createPost: { // args
+      awesomeNum: number; // Int!
       body: string; // String!
+      goodNum: number; // Int!
+      greatNum: number; // Int!
       title: string; // String!
       userId?: number | null; // Int
     }
@@ -499,7 +512,10 @@ export interface NexusGenArgTypes {
       userWalletId: string; // String!
     }
     updatePost: { // args
+      awesomeNum?: number | null; // Int
       body?: string | null; // String
+      goodNum?: number | null; // Int
+      greatNum?: number | null; // Int
       id: string; // String!
       userId?: number | null; // Int
     }
