@@ -34,6 +34,9 @@ export const greetingGacha = extendType({
           console.log(toUserWallet)
           console.log(fromUserWallet)
           const skeetSolTransferParam: SkeetSolTransferParam = {
+            workerUrl: process.env.SOLANA_TRANSFER || '',
+            projectId: process.env.SKEET_GCP_PROJECT || '',
+            taskLocation: process.env.SKEET_GCP_TASK_REGION || '',
             toAddressPubkey: toUserWallet.userWallets[0].pubkey,
             transferAmountLamport: args.transferAmountLamport,
             encodedFromSecretKeyString:

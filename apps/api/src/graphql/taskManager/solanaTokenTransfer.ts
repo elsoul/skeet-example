@@ -21,7 +21,16 @@ export const solanaTokenTransfer = extendType({
         decimal: nonNull(intArg()),
       },
       async resolve(_, args, ctx) {
-        const skeetSplTransferParam: SkeetSplTransferParam = args
+        const gcpSetting = {
+          workerUrl: process.env.SOLANA_TRANSFER || '',
+          projectId: process.env.SKEET_GCP_PROJECT || '',
+          taskLocation: process.env.SKEET_GCP_TASK_REGION || '',
+        }
+        const skeetSplTransferParam: SkeetSplTransferParam = Object.assign(
+          {},
+          gcpSetting,
+          args
+        )
         await skeetSplTransfer(skeetSplTransferParam)
         return true
       },

@@ -9,12 +9,15 @@ export const saveSkeetSolanaTransfer = extendType({
       type: 'Boolean',
       args: {
         id: intArg(),
-        toAddressPubkey: nonNull(stringArg()),
-        fromAddressPubkey: nonNull(stringArg()),
-        transferAmountLamport: nonNull(intArg()),
-        tokenMintAddress: nonNull(stringArg()),
-        signature: nonNull(stringArg()),
-        usdcPrice: nonNull(floatArg()),
+        workerUrl: stringArg(),
+        projectId: stringArg(),
+        taskLocation: stringArg(),
+        toAddressPubkey: stringArg(),
+        fromAddressPubkey: stringArg(),
+        transferAmountLamport: intArg(),
+        tokenMintAddress: stringArg(),
+        signature: stringArg(),
+        usdcPrice: floatArg(),
         timestamp: stringArg(),
       },
       async resolve(_, args, ctx) {
@@ -23,7 +26,7 @@ export const saveSkeetSolanaTransfer = extendType({
             `saveSkeetSolanaTransfer: ${JSON.stringify(args, null, 2)}`
           )
           const solanaTransfer = await updateSolanaTransfer(
-            args.id || 0,
+            Number(args.id) || 0,
             args.signature
           )
           console.log(solanaTransfer)
