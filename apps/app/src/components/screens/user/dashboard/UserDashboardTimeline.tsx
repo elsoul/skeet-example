@@ -8,7 +8,7 @@ import GreetingGacha from './GreetingGacha'
 const priceList = [
   {
     emoji: '👋',
-    price: '1 SOL',
+    price: '0.8 SOL',
   },
   {
     emoji: '🤝',

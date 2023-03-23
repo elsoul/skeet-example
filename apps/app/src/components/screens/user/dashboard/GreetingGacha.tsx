@@ -109,7 +109,7 @@ export default function GreetingGacha({ refetch }: Props) {
     commit({
       variables: {
         content,
-        transferAmountLamport: 1 * LAMPORTS_PER_SOL,
+        transferAmountLamport: 0.8 * LAMPORTS_PER_SOL,
       },
       onCompleted: () => {
         Toast.show({
@@ -117,6 +117,7 @@ export default function GreetingGacha({ refetch }: Props) {
           text1: t('gachaComplete') ?? `What's up?👋`,
           text2: content,
         })
+        refetch()
       },
       onError: (err) => {
         console.error(err)
@@ -129,7 +130,7 @@ export default function GreetingGacha({ refetch }: Props) {
         })
       },
     })
-  }, [getRandomGreeting, commit, t])
+  }, [getRandomGreeting, commit, t, refetch])
 
   return (
     <>
