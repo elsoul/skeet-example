@@ -77,7 +77,6 @@ export interface NexusGenObjects {
     greatNum: number; // Int!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId?: number | null; // Int
   }
   PostEdge: { // root type
     cursor: string; // String!
@@ -197,7 +196,7 @@ export interface NexusGenFieldTypes {
     id: string | null; // ID
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId: number | null; // Int
+    user: NexusGenRootTypes['User'] | null; // User
   }
   PostEdge: { // field return type
     cursor: string; // String!
@@ -336,7 +335,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     title: 'String'
     updatedAt: 'DateTime'
-    userId: 'Int'
+    user: 'User'
   }
   PostEdge: { // field return type name
     cursor: 'String'

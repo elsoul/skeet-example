@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cc7ef0eb1145d77e1d088ba248bd208d>>
+ * @generated SignedSource<<484de256f776fba0f35779df79d1d715>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,6 +9,7 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
+import { FragmentRefs } from "relay-runtime";
 export type UserDashboardQuery$variables = {};
 export type UserDashboardQuery$data = {
   readonly me: {
@@ -21,6 +22,7 @@ export type UserDashboardQuery$data = {
       readonly sol: number;
     }>;
   } | null;
+  readonly " $fragmentSpreads": FragmentRefs<"UserDashboardTimeline_query">;
 };
 export type UserDashboardQuery = {
   response: UserDashboardQuery$data;
@@ -111,6 +113,11 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "args": null,
+        "kind": "FragmentSpread",
+        "name": "UserDashboardTimeline_query"
       }
     ],
     "type": "Query",
@@ -151,20 +158,109 @@ return {
           (v6/*: any*/)
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": [
+          {
+            "kind": "Literal",
+            "name": "first",
+            "value": 20
+          }
+        ],
+        "concreteType": "QueryPostConnection_Connection",
+        "kind": "LinkedField",
+        "name": "postConnection",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "PostEdge",
+            "kind": "LinkedField",
+            "name": "edges",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Post",
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  (v6/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "body",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "createdAt",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "goodNum",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "greatNum",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "awesomeNum",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "user",
+                    "plural": false,
+                    "selections": [
+                      (v6/*: any*/),
+                      (v1/*: any*/),
+                      (v3/*: any*/)
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": "postConnection(first:20)"
       }
     ]
   },
   "params": {
-    "cacheID": "4e19a0fd525417ce23c5b8e7652c0fff",
+    "cacheID": "71006e08e83fd2a6f6e01059a5e486f5",
     "id": null,
     "metadata": {},
     "name": "UserDashboardQuery",
     "operationKind": "query",
-    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n}\n"
+    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "2971d9417fb99e8f4309337a7ad0b980";
+(node as any).hash = "e9ace72f8978fadb214d24e63e4d8629";
 
 export default node;

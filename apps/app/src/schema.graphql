@@ -71,7 +71,7 @@ type Post {
   rawId: ID
   title: String!
   updatedAt: DateTime!
-  userId: Int
+  user: User
 }
 
 type PostEdge {
