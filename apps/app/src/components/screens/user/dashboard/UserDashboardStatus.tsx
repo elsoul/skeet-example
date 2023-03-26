@@ -181,7 +181,11 @@ export default function UserDashboardStatus({ refetch }: Props) {
               'flex flex-row items-center justify-center gap-x-4'
             )}`}
           >
-            <SolanaLogoMark style={tw`h-10 w-10 pt-6`} viewBox="0 0 101 88" />
+            <SolanaLogoMark
+              style={tw`h-10 w-10 pt-6`}
+              viewBox="0 0 101 88"
+              width={''}
+            />
             <Text
               style={tw`font-loaded-bold pt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
             >
