@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<484de256f776fba0f35779df79d1d715>>
+ * @generated SignedSource<<3ca07b7e7ec1d42d927658a00f19f715>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -21,6 +21,7 @@ export type UserDashboardQuery$data = {
       readonly pubkey: string;
       readonly sol: number;
     }>;
+    readonly " $fragmentSpreads": FragmentRefs<"UserTransactionHistory_user">;
   } | null;
   readonly " $fragmentSpreads": FragmentRefs<"UserDashboardTimeline_query">;
 };
@@ -78,7 +79,49 @@ v6 = {
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
-};
+},
+v7 = [
+  (v6/*: any*/),
+  (v1/*: any*/),
+  (v3/*: any*/)
+],
+v8 = [
+  (v6/*: any*/),
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "amountLamport",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "signature",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "User",
+    "kind": "LinkedField",
+    "name": "fromUser",
+    "plural": false,
+    "selections": (v7/*: any*/),
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "User",
+    "kind": "LinkedField",
+    "name": "toUser",
+    "plural": false,
+    "selections": (v7/*: any*/),
+    "storageKey": null
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": [],
@@ -110,6 +153,11 @@ return {
               (v5/*: any*/)
             ],
             "storageKey": null
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "UserTransactionHistory_user"
           }
         ],
         "storageKey": null
@@ -153,6 +201,26 @@ return {
               (v5/*: any*/),
               (v6/*: any*/)
             ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "SolanaTransfer",
+            "kind": "LinkedField",
+            "name": "toTransfers",
+            "plural": true,
+            "selections": (v8/*: any*/),
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "SolanaTransfer",
+            "kind": "LinkedField",
+            "name": "fromTransfers",
+            "plural": true,
+            "selections": (v8/*: any*/),
             "storageKey": null
           },
           (v6/*: any*/)
@@ -232,11 +300,7 @@ return {
                     "kind": "LinkedField",
                     "name": "user",
                     "plural": false,
-                    "selections": [
-                      (v6/*: any*/),
-                      (v1/*: any*/),
-                      (v3/*: any*/)
-                    ],
+                    "selections": (v7/*: any*/),
                     "storageKey": null
                   }
                 ],
@@ -251,16 +315,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "71006e08e83fd2a6f6e01059a5e486f5",
+    "cacheID": "27929fbac9250e1fbb070f764a7429aa",
     "id": null,
     "metadata": {},
     "name": "UserDashboardQuery",
     "operationKind": "query",
-    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    ...UserTransactionHistory_user\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n\nfragment UserTransactionHistory_user on User {\n  toTransfers {\n    id\n    amountLamport\n    signature\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n  fromTransfers {\n    id\n    amountLamport\n    signature\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e9ace72f8978fadb214d24e63e4d8629";
+(node as any).hash = "eafff06a77a1b6e88d507144ccb5ac3a";
 
 export default node;
