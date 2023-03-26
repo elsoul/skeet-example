@@ -18,6 +18,7 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import { ArrowPathIcon, ClipboardIcon } from 'react-native-heroicons/outline'
 import { Platform } from 'react-native'
 import { copyToClipboard } from '@/utils/userAction'
+import solanaLogoMark from '@assets/logo/projects/solanaLogoMark.svg'
 
 const mutation = graphql`
   mutation UserDashboardStatusMutation {
@@ -175,7 +176,10 @@ export default function UserDashboardStatus({ refetch }: Props) {
             </View>
           </View>
           <View
-            style={tw`${clsx(Platform.OS === 'android' ? 'pt-6' : '', '')}`}
+            style={tw`${clsx(
+              Platform.OS === 'android' ? 'pt-6' : '',
+              'flex flex-row items-center justify-center gap-x-3'
+            )}`}
           >
             <Text
               style={tw`font-loaded-bold pt-6 text-center text-5xl tracking-tight text-gray-900 dark:text-white`}
