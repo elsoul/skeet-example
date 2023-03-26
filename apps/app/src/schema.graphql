@@ -22,6 +22,9 @@ type Mutation {
   login(token: String): LoginResponse
   loginTest(id: Int): LoginResponse
   saveSkeetSolanaTransfer(fromAddressPubkey: String, id: Int, signature: String, timestamp: String, toAddressPubkey: String, tokenMintAddress: String, transferAmountLamport: Int, usdcPrice: Float): Boolean
+  sendAwesome(postId: String, toUserId: String): Boolean
+  sendGood(postId: String, toUserId: String): Boolean
+  sendGreat(postId: String, toUserId: String): Boolean
   updateBalance(userWalletId: String!): UserWallets
   updatePost(awesomeNum: Int, body: String, goodNum: Int, greatNum: Int, id: String!, userId: Int): Post
   updateSolanaTransfer(fromUserId: Int, id: String!, signature: String, toUserId: Int): SolanaTransfer

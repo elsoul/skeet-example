@@ -8,6 +8,8 @@ const userJA = {
   airdropSuccessTitle: 'Airdrop 成功',
   airdropSuccessBody: 'Airdrop 成功🎉 1SOL GETしました🙌',
   greetingGacha: '👋 挨拶ガチャ',
+  notEnoughSOL: 'SOLが足りません',
+  getAirdrop: 'Airdropを獲得してください',
 }
 
 export default userJA

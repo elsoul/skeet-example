@@ -174,6 +174,9 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
     loginTest: NexusGenRootTypes['LoginResponse'] | null; // LoginResponse
     saveSkeetSolanaTransfer: boolean | null; // Boolean
+    sendAwesome: boolean | null; // Boolean
+    sendGood: boolean | null; // Boolean
+    sendGreat: boolean | null; // Boolean
     updateBalance: NexusGenRootTypes['UserWallets'] | null; // UserWallets
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateSolanaTransfer: NexusGenRootTypes['SolanaTransfer'] | null; // SolanaTransfer
@@ -313,6 +316,9 @@ export interface NexusGenFieldTypeNames {
     login: 'LoginResponse'
     loginTest: 'LoginResponse'
     saveSkeetSolanaTransfer: 'Boolean'
+    sendAwesome: 'Boolean'
+    sendGood: 'Boolean'
+    sendGreat: 'Boolean'
     updateBalance: 'UserWallets'
     updatePost: 'Post'
     updateSolanaTransfer: 'SolanaTransfer'
@@ -503,6 +509,18 @@ export interface NexusGenArgTypes {
       tokenMintAddress?: string | null; // String
       transferAmountLamport?: number | null; // Int
       usdcPrice?: number | null; // Float
+    }
+    sendAwesome: { // args
+      postId?: string | null; // String
+      toUserId?: string | null; // String
+    }
+    sendGood: { // args
+      postId?: string | null; // String
+      toUserId?: string | null; // String
+    }
+    sendGreat: { // args
+      postId?: string | null; // String
+      toUserId?: string | null; // String
     }
     updateBalance: { // args
       userWalletId: string; // String!
