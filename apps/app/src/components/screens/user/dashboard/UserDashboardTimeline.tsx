@@ -93,7 +93,7 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
           </View>
         )}
 
-        <View style={tw`w-full`}>
+        <View style={tw`w-full pb-24`}>
           {data.postConnection?.edges?.map((edge) => (
             <View
               key={`PostConnection${edge?.node?.id}`}
@@ -111,11 +111,15 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                   alt={user.name}
                   style={tw`w-10 h-10 rounded-full`}
                 />
-                <Text style={tw`font-loaded-bold text-lg`}>
+                <Text
+                  style={tw`font-loaded-bold text-lg text-gray-900 dark:text-white`}
+                >
                   {edge?.node?.user?.name}
                 </Text>
                 <View style={tw`flex-grow`} />
-                <Text style={tw`font-loaded-light text-xs text-right`}>
+                <Text
+                  style={tw`font-loaded-light text-xs text-right text-gray-700 dark:text-gray-100`}
+                >
                   {format(
                     new Date(edge?.node?.createdAt),
                     'yyyy-MM-dd HH:mm:ss'
@@ -123,7 +127,9 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                 </Text>
               </View>
               <View style={tw`pt-3`}>
-                <Text style={tw`font-loaded-normal text-lg`}>
+                <Text
+                  style={tw`font-loaded-normal text-lg text-gray-900 dark:text-white`}
+                >
                   {edge?.node?.body}
                 </Text>
               </View>
@@ -137,7 +143,9 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                       toUserId={edge?.node?.user?.id}
                     />
                   )}
-                  <Text style={tw`font-loaded-medium`}>
+                  <Text
+                    style={tw`font-loaded-medium text-gray-900 dark:text-white`}
+                  >
                     {edge?.node?.goodNum.toLocaleString()}
                   </Text>
                 </View>
@@ -150,7 +158,9 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                       toUserId={edge?.node?.user?.id}
                     />
                   )}
-                  <Text style={tw`font-loaded-medium`}>
+                  <Text
+                    style={tw`font-loaded-medium text-gray-900 dark:text-white`}
+                  >
                     {edge?.node?.greatNum.toLocaleString()}
                   </Text>
                 </View>
@@ -163,7 +173,9 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                       toUserId={edge?.node?.user?.id}
                     />
                   )}
-                  <Text style={tw`font-loaded-medium`}>
+                  <Text
+                    style={tw`font-loaded-medium text-gray-900 dark:text-white`}
+                  >
                     {edge?.node?.awesomeNum.toLocaleString()}
                   </Text>
                 </View>
