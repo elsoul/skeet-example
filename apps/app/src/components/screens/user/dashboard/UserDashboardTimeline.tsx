@@ -6,6 +6,7 @@ import { View, Text, Image, Pressable } from 'react-native'
 import GreetingGacha from './GreetingGacha'
 import { useFragment, graphql } from 'react-relay'
 import { UserDashboardTimeline_query$key } from '@/__generated__/UserDashboardTimeline_query.graphql'
+import { format } from 'date-fns'
 
 const priceList = [
   {
@@ -32,7 +33,7 @@ const fragment = graphql`
       edges {
         node {
           id
-          title
+
           body
           createdAt
           goodNum
@@ -63,7 +64,6 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
   )
 
   const data = useFragment(fragment, query)
-  console.log(data)
 
   return (
     <>
@@ -91,7 +91,60 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
           </View>
         )}
 
-        <View style={tw`w-full`}></View>
+        <View style={tw`w-full`}>
+          {data.postConnection?.edges?.map((edge) => (
+            <View
+              key={`PostConnection${edge?.node?.id}`}
+              style={tw`flex flex-col py-4 border-t border-gray-50 dark:border-gray-700`}
+            >
+              <View style={tw`flex flex-row items-center gap-4`}>
+                <Image
+                  source={{
+                    uri:
+                      edge?.node?.user?.iconUrl == ''
+                        ? 'https://dummyimage.com/300x300/000/fff&text=USER'
+                        : edge?.node?.user?.iconUrl ??
+                          'https://dummyimage.com/300x300/000/fff&text=USER',
+                  }}
+                  alt={user.name}
+                  style={tw`w-10 h-10 rounded-full`}
+                />
+                <Text style={tw`font-loaded-bold text-lg`}>
+                  {edge?.node?.user?.name}
+                </Text>
+                <View style={tw`flex-grow`} />
+                <Text style={tw`font-loaded-light text-xs text-right`}>
+                  {format(
+                    new Date(edge?.node?.createdAt),
+                    'yyyy-MM-dd HH:mm:ss'
+                  )}
+                </Text>
+              </View>
+              <View style={tw`pt-3`}>
+                <Text style={tw`font-loaded-normal text-lg`}>
+                  {edge?.node?.body}
+                </Text>
+              </View>
+              <View style={tw`pt-4 flex flex-row items-center gap-12`}>
+                <View style={tw`flex flex-row items-center gap-4`}>
+                  <Text style={tw`font-loaded-medium`}>
+                    {edge?.node?.goodNum}
+                  </Text>
+                </View>
+                <View style={tw`flex flex-row items-center gap-4`}>
+                  <Text style={tw`font-loaded-medium`}>
+                    {edge?.node?.greatNum}
+                  </Text>
+                </View>
+                <View style={tw`flex flex-row items-center gap-4`}>
+                  <Text style={tw`font-loaded-medium`}>
+                    {edge?.node?.awesomeNum}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </View>
       </View>
     </>
   )

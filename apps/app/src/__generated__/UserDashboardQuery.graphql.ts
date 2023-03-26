@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fb45528ebc1217e08dbff712b6b163bb>>
+ * @generated SignedSource<<484de256f776fba0f35779df79d1d715>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -194,13 +194,6 @@ return {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "title",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
                     "name": "body",
                     "storageKey": null
                   },
@@ -258,12 +251,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "34ab545d899d8aa808fcdfb2d7dfc682",
+    "cacheID": "71006e08e83fd2a6f6e01059a5e486f5",
     "id": null,
     "metadata": {},
     "name": "UserDashboardQuery",
     "operationKind": "query",
-    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        title\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
