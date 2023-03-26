@@ -231,11 +231,13 @@ enum Role {
 
 type SolanaTransfer {
   amountLamport: Float!
+  createdAt: DateTime!
   fromUser: User!
   id: ID
   rawId: ID
   signature: String!
   toUser: User!
+  updatedAt: DateTime!
 }
 
 type SolanaTransferEdge {

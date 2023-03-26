@@ -10,6 +10,8 @@ const userJA = {
   greetingGacha: '👋 挨拶ガチャ',
   notEnoughSOL: 'SOLが足りません',
   getAirdrop: 'Airdropを獲得してください',
+  toMe: '届いた',
+  fromMe: '送った',
 }
 
 export default userJA

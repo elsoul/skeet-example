@@ -9,6 +9,7 @@ import { View } from 'react-native'
 import tw from '@/lib/tailwind'
 import UserDashboardStatus from './UserDashboardStatus'
 import UserDashboardTimeline from './UserDashboardTimeline'
+import UserTransactionHistory from './UserTransactionHistory'
 
 export const userDashboardQuery = graphql`
   query UserDashboardQuery {
@@ -21,6 +22,7 @@ export const userDashboardQuery = graphql`
         pubkey
         sol
       }
+      ...UserTransactionHistory_user
     }
     ...UserDashboardTimeline_query
   }
@@ -85,6 +87,9 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
         >
           <View style={tw``}>
             <UserDashboardStatus refetch={refetch} />
+            {data.me && (
+              <UserTransactionHistory refetch={refetch} userQuery={data.me} />
+            )}
           </View>
           <View style={tw`grow`}>
             <UserDashboardTimeline refetch={refetch} query={data} />

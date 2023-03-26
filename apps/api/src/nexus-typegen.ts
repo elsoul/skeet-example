@@ -105,7 +105,9 @@ export interface NexusGenObjects {
   }
   SolanaTransfer: { // root type
     amountLamport: number; // Float!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     signature: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   SolanaTransferEdge: { // root type
     cursor: string; // String!
@@ -246,10 +248,12 @@ export interface NexusGenFieldTypes {
   }
   SolanaTransfer: { // field return type
     amountLamport: number; // Float!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     fromUser: NexusGenRootTypes['User']; // User!
     id: string | null; // ID
     signature: string; // String!
     toUser: NexusGenRootTypes['User']; // User!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   SolanaTransferEdge: { // field return type
     cursor: string; // String!
@@ -388,10 +392,12 @@ export interface NexusGenFieldTypeNames {
   }
   SolanaTransfer: { // field return type name
     amountLamport: 'Float'
+    createdAt: 'DateTime'
     fromUser: 'User'
     id: 'ID'
     signature: 'String'
     toUser: 'User'
+    updatedAt: 'DateTime'
   }
   SolanaTransferEdge: { // field return type name
     cursor: 'String'

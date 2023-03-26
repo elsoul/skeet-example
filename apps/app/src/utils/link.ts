@@ -1,11 +1,12 @@
-import { Linking } from 'react-native'
+import * as Linking from 'expo-linking'
 import i18n from '@/lib/i18n'
 import Toast from 'react-native-toast-message'
+import * as WebBrowser from 'expo-web-browser'
 
 export async function openUrl(url: string) {
   const supported = await Linking.canOpenURL(url)
   if (supported) {
-    await Linking.openURL(url)
+    await WebBrowser.openBrowserAsync(url)
   } else {
     Toast.show({
       type: 'error',
