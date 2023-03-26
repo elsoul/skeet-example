@@ -93,7 +93,7 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
           </View>
         )}
 
-        <View style={tw`w-full`}>
+        <View style={tw`w-full pb-24`}>
           {data.postConnection?.edges?.map((edge) => (
             <View
               key={`PostConnection${edge?.node?.id}`}
