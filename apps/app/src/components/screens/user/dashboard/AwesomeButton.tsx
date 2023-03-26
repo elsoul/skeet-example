@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next'
 import { userState } from '@/store/user'
 import { useRecoilValue } from 'recoil'
 import { useMutation, graphql } from 'react-relay'
-import { GoodButtonMutation } from '@/__generated__/GoodButtonMutation.graphql'
+import { AwesomeButtonMutation } from '@/__generated__/AwesomeButtonMutation.graphql'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import Toast from 'react-native-toast-message'
 
 const mutation = graphql`
-  mutation GoodButtonMutation($toUserId: String, $postId: String) {
-    sendGood(toUserId: $toUserId, postId: $postId)
+  mutation AwesomeButtonMutation($toUserId: String, $postId: String) {
+    sendAwesome(toUserId: $toUserId, postId: $postId)
   }
 `
 
@@ -23,7 +23,12 @@ type Props = {
   refetch: () => void
 }
 
-export default function GoodButton({ postId, toUserId, name, refetch }: Props) {
+export default function AwesomeButton({
+  postId,
+  toUserId,
+  name,
+  refetch,
+}: Props) {
   const { t } = useTranslation()
   const user = useRecoilValue(userState)
 
@@ -31,10 +36,10 @@ export default function GoodButton({ postId, toUserId, name, refetch }: Props) {
     () =>
       user.wallet.pubkey != null &&
       user.wallet.pubkey != '' &&
-      user.wallet.sol > 0.201 * LAMPORTS_PER_SOL,
+      user.wallet.sol > 0.501 * LAMPORTS_PER_SOL,
     [user.wallet]
   )
-  const [commit, isInFlight] = useMutation<GoodButtonMutation>(mutation)
+  const [commit, isInFlight] = useMutation<AwesomeButtonMutation>(mutation)
 
   const onSubmit = useCallback(() => {
     if (hasSOL) {
@@ -43,7 +48,7 @@ export default function GoodButton({ postId, toUserId, name, refetch }: Props) {
         onCompleted: () => {
           Toast.show({
             type: 'success',
-            text1: '🤝',
+            text1: '🚀',
             text2: `to: ${name}`,
           })
           refetch()
@@ -79,7 +84,7 @@ export default function GoodButton({ postId, toUserId, name, refetch }: Props) {
         {isInFlight ? (
           <ActivityIndicator color={colors.blue[400]} />
         ) : (
-          <Text style={tw`text-xl`}>🤝</Text>
+          <Text style={tw`text-xl`}>🚀</Text>
         )}
       </Pressable>
     </>

@@ -8,6 +8,8 @@ import { useFragment, graphql } from 'react-relay'
 import { UserDashboardTimeline_query$key } from '@/__generated__/UserDashboardTimeline_query.graphql'
 import { format } from 'date-fns'
 import GoodButton from './GoodButton'
+import AwesomeButton from './AwesomeButton'
+import GreatButton from './GreatButton'
 
 const priceList = [
   {
@@ -125,8 +127,8 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                   {edge?.node?.body}
                 </Text>
               </View>
-              <View style={tw`pt-4 flex flex-row items-center gap-12`}>
-                <View style={tw`flex flex-row items-center gap-4`}>
+              <View style={tw`pt-4 flex flex-row items-center gap-10`}>
+                <View style={tw`flex flex-row items-center gap-3`}>
                   {edge?.node?.id && edge?.node?.user?.id && (
                     <GoodButton
                       refetch={refetch}
@@ -136,17 +138,33 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
                     />
                   )}
                   <Text style={tw`font-loaded-medium`}>
-                    {edge?.node?.goodNum}
+                    {edge?.node?.goodNum.toLocaleString()}
                   </Text>
                 </View>
-                <View style={tw`flex flex-row items-center gap-4`}>
+                <View style={tw`flex flex-row items-center gap-3`}>
+                  {edge?.node?.id && edge?.node?.user?.id && (
+                    <GreatButton
+                      refetch={refetch}
+                      name={edge?.node?.user?.name}
+                      postId={edge?.node?.id}
+                      toUserId={edge?.node?.user?.id}
+                    />
+                  )}
                   <Text style={tw`font-loaded-medium`}>
-                    {edge?.node?.greatNum}
+                    {edge?.node?.greatNum.toLocaleString()}
                   </Text>
                 </View>
-                <View style={tw`flex flex-row items-center gap-4`}>
+                <View style={tw`flex flex-row items-center gap-3`}>
+                  {edge?.node?.id && edge?.node?.user?.id && (
+                    <AwesomeButton
+                      refetch={refetch}
+                      name={edge?.node?.user?.name}
+                      postId={edge?.node?.id}
+                      toUserId={edge?.node?.user?.id}
+                    />
+                  )}
                   <Text style={tw`font-loaded-medium`}>
-                    {edge?.node?.awesomeNum}
+                    {edge?.node?.awesomeNum.toLocaleString()}
                   </Text>
                 </View>
               </View>
