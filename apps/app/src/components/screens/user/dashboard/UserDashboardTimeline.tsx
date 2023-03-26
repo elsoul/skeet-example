@@ -4,6 +4,8 @@ import { userState } from '@/store/user'
 import { useRecoilValue } from 'recoil'
 import { View, Text, Image, Pressable } from 'react-native'
 import GreetingGacha from './GreetingGacha'
+import { useFragment, graphql } from 'react-relay'
+import { UserDashboardTimeline_query$key } from '@/__generated__/UserDashboardTimeline_query.graphql'
 
 const priceList = [
   {
@@ -24,17 +26,44 @@ const priceList = [
   },
 ]
 
+const fragment = graphql`
+  fragment UserDashboardTimeline_query on Query {
+    postConnection(first: 20) {
+      edges {
+        node {
+          id
+          title
+          body
+          createdAt
+          goodNum
+          greatNum
+          awesomeNum
+          user {
+            id
+            name
+            iconUrl
+          }
+        }
+      }
+    }
+  }
+`
+
 type Props = {
   refetch: () => void
+  query: UserDashboardTimeline_query$key
 }
 
-export default function UserDashboardTimeline({ refetch }: Props) {
+export default function UserDashboardTimeline({ refetch, query }: Props) {
   const user = useRecoilValue(userState)
 
   const hasWallet = useMemo(
     () => user.wallet.pubkey != null && user.wallet.pubkey != '',
     [user.wallet]
   )
+
+  const data = useFragment(fragment, query)
+  console.log(data)
 
   return (
     <>

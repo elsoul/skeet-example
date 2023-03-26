@@ -22,6 +22,7 @@ export const userDashboardQuery = graphql`
         sol
       }
     }
+    ...UserDashboardTimeline_query
   }
 `
 
@@ -86,7 +87,7 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
             <UserDashboardStatus refetch={refetch} />
           </View>
           <View style={tw`grow`}>
-            <UserDashboardTimeline refetch={refetch} />
+            <UserDashboardTimeline refetch={refetch} query={data} />
           </View>
         </View>
       </Container>
