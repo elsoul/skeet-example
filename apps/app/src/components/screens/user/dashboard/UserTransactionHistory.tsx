@@ -166,7 +166,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                       activeTab === 'to'
                         ? 'font-loaded-bold border-b-2'
                         : 'font-loaded-normal',
-                      'py-3'
+                      'py-3 dark:text-white dark:border-white'
                     )}`}
                   >
                     {t('users.toMe')}
@@ -185,7 +185,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                       activeTab === 'from'
                         ? 'font-loaded-bold border-b-2'
                         : 'font-loaded-normal',
-                      'py-3'
+                      'py-3 dark:text-white dark:border-white'
                     )}`}
                   >
                     {t('users.fromMe')}
@@ -222,7 +222,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                         style={tw`w-8 h-8 rounded-full`}
                       />
                       <View>
-                        <Text style={tw`font-loaded-medium`}>
+                        <Text style={tw`font-loaded-medium dark:text-white`}>
                           {item.fromUser.name}
                         </Text>
                         <Pressable
@@ -278,7 +278,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                         style={tw`w-8 h-8 rounded-full`}
                       />
                       <View>
-                        <Text style={tw`font-loaded-medium`}>
+                        <Text style={tw`font-loaded-medium dark:text-white`}>
                           {item.toUser.name}
                         </Text>
                         <Pressable
