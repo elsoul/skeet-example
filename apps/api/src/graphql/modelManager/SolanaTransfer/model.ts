@@ -10,5 +10,7 @@ export const SolanaTransferObject = objectType({
     t.field(SolanaTransfer.fromUser)
     t.field(SolanaTransfer.toUser)
     t.field(SolanaTransfer.signature)
+    t.field(SolanaTransfer.createdAt)
+    t.field(SolanaTransfer.updatedAt)
   },
 })

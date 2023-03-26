@@ -8,7 +8,12 @@ export const SolanaTransfersQuery = extendType({
     t.connectionField('solanaTransferConnection', {
       type: SolanaTransfer.$name,
       async resolve(_, args, ctx, info) {
-        return connectionFromArray(await ctx.prisma.solanaTransfer.findMany(), args)
+        return connectionFromArray(
+          await ctx.prisma.solanaTransfer.findMany({
+            orderBy: { createdAt: 'desc' },
+          }),
+          args
+        )
       },
       extendConnection(t) {
         t.int('totalCount', {

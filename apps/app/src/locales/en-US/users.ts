@@ -10,6 +10,8 @@ const userEN = {
   greetingGacha: '👋 Greeting Gacha',
   notEnoughSOL: 'Not enough SOL',
   getAirdrop: 'Please get Airdrop',
+  toMe: 'Received',
+  fromMe: 'Sent',
 }
 
 export default userEN

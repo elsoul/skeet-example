@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4eb58a5fa23ea89c5d21686b4b4cbd6a>>
+ * @generated SignedSource<<01419b9a1397e7fd190e68cf481a586b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type UserTransactionHistory_user$data = {
   readonly fromTransfers: ReadonlyArray<{
     readonly amountLamport: number;
+    readonly createdAt: any;
     readonly fromUser: {
       readonly iconUrl: string | null;
       readonly id: string | null;
@@ -28,6 +29,7 @@ export type UserTransactionHistory_user$data = {
   }>;
   readonly toTransfers: ReadonlyArray<{
     readonly amountLamport: number;
+    readonly createdAt: any;
     readonly fromUser: {
       readonly iconUrl: string | null;
       readonly id: string | null;
@@ -92,6 +94,13 @@ v2 = [
   {
     "alias": null,
     "args": null,
+    "kind": "ScalarField",
+    "name": "createdAt",
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
     "concreteType": "User",
     "kind": "LinkedField",
     "name": "fromUser",
@@ -142,6 +151,6 @@ return {
 };
 })();
 
-(node as any).hash = "d0dec5458669e1e4f1f2296cecbf9f0d";
+(node as any).hash = "6a2cd0f4a3b7431d9dd0e2791641f87c";
 
 export default node;
