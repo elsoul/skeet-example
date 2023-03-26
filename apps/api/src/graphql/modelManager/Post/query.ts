@@ -8,7 +8,10 @@ export const PostsQuery = extendType({
     t.connectionField('postConnection', {
       type: Post.$name,
       async resolve(_, args, ctx, info) {
-        return connectionFromArray(await ctx.prisma.post.findMany(), args)
+        return connectionFromArray(
+          await ctx.prisma.post.findMany({ orderBy: { createdAt: 'desc' } }),
+          args
+        )
       },
       extendConnection(t) {
         t.int('totalCount', {

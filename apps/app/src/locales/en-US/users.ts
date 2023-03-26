@@ -7,7 +7,9 @@ const userEN = {
   airdrop: 'GET Airdrop',
   airdropSuccessTitle: 'Airdrop Succeed',
   airdropSuccessBody: 'Airdrop Succeeded🎉 You got 1 SOL🙌',
-  greetingGacha: '👋 挨拶ガチャ',
+  greetingGacha: '👋 Greeting Gacha',
+  notEnoughSOL: 'Not enough SOL',
+  getAirdrop: 'Please get Airdrop',
 }
 
 export default userEN
