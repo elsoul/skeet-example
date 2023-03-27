@@ -14,6 +14,8 @@ async function main() {
       email: 'labo@elsoul.nl',
       name: 'ELSOUL LABO',
       role: 'MASTER',
+      iconUrl:
+        'https://www.gravatar.com/avatar/ad51806dd1690c2db9cf74dcca1274c2?d=retro',
       userWallets: {
         create: {
           name: 'Main Phantom',

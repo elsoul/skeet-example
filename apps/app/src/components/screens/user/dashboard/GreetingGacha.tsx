@@ -1,10 +1,11 @@
 import Button from '@/components/common/atoms/Button'
 import tw from '@/lib/tailwind'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { View, Text } from 'react-native'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
-
+import { useRecoilValue } from 'recoil'
+import { userState } from '@/store/user'
 import { useMutation, graphql } from 'react-relay'
 import { GreetingGachaMutation } from '@/__generated__/GreetingGachaMutation.graphql'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
@@ -96,6 +97,16 @@ type Props = {
 export default function GreetingGacha({ refetch }: Props) {
   const { t, i18n } = useTranslation()
 
+  const user = useRecoilValue(userState)
+
+  const hasSOL = useMemo(
+    () =>
+      user.wallet.pubkey != null &&
+      user.wallet.pubkey != '' &&
+      user.wallet.sol > 0.801 * LAMPORTS_PER_SOL,
+    [user.wallet]
+  )
+
   const getRandomGreeting = useCallback(() => {
     const languageArray = greetings[i18n.language as 'en-US' | 'ja-JP']
     const randomIndex = Math.floor(Math.random() * languageArray.length)
@@ -105,32 +116,40 @@ export default function GreetingGacha({ refetch }: Props) {
   const [commit, isInFlight] = useMutation<GreetingGachaMutation>(mutation)
 
   const onSubmit = useCallback(() => {
-    const content = getRandomGreeting()
-    commit({
-      variables: {
-        content,
-        transferAmountLamport: 0.8 * LAMPORTS_PER_SOL,
-      },
-      onCompleted: () => {
-        Toast.show({
-          type: 'success',
-          text1: t('gachaComplete') ?? `What's up?👋`,
-          text2: content,
-        })
-        refetch()
-      },
-      onError: (err) => {
-        console.error(err)
-        Toast.show({
-          type: 'warning',
-          text1: t('networkErrorTitle') ?? 'Network Error',
-          text2:
-            t('networkErrorBody') ??
-            'Network connection failed. Please retry it again later.',
-        })
-      },
-    })
-  }, [getRandomGreeting, commit, t, refetch])
+    if (hasSOL) {
+      const content = getRandomGreeting()
+      commit({
+        variables: {
+          content,
+          transferAmountLamport: 0.8 * LAMPORTS_PER_SOL,
+        },
+        onCompleted: () => {
+          Toast.show({
+            type: 'success',
+            text1: t('gachaComplete') ?? `What's up?👋`,
+            text2: content,
+          })
+          refetch()
+        },
+        onError: (err) => {
+          console.error(err)
+          Toast.show({
+            type: 'warning',
+            text1: t('networkErrorTitle') ?? 'Network Error',
+            text2:
+              t('networkErrorBody') ??
+              'Network connection failed. Please retry it again later.',
+          })
+        },
+      })
+    } else {
+      Toast.show({
+        type: 'warning',
+        text1: t('users.notEnoughSOL') ?? 'Not enough SOL',
+        text2: t('users.getAirdrop') ?? 'Please get Airdrop',
+      })
+    }
+  }, [getRandomGreeting, commit, t, refetch, hasSOL])
 
   return (
     <>
@@ -139,9 +158,11 @@ export default function GreetingGacha({ refetch }: Props) {
           onPress={() => {
             onSubmit()
           }}
-          disabled={isInFlight}
+          disabled={isInFlight || !hasSOL}
           className={clsx(
-            isInFlight ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400' : '',
+            isInFlight || !hasSOL
+              ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400'
+              : '',
             'flex w-full py-2 px-3'
           )}
         >
