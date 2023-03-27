@@ -107,7 +107,6 @@ export const expressServer = httpServer.listen(PORT, async () => {
     await sleep(1000)
     process.exit()
   }
-  console.log(await encodeJWT(String(1), LOGIN_EXPIRATION))
   console.log(
     `🚀 [${skeetEnv}]Server ready at http://localhost:${PORT}/graphql`
   )
