@@ -9,6 +9,7 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 import { openUrl } from '@/utils/link'
+import EmptyRecords from '@/components/empty/EmptyRecords'
 
 const fragment = graphql`
   fragment UserTransactionHistory_user on User {
@@ -194,6 +195,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
           <View style={tw`flex flex-col`}>
             {activeTab === 'to' && (
               <>
+                {data.toTransfers.length === 0 && <EmptyRecords />}
                 {data.toTransfers
                   .map((i) => i)
                   .sort(
@@ -250,6 +252,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
             )}
             {activeTab === 'from' && (
               <>
+                {data.fromTransfers.length === 0 && <EmptyRecords />}
                 {data.fromTransfers
                   .map((i) => i)
                   .sort(

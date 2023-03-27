@@ -39,6 +39,7 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
   const [user, setUser] = useRecoilState(userState)
 
   const data = usePreloadedQuery(userDashboardQuery, queryReference)
+  console.log(data)
 
   useEffect(() => {
     if (

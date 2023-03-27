@@ -10,6 +10,7 @@ import { format } from 'date-fns'
 import GoodButton from './GoodButton'
 import AwesomeButton from './AwesomeButton'
 import GreatButton from './GreatButton'
+import EmptyRecords from '@/components/empty/EmptyRecords'
 
 const priceList = [
   {
@@ -67,6 +68,7 @@ export default function UserDashboardTimeline({
   )
 
   const data = useFragment(fragment, postConnection)
+  console.log(data)
 
   return (
     <>
@@ -95,6 +97,7 @@ export default function UserDashboardTimeline({
         )}
 
         <View style={tw`w-full pb-24`}>
+          {data.edges?.length == 0 && <EmptyRecords />}
           {data.edges?.map((edge) => (
             <View
               key={`PostConnection${edge?.node?.id}`}
