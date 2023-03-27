@@ -30,7 +30,7 @@ export default function UserDashboardScreen() {
 
   useEffect(() => {
     if (user.skeetToken != '') {
-      loadQuery({})
+      loadQuery({}, { fetchPolicy: 'network-only' })
     }
   }, [loadQuery, user.skeetToken])
 

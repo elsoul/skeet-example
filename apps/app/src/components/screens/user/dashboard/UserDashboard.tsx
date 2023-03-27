@@ -24,7 +24,9 @@ export const userDashboardQuery = graphql`
       }
       ...UserTransactionHistory_user
     }
-    ...UserDashboardTimeline_query
+    postConnection(first: 20) {
+      ...UserDashboardTimeline_postConnection
+    }
   }
 `
 
@@ -83,16 +85,26 @@ export default function UserDashboard({ queryReference, refetch }: Props) {
     <>
       <Container>
         <View
-          style={tw`flex flex-col md:flex-row items-center md:items-start justify-center gap-24`}
+          style={tw`flex flex-col md:flex-row items-center md:items-start justify-center gap-24 w-full h-full`}
         >
-          <View style={tw``}>
-            <UserDashboardStatus refetch={refetch} />
-            {data.me && (
-              <UserTransactionHistory refetch={refetch} userQuery={data.me} />
-            )}
+          <View style={tw`flex flex-col`}>
+            <View style={tw`flex`}>
+              <UserDashboardStatus refetch={refetch} />
+            </View>
+
+            <View style={tw`flex`}>
+              {data.me && (
+                <UserTransactionHistory refetch={refetch} userQuery={data.me} />
+              )}
+            </View>
           </View>
-          <View style={tw`grow`}>
-            <UserDashboardTimeline refetch={refetch} query={data} />
+          <View style={tw`flex`}>
+            {data.postConnection && (
+              <UserDashboardTimeline
+                refetch={refetch}
+                postConnection={data.postConnection}
+              />
+            )}
           </View>
         </View>
       </Container>

@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil'
 import { View, Text, Image, Pressable } from 'react-native'
 import { useFragment, graphql } from 'react-relay'
 import { UserTransactionHistory_user$key } from '@/__generated__/UserTransactionHistory_user.graphql'
-import { format } from 'date-fns'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
@@ -132,7 +131,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
 
   return (
     <>
-      <View style={tw`max-w-xs py-12`}>
+      <View style={tw`max-w-xs py-12 flex flex-col`}>
         <View
           style={tw`w-full px-6 py-3 bg-gray-50 dark:bg-gray-700 flex flex-row items-center justify-center flex-wrap sm:flex-nowrap gap-12`}
         >
@@ -151,12 +150,11 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
           ))}
         </View>
 
-        <View style={tw`w-full`}>
+        <View style={tw`w-full flex`}>
           <View style={tw`py-8`}>
             <View style={tw`flex flex-row items-center justify-center`}>
               <View style={tw`flex-1`}>
                 <Pressable
-                  style={tw`w-full h-full text-center`}
                   onPress={() => {
                     setActiveTab('to')
                   }}
@@ -166,7 +164,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                       activeTab === 'to'
                         ? 'font-loaded-bold border-b-2'
                         : 'font-loaded-normal',
-                      'py-3 dark:text-white dark:border-white'
+                      'py-3 dark:text-white dark:border-white text-center'
                     )}`}
                   >
                     {t('users.toMe')}
@@ -175,7 +173,6 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
               </View>
               <View style={tw`flex-1`}>
                 <Pressable
-                  style={tw`w-full h-full text-center`}
                   onPress={() => {
                     setActiveTab('from')
                   }}
@@ -185,7 +182,7 @@ export default function UserTransactionHistory({ refetch, userQuery }: Props) {
                       activeTab === 'from'
                         ? 'font-loaded-bold border-b-2'
                         : 'font-loaded-normal',
-                      'py-3 dark:text-white dark:border-white'
+                      'py-3 dark:text-white dark:border-white text-center'
                     )}`}
                   >
                     {t('users.fromMe')}

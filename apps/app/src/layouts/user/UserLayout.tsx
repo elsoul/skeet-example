@@ -18,9 +18,9 @@ export default function UserLayout({ children }: Props) {
 
   return (
     <>
-      <ScrollView style={tw`relative w-full h-full bg-white dark:bg-gray-900`}>
-        <SafeAreaView>
-          <View style={tw`h-24 w-full bg-white dark:bg-gray-900`}>
+      <ScrollView style={tw`relative bg-white dark:bg-gray-900`}>
+        <SafeAreaView style={tw`flex flex-col`}>
+          <View style={tw`h-24 bg-white dark:bg-gray-900 flex`}>
             <View
               style={tw`flex flex-row items-center justify-between p-6 md:justify-start md:gap-10`}
             >
@@ -48,7 +48,7 @@ export default function UserLayout({ children }: Props) {
               </View>
             </View>
           </View>
-          {children}
+          <View style={tw`flex-1 w-full h-full`}>{children}</View>
         </SafeAreaView>
       </ScrollView>
     </>

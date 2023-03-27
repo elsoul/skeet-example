@@ -102,7 +102,7 @@ export default function UserDashboardStatus({ refetch }: Props) {
 
   return (
     <>
-      <View style={tw`max-w-sm`}>
+      <View style={tw`max-w-xs`}>
         <View style={tw`sm:mx-auto sm:w-full sm:max-w-md`}>
           <LogoHorizontal />
           <View
