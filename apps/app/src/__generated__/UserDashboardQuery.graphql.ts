@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b5f97c79633ad408f9411b172f37b88e>>
+ * @generated SignedSource<<df2c10c47a29a94783951ec951702578>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -23,7 +23,9 @@ export type UserDashboardQuery$data = {
     }>;
     readonly " $fragmentSpreads": FragmentRefs<"UserTransactionHistory_user">;
   } | null;
-  readonly " $fragmentSpreads": FragmentRefs<"UserDashboardTimeline_query">;
+  readonly postConnection: {
+    readonly " $fragmentSpreads": FragmentRefs<"UserDashboardTimeline_postConnection">;
+  } | null;
 };
 export type UserDashboardQuery = {
   response: UserDashboardQuery$data;
@@ -73,27 +75,34 @@ v5 = {
   "name": "sol",
   "storageKey": null
 },
-v6 = {
+v6 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 20
+  }
+],
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v7 = {
+v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "createdAt",
   "storageKey": null
 },
-v8 = [
-  (v6/*: any*/),
+v9 = [
+  (v7/*: any*/),
   (v1/*: any*/),
   (v3/*: any*/)
 ],
-v9 = [
-  (v6/*: any*/),
+v10 = [
+  (v7/*: any*/),
   {
     "alias": null,
     "args": null,
@@ -108,7 +117,7 @@ v9 = [
     "name": "signature",
     "storageKey": null
   },
-  (v7/*: any*/),
+  (v8/*: any*/),
   {
     "alias": null,
     "args": null,
@@ -116,7 +125,7 @@ v9 = [
     "kind": "LinkedField",
     "name": "fromUser",
     "plural": false,
-    "selections": (v8/*: any*/),
+    "selections": (v9/*: any*/),
     "storageKey": null
   },
   {
@@ -126,7 +135,7 @@ v9 = [
     "kind": "LinkedField",
     "name": "toUser",
     "plural": false,
-    "selections": (v8/*: any*/),
+    "selections": (v9/*: any*/),
     "storageKey": null
   }
 ];
@@ -171,9 +180,20 @@ return {
         "storageKey": null
       },
       {
-        "args": null,
-        "kind": "FragmentSpread",
-        "name": "UserDashboardTimeline_query"
+        "alias": null,
+        "args": (v6/*: any*/),
+        "concreteType": "QueryPostConnection_Connection",
+        "kind": "LinkedField",
+        "name": "postConnection",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "UserDashboardTimeline_postConnection"
+          }
+        ],
+        "storageKey": "postConnection(first:20)"
       }
     ],
     "type": "Query",
@@ -207,7 +227,7 @@ return {
             "selections": [
               (v4/*: any*/),
               (v5/*: any*/),
-              (v6/*: any*/)
+              (v7/*: any*/)
             ],
             "storageKey": null
           },
@@ -218,7 +238,7 @@ return {
             "kind": "LinkedField",
             "name": "toTransfers",
             "plural": true,
-            "selections": (v9/*: any*/),
+            "selections": (v10/*: any*/),
             "storageKey": null
           },
           {
@@ -228,22 +248,16 @@ return {
             "kind": "LinkedField",
             "name": "fromTransfers",
             "plural": true,
-            "selections": (v9/*: any*/),
+            "selections": (v10/*: any*/),
             "storageKey": null
           },
-          (v6/*: any*/)
+          (v7/*: any*/)
         ],
         "storageKey": null
       },
       {
         "alias": null,
-        "args": [
-          {
-            "kind": "Literal",
-            "name": "first",
-            "value": 20
-          }
-        ],
+        "args": (v6/*: any*/),
         "concreteType": "QueryPostConnection_Connection",
         "kind": "LinkedField",
         "name": "postConnection",
@@ -265,7 +279,7 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v6/*: any*/),
+                  (v7/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -273,7 +287,7 @@ return {
                     "name": "body",
                     "storageKey": null
                   },
-                  (v7/*: any*/),
+                  (v8/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -302,7 +316,7 @@ return {
                     "kind": "LinkedField",
                     "name": "user",
                     "plural": false,
-                    "selections": (v8/*: any*/),
+                    "selections": (v9/*: any*/),
                     "storageKey": null
                   }
                 ],
@@ -317,16 +331,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dba30d3fff3a5412b37f168ee70a4f51",
+    "cacheID": "53be00eba60d9cacbfea866c9373aa59",
     "id": null,
     "metadata": {},
     "name": "UserDashboardQuery",
     "operationKind": "query",
-    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    ...UserTransactionHistory_user\n    id\n  }\n  ...UserDashboardTimeline_query\n}\n\nfragment UserDashboardTimeline_query on Query {\n  postConnection(first: 20) {\n    edges {\n      node {\n        id\n        body\n        createdAt\n        goodNum\n        greatNum\n        awesomeNum\n        user {\n          id\n          name\n          iconUrl\n        }\n      }\n    }\n  }\n}\n\nfragment UserTransactionHistory_user on User {\n  toTransfers {\n    id\n    amountLamport\n    signature\n    createdAt\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n  fromTransfers {\n    id\n    amountLamport\n    signature\n    createdAt\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n}\n"
+    "text": "query UserDashboardQuery {\n  me {\n    uid\n    name\n    email\n    iconUrl\n    userWallets {\n      pubkey\n      sol\n      id\n    }\n    ...UserTransactionHistory_user\n    id\n  }\n  postConnection(first: 20) {\n    ...UserDashboardTimeline_postConnection\n  }\n}\n\nfragment UserDashboardTimeline_postConnection on QueryPostConnection_Connection {\n  edges {\n    node {\n      id\n      body\n      createdAt\n      goodNum\n      greatNum\n      awesomeNum\n      user {\n        id\n        name\n        iconUrl\n      }\n    }\n  }\n}\n\nfragment UserTransactionHistory_user on User {\n  toTransfers {\n    id\n    amountLamport\n    signature\n    createdAt\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n  fromTransfers {\n    id\n    amountLamport\n    signature\n    createdAt\n    fromUser {\n      id\n      name\n      iconUrl\n    }\n    toUser {\n      id\n      name\n      iconUrl\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "eafff06a77a1b6e88d507144ccb5ac3a";
+(node as any).hash = "5f39e21eedb73265ddf98e1b41644de7";
 
 export default node;

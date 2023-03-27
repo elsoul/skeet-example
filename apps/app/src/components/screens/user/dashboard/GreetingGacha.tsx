@@ -142,7 +142,7 @@ export default function GreetingGacha({ refetch }: Props) {
           disabled={isInFlight}
           className={clsx(
             isInFlight ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400' : '',
-            'w-full py-2 px-3'
+            'flex w-full py-2 px-3'
           )}
         >
           <Text style={tw`text-center font-loaded-bold text-lg text-white `}>

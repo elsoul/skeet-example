@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { View, Text, Image } from 'react-native'
 import GreetingGacha from './GreetingGacha'
 import { useFragment, graphql } from 'react-relay'
-import { UserDashboardTimeline_query$key } from '@/__generated__/UserDashboardTimeline_query.graphql'
+import { UserDashboardTimeline_postConnection$key } from '@/__generated__/UserDashboardTimeline_postConnection.graphql'
 import { format } from 'date-fns'
 import GoodButton from './GoodButton'
 import AwesomeButton from './AwesomeButton'
@@ -31,21 +31,19 @@ const priceList = [
 ]
 
 const fragment = graphql`
-  fragment UserDashboardTimeline_query on Query {
-    postConnection(first: 20) {
-      edges {
-        node {
+  fragment UserDashboardTimeline_postConnection on QueryPostConnection_Connection {
+    edges {
+      node {
+        id
+        body
+        createdAt
+        goodNum
+        greatNum
+        awesomeNum
+        user {
           id
-          body
-          createdAt
-          goodNum
-          greatNum
-          awesomeNum
-          user {
-            id
-            name
-            iconUrl
-          }
+          name
+          iconUrl
         }
       }
     }
@@ -54,10 +52,13 @@ const fragment = graphql`
 
 type Props = {
   refetch: () => void
-  query: UserDashboardTimeline_query$key
+  postConnection: UserDashboardTimeline_postConnection$key
 }
 
-export default function UserDashboardTimeline({ refetch, query }: Props) {
+export default function UserDashboardTimeline({
+  refetch,
+  postConnection,
+}: Props) {
   const user = useRecoilValue(userState)
 
   const hasWallet = useMemo(
@@ -65,7 +66,7 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
     [user.wallet]
   )
 
-  const data = useFragment(fragment, query)
+  const data = useFragment(fragment, postConnection)
 
   return (
     <>
@@ -88,13 +89,13 @@ export default function UserDashboardTimeline({ refetch, query }: Props) {
           ))}
         </View>
         {hasWallet && (
-          <View style={tw`w-full`}>
+          <View style={tw`w-full flex`}>
             <GreetingGacha refetch={refetch} />
           </View>
         )}
 
         <View style={tw`w-full pb-24`}>
-          {data.postConnection?.edges?.map((edge) => (
+          {data.edges?.map((edge) => (
             <View
               key={`PostConnection${edge?.node?.id}`}
               style={tw`flex flex-col py-4 border-t border-gray-50 dark:border-gray-700`}
