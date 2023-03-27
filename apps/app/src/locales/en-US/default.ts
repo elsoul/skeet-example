@@ -64,6 +64,8 @@ const defaultEN = {
   pleaseLoginAgain: 'Please sign in again.',
   copyToClipboardSuccess: 'Copied to Clipboard📜',
   gachaComplete: "What's up?👋",
+  noRecords: 'No records',
+  makeActions: 'Make your actions💃',
 }
 
 export default defaultEN

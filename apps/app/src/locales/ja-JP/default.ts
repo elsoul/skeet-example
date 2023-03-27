@@ -66,6 +66,8 @@ const defaultJA = {
   pleaseLoginAgain: 'もう一度ログインしてください。',
   copyToClipboardSuccess: 'クリップボードにコピーしました📜',
   gachaComplete: 'お疲れ様です👋',
+  noRecords: 'データがありません',
+  makeActions: '行動を起こしましょう💃',
 }
 
 export default defaultJA
